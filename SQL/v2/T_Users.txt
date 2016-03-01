@@ -1,0 +1,25 @@
+SELECT
+    U_ID,
+    U_NAME,
+    CL_NAME,
+    U_NOMERZAK,
+    U_OBJECT,
+    OB_NAME,
+    U_DATEBEG,
+    U_DATESTART,
+    U_DATEEND,
+    U_NASED,
+    U_OTD,
+    U_PROFFIO,
+    U_CERT,
+    U_MET,
+    U_PRIM,
+    P_Prof,
+    U_RIGHTS
+FROM
+    T_USERS
+left join T_clients on t_clients.cl_id=t_users.u_name
+left join t_object on t_object.ob_id=t_users.u_object
+left join T_PROFESIONALS on T_PROFESIONALS.p_id=t_users.u_proffio
+WHERE U_NASED <> 'Отгружено'
+ORDER BY U_DATEBEG

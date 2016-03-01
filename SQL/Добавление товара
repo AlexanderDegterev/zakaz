@@ -1,0 +1,4 @@
+Select count (T_SERV.sv_tpid)
+from t_serv
+left join t_product on t_product.tp_id=t_serv.sv_tpid
+where t_serv.sv_tpid = '1' and t_serv.sv_uid = '1'

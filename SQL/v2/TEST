@@ -1,0 +1,10 @@
+CREATE trigger t_serv_m_bu0 for t_serv_m
+active before update position 0
+AS
+begin
+  UPDATE t_users
+   set t_users.u_met = (select SUM(SVM_COUNT)
+   from t_serv_m
+   where svm_uid = old.svm_uid)
+   where t_users.u_id = OLD.SVM_UID;
+end

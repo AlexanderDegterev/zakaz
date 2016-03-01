@@ -1,0 +1,83 @@
+program JBK_zakaz;
+
+uses
+  Forms,
+  About in 'About.pas' {FormAbout},
+  EditForm in 'EditForm.pas' {FormEdit},
+  ADD_Form in 'ADD_Form.pas' {FormAdd},
+  Reference_Form in 'Reference_Form.pas' {Reference},
+  Edit_Clients_Form in 'Edit_Clients_Form.pas' {Edit_Clients},
+  Add_Reference_Form in 'Add_Reference_Form.pas' {Add_reference},
+  DataBaseConnection in 'DataBaseConnection.pas' {DataBase},
+  registration_form in 'registration_form.pas' {registration},
+  BTS_Office_form in 'BTS_Office_form.pas' {Main},
+  DataModuleForm in 'DataModuleForm.pas' {DataModule},
+  DelUsers_Forn in 'DelUsers_Forn.pas' {FormDelUsers},
+  professionals_Form in 'professionals_Form.pas' {Professionals},
+  ADD_Prof_Form in 'ADD_Prof_Form.pas' {ADD_Prof},
+  GenerateReportForm in 'GenerateReportForm.pas' {GenerateReport},
+  ControlOfTemplates_Form in 'ControlOfTemplates_Form.pas' {ControlOfTemplates},
+  Edit_Template_Form in 'Edit_Template_Form.pas' {Edit_Templates},
+  KeyBreakForm in 'KeyBreakForm.pas' {KeyBreak},
+  Clients_Form in 'Clients_Form.pas' {Clients},
+  Edit_Reference_Form in 'Edit_Reference_Form.pas',
+  ADD_Clients_Form in 'ADD_Clients_Form.pas' {Add_Clients},
+  ProdGroup_Form in 'ProdGroup_Form.pas' {ProdGroup},
+  ADD_ProdGroup_Form in 'ADD_ProdGroup_Form.pas' {Add_ProdGroup},
+  EDIT_ProdGroup_Form in 'EDIT_ProdGroup_Form.pas' {Edit_ProdGroup},
+  Object_Form in 'Object_Form.pas' {Obj},
+  ADD_Object_Form in 'ADD_Object_Form.pas' {Add_Object},
+  Edit_Object_Form in 'Edit_Object_Form.pas' {Edit_Object},
+  Izdelie in 'Izdelie.pas' {IzdelieForm},
+  Product_Form in 'Product_Form.pas' {PRODUCT},
+  Metal_Form in 'Metal_Form.pas' {Metal},
+  ADD_Metal_Form in 'ADD_Metal_Form.pas' {ADD_Metal},
+  Edit_Metal_Form in 'Edit_Metal_Form.pas' {Edit_Metal},
+  Edit_Product_Form in 'Edit_Product_Form.pas' {Edit_Product},
+  Add_Product_Form in 'Add_Product_Form.pas' {Add_product},
+  Material_Form in 'Material_Form.pas' {Material};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  if Tregistration.Execute then
+  begin
+    Application.MainFormOnTaskbar := True;
+    Application.Title := '«¿ ¿«';
+  Application.CreateForm(TMain, Main);
+  Application.CreateForm(TClients, Clients);
+  Application.CreateForm(TAdd_Clients, Add_Clients);
+  Application.CreateForm(TProdGroup, ProdGroup);
+  Application.CreateForm(TAdd_ProdGroup, Add_ProdGroup);
+  Application.CreateForm(TEdit_ProdGroup, Edit_ProdGroup);
+  Application.CreateForm(TObj, Obj);
+  Application.CreateForm(TAdd_Object, Add_Object);
+  Application.CreateForm(TEdit_Object, Edit_Object);
+  Application.CreateForm(TIzdelieForm, IzdelieForm);
+  Application.CreateForm(TPRODUCT, PRODUCT);
+  Application.CreateForm(TMetal, Metal);
+  Application.CreateForm(TADD_Metal, ADD_Metal);
+  Application.CreateForm(TEdit_Metal, Edit_Metal);
+  Application.CreateForm(TEdit_Product, Edit_Product);
+  Application.CreateForm(TAdd_product, Add_product);
+  Application.CreateForm(TMaterial, Material);
+  Application.Run;
+
+  end;
+
+  {Application.MainFormOnTaskbar := True;
+  Application.Title := '¡“—-ÓÙËÒ';
+  Application.CreateForm(Tregistration, registration);
+  Application.CreateForm(TMain, Main);
+  Application.CreateForm(TDataBase, DataBase);
+  Application.CreateForm(TFormAbout, FormAbout);
+  Application.CreateForm(TFormEdit, FormEdit);
+  Application.CreateForm(TFormAdd, FormAdd);
+  Application.CreateForm(TReference, Reference);
+  Application.CreateForm(TEdit_Reference, Edit_Reference);
+  Application.CreateForm(TAdd_reference, Add_reference);
+  //Application.CreateForm(TDataModule1, DataModule1);
+  Application.CreateForm(TDataModule, DataModule);
+  Application.Run;}
+end.

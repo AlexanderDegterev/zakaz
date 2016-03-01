@@ -1,0 +1,11 @@
+ALTER TABLE T_SERV
+ADD SV_ZAGOTOVKI NUMERIC(15,4)
+
+alter table T_SERV
+alter SV_UNITM position 9
+
+ALTER TABLE T_SERV
+ADD SV_DATEOTGRUZ DATE
+
+alter table T_SERV
+alter SV_UNITM position 10

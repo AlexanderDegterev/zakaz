@@ -1,0 +1,14 @@
+CREATE TABLE T_POSITION (
+    SP_ID        INTEGER NOT NULL,
+    SP_POS       VARCHAR(200)
+    
+);
+
+
+
+
+/******************************************************************************/
+/***                              Primary Keys                              ***/
+/******************************************************************************/
+
+ALTER TABLE T_POSITION ADD CONSTRAINT PK_POSI PRIMARY KEY (SP_ID);

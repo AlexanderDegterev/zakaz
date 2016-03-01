@@ -1,0 +1,273 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{590B6774-EF46-4630-AFFD-EB88E22819BF}</ProjectGuid>
+			<ProjectVersion>12.3</ProjectVersion>
+			<MainSource>JBK_zakaz_v2.dpr</MainSource>
+			<Base>True</Base>
+			<Config Condition="'$(Config)'==''">Debug</Config>
+			<Platform>Win32</Platform>
+			<AppType>Application</AppType>
+			<FrameworkType>VCL</FrameworkType>
+			<DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_1)'!=''">
+			<Cfg_1>true</Cfg_1>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_2)'!=''">
+			<Cfg_2>true</Cfg_2>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base)'!=''">
+			<DCC_UsePackage>vclx;dbrtl;bdertl;rtl;xmlrtl;vclib;FIBPlus2011</DCC_UsePackage>
+			<DCC_ImageBase>00400000</DCC_ImageBase>
+			<DCC_DcuOutput>.\$(Config)\$(Platform)</DCC_DcuOutput>
+			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;$(DCC_UnitAlias)</DCC_UnitAlias>
+			<DCC_ExeOutput>.\$(Config)\$(Platform)</DCC_ExeOutput>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+			<DCC_IOChecking>false</DCC_IOChecking>
+			<DCC_DebugInformation>false</DCC_DebugInformation>
+			<DCC_AssertionsAtRuntime>false</DCC_AssertionsAtRuntime>
+			<DCC_ImportedDataReferences>false</DCC_ImportedDataReferences>
+			<DCC_MaxStackSize>1548576</DCC_MaxStackSize>
+			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+			<DCC_Optimize>false</DCC_Optimize>
+			<DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2)'!=''">
+			<DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+			<DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+			<DCC_DebugInformation>false</DCC_DebugInformation>
+		</PropertyGroup>
+		<ItemGroup>
+			<DelphiCompile Include="JBK_zakaz_v2.dpr">
+				<MainSource>MainSource</MainSource>
+			</DelphiCompile>
+			<DCCReference Include="About.pas">
+				<Form>FormAbout</Form>
+			</DCCReference>
+			<DCCReference Include="EditForm.pas">
+				<Form>FormEdit</Form>
+			</DCCReference>
+			<DCCReference Include="ADD_Form.pas">
+				<Form>FormAdd</Form>
+			</DCCReference>
+			<DCCReference Include="Reference_Form.pas">
+				<Form>Reference</Form>
+			</DCCReference>
+			<DCCReference Include="Edit_Clients_Form.pas">
+				<Form>Edit_Clients</Form>
+			</DCCReference>
+			<DCCReference Include="Add_Reference_Form.pas">
+				<Form>Add_reference</Form>
+			</DCCReference>
+			<DCCReference Include="DataBaseConnection.pas">
+				<Form>DataBase</Form>
+			</DCCReference>
+			<DCCReference Include="registration_form.pas">
+				<Form>registration</Form>
+			</DCCReference>
+			<DCCReference Include="BTS_Office_form.pas">
+				<Form>Main</Form>
+			</DCCReference>
+			<DCCReference Include="DataModuleForm.pas">
+				<Form>DataModule</Form>
+			</DCCReference>
+			<DCCReference Include="professionals_Form.pas">
+				<Form>Professionals</Form>
+			</DCCReference>
+			<DCCReference Include="ADD_Prof_Form.pas">
+				<Form>ADD_Prof</Form>
+			</DCCReference>
+			<DCCReference Include="GenerateReportForm.pas">
+				<Form>GenerateReport</Form>
+			</DCCReference>
+			<DCCReference Include="ControlOfTemplates_Form.pas">
+				<Form>ControlOfTemplates</Form>
+			</DCCReference>
+			<DCCReference Include="Edit_Template_Form.pas">
+				<Form>Edit_Templates</Form>
+			</DCCReference>
+			<DCCReference Include="Clients_Form.pas">
+				<Form>Clients</Form>
+			</DCCReference>
+			<DCCReference Include="ADD_Clients_Form.pas">
+				<Form>Add_Clients</Form>
+			</DCCReference>
+			<DCCReference Include="ProdGroup_Form.pas">
+				<Form>ProdGroup</Form>
+			</DCCReference>
+			<DCCReference Include="ADD_ProdGroup_Form.pas">
+				<Form>Add_ProdGroup</Form>
+			</DCCReference>
+			<DCCReference Include="EDIT_ProdGroup_Form.pas">
+				<Form>Edit_ProdGroup</Form>
+			</DCCReference>
+			<DCCReference Include="Object_Form.pas">
+				<Form>Obj</Form>
+			</DCCReference>
+			<DCCReference Include="ADD_Object_Form.pas">
+				<Form>Add_Object</Form>
+			</DCCReference>
+			<DCCReference Include="Edit_Object_Form.pas">
+				<Form>Edit_Object</Form>
+			</DCCReference>
+			<DCCReference Include="Izdelie.pas">
+				<Form>IzdelieForm</Form>
+			</DCCReference>
+			<DCCReference Include="Product_Form.pas">
+				<Form>PRODUCT</Form>
+			</DCCReference>
+			<DCCReference Include="Metal_Form.pas">
+				<Form>Metal</Form>
+			</DCCReference>
+			<DCCReference Include="ADD_Metal_Form.pas">
+				<Form>ADD_Metal</Form>
+			</DCCReference>
+			<DCCReference Include="Edit_Metal_Form.pas">
+				<Form>Edit_Metal</Form>
+			</DCCReference>
+			<DCCReference Include="Edit_Product_Form.pas">
+				<Form>Edit_Product</Form>
+			</DCCReference>
+			<DCCReference Include="Add_Product_Form.pas">
+				<Form>Add_product</Form>
+			</DCCReference>
+			<DCCReference Include="Material_Form.pas">
+				<Form>Material</Form>
+			</DCCReference>
+			<DCCReference Include="remote_orders.pas">
+				<Form>Remot_orders</Form>
+			</DCCReference>
+			<DCCReference Include="Izdelie_2.pas">
+				<Form>Izdelie2</Form>
+			</DCCReference>
+			<DCCReference Include="ADD_Form_S.pas">
+				<Form>FormAdd_S</Form>
+			</DCCReference>
+			<DCCReference Include="Edit_Form_S.pas">
+				<Form>FormEdit_S</Form>
+			</DCCReference>
+			<DCCReference Include="Supplier_Form.pas">
+				<Form>Supplier</Form>
+			</DCCReference>
+			<DCCReference Include="Supplier_Add_Form.pas">
+				<Form>Supplier_Add</Form>
+			</DCCReference>
+			<DCCReference Include="Supplier_Edit_Form.pas">
+				<Form>Supplier_Edit</Form>
+			</DCCReference>
+			<DCCReference Include="ConnectBD_form.pas">
+				<Form>ConnectDB</Form>
+			</DCCReference>
+			<DCCReference Include="ADD_Form_R.pas">
+				<Form>FormAdd_R</Form>
+			</DCCReference>
+			<DCCReference Include="Edit_Form_R.pas">
+				<Form>FormEdit_R</Form>
+			</DCCReference>
+			<DCCReference Include="ADD_FormPrice.pas">
+				<Form>FormAddPrice</Form>
+			</DCCReference>
+			<DCCReference Include="Edit_FormPrice.pas">
+				<Form>FormEditPrice</Form>
+			</DCCReference>
+			<BuildConfiguration Include="Release">
+				<Key>Cfg_2</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Base">
+				<Key>Base</Key>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Debug">
+				<Key>Cfg_1</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+		</ItemGroup>
+		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')" Project="$(BDS)\Bin\CodeGear.Delphi.Targets"/>
+		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
+		<ProjectExtensions>
+			<Borland.Personality>Delphi.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Delphi.Personality>
+					<VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+						<VersionInfo Name="AutoIncBuild">False</VersionInfo>
+						<VersionInfo Name="MajorVer">3</VersionInfo>
+						<VersionInfo Name="MinorVer">0</VersionInfo>
+						<VersionInfo Name="Release">0</VersionInfo>
+						<VersionInfo Name="Build">4</VersionInfo>
+						<VersionInfo Name="Debug">False</VersionInfo>
+						<VersionInfo Name="PreRelease">False</VersionInfo>
+						<VersionInfo Name="Special">False</VersionInfo>
+						<VersionInfo Name="Private">False</VersionInfo>
+						<VersionInfo Name="DLL">False</VersionInfo>
+						<VersionInfo Name="Locale">1033</VersionInfo>
+						<VersionInfo Name="CodePage">1252</VersionInfo>
+					</VersionInfo>
+					<VersionInfoKeys>
+						<VersionInfoKeys Name="CompanyName"/>
+						<VersionInfoKeys Name="FileDescription"/>
+						<VersionInfoKeys Name="FileVersion">3.0.0.4</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName"/>
+						<VersionInfoKeys Name="LegalCopyright"/>
+						<VersionInfoKeys Name="LegalTrademarks"/>
+						<VersionInfoKeys Name="OriginalFilename"/>
+						<VersionInfoKeys Name="ProductName"/>
+						<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="Comments"/>
+					</VersionInfoKeys>
+					<Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dclIndyProtocols150.bpl">Indy 10 Protocols Design Time</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dclbde150.bpl">Embarcadero BDE DB Components</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dclDataSnapIndy10ServerTransport150.bpl">Embarcadero DBExpress DataSnap Server Transport Components</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dclDataSnapProviderClient150.bpl">Embarcadero DBExpress DataSnap Provider Client Components</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dclDataSnapClient150.bpl">Embarcadero DBExpress DataSnap Client Components</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dclDataSnapServer150.bpl">Embarcadero DBExpress DataSnap Server Components</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dcldbxcds150.bpl">Embarcadero SimpleDataset Component (DBX)</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Admin\Documents\DevExpress VCL\Library\RS15\dcldxSkinscxPCPainterRS15.bpl">ExpressSkins Library Uses Clause Auto Fill Helper for PageControl Painter by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Admin\Documents\DevExpress VCL\Library\RS15\dcldxSkinscxSchedulerPainterRS15.bpl">ExpressSkins Library Uses Clause Auto Fill Helper for Scheduler Painter by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Admin\Documents\DevExpress VCL\Library\RS15\dcldxSkinsdxBarsPaintersRS15.bpl">ExpressSkins Library Uses Clause Auto Fill Helper for Bars Painters by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Admin\Documents\DevExpress VCL\Library\RS15\dcldxSkinsdxNavBarPainterRS15.bpl">ExpressSkins Library Uses Clause Auto Fill Helper for NavBar Painter by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Admin\Documents\DevExpress VCL\Library\RS15\dcldxSkinscxEditorsHelperRS15.bpl">ExpressSkins Library Uses Clause Auto Fill Helper for ExpressEditors by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Admin\Documents\DevExpress VCL\Library\RS15\dcldxPSLnksRS15.bpl">ExpressPrinting System ReportLinks (Standard) by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Admin\Documents\DevExpress VCL\Library\RS15\dcldxPScxCommonRS15.bpl">ExpressPrinting System Cross Platform Library by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Admin\Documents\DevExpress VCL\Library\RS15\dcldxPScxExtCommonRS15.bpl">ExpressPrinting System Extended Cross Platform Library by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Admin\Documents\DevExpress VCL\Library\RS15\dcldxPScxGridLnkRS15.bpl">ExpressPrinting System ReportLink for ExpressQuantumGrid by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Admin\Documents\DevExpress VCL\Library\RS15\dcldxPScxPivotGridLnkRS15.bpl">ExpressPrinting System ReportLink for ExpressPivotGrid by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Admin\Documents\DevExpress VCL\Library\RS15\dcldxPScxSchedulerLnkRS15.bpl">ExpressPrinting System ReportLink for ExpressScheduler by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Admin\Documents\DevExpress VCL\Library\RS15\dcldxPScxSSLnkRS15.bpl">ExpressPrinting System ReportLink for ExpressSpreadSheet by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Admin\Documents\DevExpress VCL\Library\RS15\dcldxPScxTLLnkRS15.bpl">ExpressPrinting System ReportLink for ExpressQuantumTreeList by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Admin\Documents\DevExpress VCL\Library\RS15\dcldxPScxVGridLnkRS15.bpl">ExpressPrinting System ReportLink for ExpressVerticalGrid by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Admin\Documents\DevExpress VCL\Library\RS15\dcldxPSDBTeeChartRS15.bpl">ExpressPrinting System ReportLink for DBTeeChart by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Admin\Documents\DevExpress VCL\Library\RS15\dcldxPSdxOCLnkRS15.bpl">ExpressPrinting System ReportLinks for ExpressOrgChart by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Admin\Documents\DevExpress VCL\Library\RS15\dcldxPSdxDBOCLnkRS15.bpl">ExpressPrinting System ReportLinks for ExpressDBOrgChart by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Admin\Documents\DevExpress VCL\Library\RS15\dcldxPSdxDBTVLnkRS15.bpl">ExpressPrinting System ReportLink for ExpressDBTree by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Admin\Documents\DevExpress VCL\Library\RS15\dcldxPSdxFCLnkRS15.bpl">ExpressPrinting System ReportLinks for ExpressFlowChart by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Admin\Documents\DevExpress VCL\Library\RS15\dxPScxPCProdRS15.bpl">ExpressPrinting System ContainerProducer for ExpressPageControl by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Admin\Documents\DevExpress VCL\Library\RS15\dcldxPSPrVwAdvRS15.bpl">ExpressPrinting System Advanced Preview Window by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Users\Admin\Documents\DevExpress VCL\Library\RS15\dclcxPivotGridOLAPRS15.bpl">ExpressPivotGrid 2 OLAP by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dcloffice2k150.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dclofficexp150.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+					</Excluded_Packages>
+					<Source>
+						<Source Name="MainSource">JBK_zakaz_v2.dpr</Source>
+					</Source>
+				</Delphi.Personality>
+				<Platforms>
+					<Platform value="Win32">True</Platform>
+				</Platforms>
+				<ModelSupport>False</ModelSupport>
+			</BorlandProject>
+			<ProjectFileVersion>12</ProjectFileVersion>
+		</ProjectExtensions>
+	</Project>

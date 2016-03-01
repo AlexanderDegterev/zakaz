@@ -1,0 +1,151 @@
+unit Edit_FormPrice;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters,
+  cxStyles, dxSkinsCore, dxSkinsDefaultPainters, cxCustomData, cxFilter, cxData,
+  cxDataStorage, cxEdit, DB, cxDBData, frxClass, frxDBSet, frxFIBComponents,
+  DBCtrls, StdCtrls, Buttons, cxGridLevel, cxGridCustomTableView,
+  cxGridTableView, cxGridDBTableView, cxClasses, cxGridCustomView, cxGrid,
+  RzButton, RzPanel, ExtCtrls, ComCtrls;
+
+type
+  TFormEditPrice = class(TForm)
+    Label1: TLabel;
+    Label2: TLabel;
+    StaticText4: TStaticText;
+    StaticText3: TStaticText;
+    StaticText2: TStaticText;
+    StaticText1: TStaticText;
+    StaticText5: TStaticText;
+    eDateBegin: TDateTimePicker;
+    Panel3: TPanel;
+    RzToolbar1: TRzToolbar;
+    RzSpacer1: TRzSpacer;
+    RzSpacer3: TRzSpacer;
+    RzSpacer2: TRzSpacer;
+    AddBtn: TRzBitBtn;
+    RzDelBtn: TRzBitBtn;
+    eFilter: TEdit;
+    RzEditBtn: TRzBitBtn;
+    BtnClearEFilter: TRzBitBtn;
+    cxGrid2: TcxGrid;
+    cxGrid2DBTableView1: TcxGridDBTableView;
+    cxGrid2DBTableView1TM_ID: TcxGridDBColumn;
+    cxGrid2DBTableView1TM_NAME: TcxGridDBColumn;
+    cxGrid2DBTableView1TM_UNITM: TcxGridDBColumn;
+    cxGrid2DBTableView1TM_GOST: TcxGridDBColumn;
+    cxGrid2Level1: TcxGridLevel;
+    CloseButton: TButton;
+    Panel1: TPanel;
+    cxGrid1: TcxGrid;
+    cxGrid1DBTableView1: TcxGridDBTableView;
+    cxGrid1Level1: TcxGridLevel;
+    BtnDelSpecProd: TRzBitBtn;
+    BtnPrint: TBitBtn;
+    StaticText6: TStaticText;
+    Edit1: TEdit;
+    Memo1: TMemo;
+    Edit2: TEdit;
+    StaticText7: TStaticText;
+    Edit3: TEdit;
+    StaticText8: TStaticText;
+    DBLookupComboBox2: TDBLookupComboBox;
+    StaticText9: TStaticText;
+    StaticText10: TStaticText;
+    Edit4: TEdit;
+    StaticText11: TStaticText;
+    Edit5: TEdit;
+    Edit6: TEdit;
+    DBLookupComboBox3: TDBLookupComboBox;
+    SaveButton: TBitBtn;
+    frxFIBComponents1: TfrxFIBComponents;
+    frxReport1: TfrxReport;
+    frxDBDataset1: TfrxDBDataset;
+    cxGrid1DBTableView1TSP_ID: TcxGridDBColumn;
+    cxGrid1DBTableView1TSP_TMID: TcxGridDBColumn;
+    cxGrid1DBTableView1TSP_TPID: TcxGridDBColumn;
+    cxGrid1DBTableView1TSP_NAME: TcxGridDBColumn;
+    cxGrid1DBTableView1TSP_COUNT: TcxGridDBColumn;
+    cxGrid1DBTableView1TSP_UNITM: TcxGridDBColumn;
+    procedure FormShow(Sender: TObject);
+    procedure BtnDelSpecProdClick(Sender: TObject);
+    procedure SaveButtonClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormEditPrice: TFormEditPrice;
+
+implementation
+
+uses DataModuleForm;
+
+{$R *.dfm}
+
+procedure TFormEditPrice.BtnDelSpecProdClick(Sender: TObject);
+begin
+  DataModule.ds_Specification_Production.Delete;
+end;
+
+procedure TFormEditPrice.FormShow(Sender: TObject);
+begin
+  DataModule.ds_product.Open;
+  DataModule.ds_Metal.Open;
+  DataModule.ds_Specification_Production.Close;
+  DataModule.ds_Specification_Production.ParamByName('Perem').Value:=DataModule.ds_product.FieldByName('TP_ID').AsInteger;
+  DataModule.ds_Specification_Production.Open;
+
+  Label1.Caption:=DataModule.ds_product.FieldByName('TP_ID').AsString;
+  Edit1.Text:=DataModule.ds_product.FieldByName('TP_NAME').AsString;
+  Edit6.Text:=DataModule.ds_product.FieldByName('TP_WEIGHT').AsString;
+  Edit4.Text:=DataModule.ds_product.FieldByName('TP_UNITM').AsString;
+  Edit2.Text:=DataModule.ds_product.FieldByName('TP_PRICE').AsString;
+  eDateBegin.DateTime:=DataModule.ds_product.FieldByName('TP_DATE').AsDateTime;
+  Memo1.Text:=DataModule.ds_product.FieldByName('TP_PRIM').AsString;
+
+end;
+
+procedure TFormEditPrice.SaveButtonClick(Sender: TObject);
+var
+  IzdName: string;
+  IzdQuantity: integer;
+begin
+  //проверка по наименованию старое название и новое название 25/02/2016
+  IzdName:=Trim(Edit1.Text); //наименование издели€
+  //
+  // ѕеределка через FIBQuery ( ол-во наименовани€)
+  DataModule.Query_QuantityT_Product.ParamByName('Perem1').Value:=TRIM(Edit1.Text);
+  DataModule.Query_QuantityT_Product.ExecQuery;
+  IzdQuantity:=0;
+  IzdQuantity:=DataModule.Query_QuantityT_Product.FieldByName('COUNT').AsInteger;
+
+  if IzdQuantity>=1 then
+    begin
+     ShowMessage('»зделие: '+IzdName+' уже есть с справочнике');
+    end
+   else
+   Begin
+    DataModule.ds_product.FieldByName('TP_NAME').AsString :=Trim(Edit1.Text);
+    DataModule.ds_product.FieldByName('TP_WEIGHT').AsString :=Trim(Edit6.Text);
+    DataModule.ds_product.FieldByName('TP_UNITM').AsString :=Trim(Edit4.Text);
+    DataModule.ds_product.FieldByName('TP_PRICE').AsString :=Trim(Edit2.Text);
+    DataModule.ds_product.FieldByName('TP_DATE').AsDateTime := eDateBegin.Date;
+    DataModule.ds_product.FieldByName('TP_PRIM').AsString :=Trim(Memo1.Text);
+    DataModule.ds_product.Post;
+    Label1.Caption:=DataModule.ds_product.FieldByName('TP_ID').AsString;
+    DataModule.ds_Specification_Production.Close;
+    DataModule.ds_Specification_Production.ParamByName('Perem').Value:=DataModule.ds_product.FieldByName('TP_ID').AsInteger;
+    DataModule.ds_Specification_Production.Open;
+    Panel1.visible:=true;
+    Panel3.visible:=true;
+    SaveButton.Enabled:=false;
+   end;
+end;
+
+end.

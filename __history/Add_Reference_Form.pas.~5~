@@ -1,0 +1,46 @@
+unit Add_Reference_Form;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons, ExtCtrls, DataModuleUnit;
+
+type
+  TAdd_reference = class(TForm)
+    Edit1: TEdit;
+    Panel1: TPanel;
+    SaveButton: TBitBtn;
+    CancelButton: TBitBtn;
+    procedure CancelButtonClick(Sender: TObject);
+    procedure SaveButtonClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Add_reference: TAdd_reference;
+
+implementation
+
+{$R *.dfm}
+
+procedure TAdd_reference.CancelButtonClick(Sender: TObject);
+begin
+ Close;
+end;
+
+procedure TAdd_reference.SaveButtonClick(Sender: TObject);
+begin
+ DataModuleUnit.DataModule1.FIBDataSet_OTD.Open;
+ DataModuleUnit.DataModule1.FIBDataSet_OTD.Insert;
+ DataModuleUnit.DataModule1.FIBDataSet_OTD.FieldByName('O_NAME').AsString := Trim(Edit1.Text);
+ DataModuleUnit.DataModule1.FIBDataSet_OTD.Post;
+ DataModuleUnit.DataModule1.FIBDataSet_OTD.Close;
+ DataModuleUnit.DataModule1.FIBDataSet_OTD.Open; //если его не сделать - BDGrid - исчезнет
+ Close;
+end;
+
+end.

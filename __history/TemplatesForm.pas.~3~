@@ -1,0 +1,30 @@
+unit TemplatesForm;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ExtCtrls, Buttons, Grids, DBGrids;
+
+type
+  TTemplate = class(TForm)
+    DBGrid1: TDBGrid;
+    Panel1: TPanel;
+    Panel_Name: TPanel;
+    GroupBox1: TGroupBox;
+    Panel2: TPanel;
+    ButtonReport: TBitBtn;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Template: TTemplate;
+
+implementation
+
+{$R *.dfm}
+
+end.

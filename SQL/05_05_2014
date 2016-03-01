@@ -1,0 +1,5 @@
+ALTER TABLE T_USERS
+ADD U_DIVISION INTEGER
+
+alter table T_USERS
+alter U_RIGHTS position 18

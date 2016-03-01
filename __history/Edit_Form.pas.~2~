@@ -1,0 +1,111 @@
+unit Edit_Form;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, DataModuleUnit, dblookup, DBCtrls;
+
+type
+  TFormEdit = class(TForm)
+    Label1: TLabel;
+    Label2: TLabel;
+    Edit2: TEdit;
+    Label3: TLabel;
+    Edit3: TEdit;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Edit7: TEdit;
+    Label8: TLabel;
+    Edit8: TEdit;
+    Label9: TLabel;
+    Edit9: TEdit;
+    Label10: TLabel;
+    Edit10: TEdit;
+    Edit1: TEdit;
+    Label11: TLabel;
+    SaveButton: TButton;
+    ButtonClose: TButton;
+    DBLookupComboBox1: TDBLookupComboBox;
+    ComboBox1: TComboBox;
+    ComboBox2: TComboBox;
+    procedure FormShow(Sender: TObject);
+    procedure SaveButtonClick(Sender: TObject);
+    procedure ButtonCloseClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormEdit: TFormEdit;
+
+implementation
+
+uses BTScertificat_form;
+
+{$R *.dfm}
+
+procedure TFormEdit.ButtonCloseClick(Sender: TObject);
+begin
+ Close;
+end;
+
+procedure TFormEdit.FormShow(Sender: TObject);
+var
+F:string;
+begin
+  //F:=BTScertificat_form.Form1.Label1.Caption;
+  //DataModuleUnit.DataModule1.FIBDataSet.ParamByName('X').AsInteger:=StrToInt(F);
+  DataModuleUnit.DataModule1.DS_T_USERS.ParamByName('X').AsInteger:=DataModuleUnit.DataModule1.DS_T_USERS.FieldByName('U_ID').AsInteger;
+  DataModuleUnit.DataModule1.DS_T_USERS.Open;
+  Label11.Caption:=DataModuleUnit.DataModule1.DS_T_USERS.FieldByName('U_NAME').AsString;
+  Edit1.Text:=DataModuleUnit.DataModule1.DS_T_USERS.FieldByName('U_NAME').AsString;
+  Edit2.Text:=DataModuleUnit.DataModule1.DS_T_USERS.FieldByName('U_LOGIN').AsString;
+  Edit3.Text:=DataModuleUnit.DataModule1.DS_T_USERS.FieldByName('U_PASS').AsString;
+  ComboBox1.Text:=DataModuleUnit.DataModule1.DS_T_USERS.FieldByName('U_NASED').AsString;
+  //DBLookupCombo1:=DataModuleUnit.DataModule1.DS_T_USERS.FieldByName('U_OTD').AsString;
+  ComboBox2.Text:=DataModuleUnit.DataModule1.DS_T_USERS.FieldByName('U_PROFFIO').AsString;
+  Edit7.Text:=DataModuleUnit.DataModule1.DS_T_USERS.FieldByName('U_CERT').AsString;
+  Edit8.Text:=DataModuleUnit.DataModule1.DS_T_USERS.FieldByName('U_KEY').AsString;
+  Edit9.Text:=DataModuleUnit.DataModule1.DS_T_USERS.FieldByName('U_INV').AsString;
+  Edit10.Text:=DataModuleUnit.DataModule1.DS_T_USERS.FieldByName('U_PRIM').AsString;
+  //DataModuleUnit.DataModule1.FIBDataSet.SQLs.UpdateSQL.f
+  //DataModuleUnit.DataModule1.FIBDataSet.Close;
+  //DataModuleUnit.DataModule1.FIBDataSet.SQLs.SelectSQL.Clear;
+  //DataModuleUnit.DataModule1.FIBDataSet.SQLs.SelectSQL.
+  //DataModuleUnit.DataModule1.FIBDataSet.SQLs.SelectSQL.
+  //DataModuleUnit.DataModule1.FIBDataSet.SQLs.Text:='Select U_Name from T_USERS where U_ID ='+QuotedStr(F);
+  //DataModuleUnit.DataModule1.FindQuery.
+  //Edit1.Text:=DataModuleUnit.DataModule1.FIBDataSet.FieldByName('U_NAME').AsString;
+  //F:=DataModuleUnit.DataModule1.pFIBQuery1.FieldByName('U_NAME');
+  //Edit1.Text:=F;
+end;
+
+procedure TFormEdit.SaveButtonClick(Sender: TObject);
+begin
+  DataModuleUnit.DataModule1.DS_T_USERS.Open;
+  DataModuleUnit.DataModule1.DS_T_USERS.Edit;
+  DataModuleUnit.DataModule1.DS_T_USERS.FieldByName('U_NAME').AsString := Trim(Edit1.Text);//‘ункци€ Trim удал€ет пробельные и управл€ющие символы
+  DataModuleUnit.DataModule1.DS_T_USERS.FieldByName('U_LOGIN').AsString := Trim(Edit2.Text);
+  DataModuleUnit.DataModule1.DS_T_USERS.FieldByName('U_PASS').AsString := Trim(Edit3.Text);
+  DataModuleUnit.DataModule1.DS_T_USERS.FieldByName('U_NASED').AsString := ComboBox1.Text;
+  //DataModuleUnit.DataModule1.FIBDataSet.FieldByName('U_OTD').AsString := Trim(Edit5.Text);
+  DataModuleUnit.DataModule1.DS_T_USERS.FieldByName('U_PROFFIO').AsString := ComboBox2.Text;
+  DataModuleUnit.DataModule1.DS_T_USERS.FieldByName('U_CERT').AsString := Trim(Edit7.Text);
+  DataModuleUnit.DataModule1.DS_T_USERS.FieldByName('U_KEY').AsString := Trim(Edit8.Text);
+  DataModuleUnit.DataModule1.DS_T_USERS.FieldByName('U_INV').AsString := Trim(Edit9.Text);
+  DataModuleUnit.DataModule1.DS_T_USERS.FieldByName('U_PRIM').AsString := Trim(Edit10.Text);
+  DataModuleUnit.DataModule1.DS_T_USERS.Post;
+  //DataModuleUnit.DataModule1.FIBDataSet.Refresh;
+  //DataModuleUnit.DataModule1.FIBDataSet.Close;
+  //DataModuleUnit.DataModule1.FIBDataSet.Open;
+  //DataModuleUnit.DataModule1.FIBDataSet.FieldByName('OLD_U_ID').AsInteger:=DataModuleUnit.DataModule1.FIBDataSet.FieldByName('U_ID').AsInteger;
+  //DataModuleUnit.DataModule1.FIBDataSet.Edit;
+  Close;
+end;
+
+end.

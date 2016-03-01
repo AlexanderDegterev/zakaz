@@ -1,0 +1,15 @@
+SELECT
+    SV_ID,
+    SV_UID,
+    SV_TPID,
+    TP_NAME,
+    SV_COUNT,
+    SV_READY,
+    SV_OLDREADY,
+    SV_SHIP,
+    SV_UNITM
+FROM
+    T_SERV 
+left join T_PRODUCT on T_PRODUCT.TP_ID = T_SERV.SV_TPID
+where SV_UID=:perem
+order by SV_ID 

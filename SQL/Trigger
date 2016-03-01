@@ -1,0 +1,7 @@
+CREATE OR ALTER trigger t_serv_oldready for t_serv
+active before update position 0
+AS
+begin
+if (old.sv_ready <> new.sv_ready) then
+NEW.SV_OLDREADY = old.sv_ready;
+end

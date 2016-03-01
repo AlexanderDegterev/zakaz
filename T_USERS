@@ -1,0 +1,24 @@
+CREATE TABLE T_USERS (
+    U_ID        INTEGER NOT NULL,
+    U_NAME      VARCHAR(50) CHARACTER SET WIN1251,
+    U_LOGIN     VARCHAR(50) CHARACTER SET WIN1251,
+    U_PASS      VARCHAR(10) CHARACTER SET WIN1251,
+    U_NASED     VARCHAR(10) CHARACTER SET WIN1251,
+    U_OTD       VARCHAR(100) CHARACTER SET WIN1251,
+    U_PROFFIO   VARCHAR(100) CHARACTER SET WIN1251,
+    U_CERT      BLOB SUB_TYPE 0 SEGMENT SIZE 500 CHARACTER SET WIN1251,
+    U_KEY       VARCHAR(30) CHARACTER SET WIN1251,
+    U_INV       VARCHAR(12) CHARACTER SET WIN1251,
+    U_PRIM      VARCHAR(50) CHARACTER SET WIN1251,
+    U_RIGHTS    VARCHAR(10) CHARACTER SET WIN1251
+
+);
+
+
+
+
+/******************************************************************************/
+/***                              Primary Keys                              ***/
+/******************************************************************************/
+
+ALTER TABLE T_USERS ADD CONSTRAINT PK_T_USERS PRIMARY KEY (U_ID);

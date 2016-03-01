@@ -1,0 +1,59 @@
+unit Product_Form;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons, Grids, DBGrids, ExtCtrls;
+
+type
+  TPRODUCT = class(TForm)
+    DBGrid1: TDBGrid;
+    EditButton: TBitBtn;
+    ADDButton: TBitBtn;
+    DelButton: TBitBtn;
+    CloseButton: TBitBtn;
+    Panel1: TPanel;
+    MonEdit: TEdit;
+    procedure FormShow(Sender: TObject);
+    procedure CloseButtonClick(Sender: TObject);
+    procedure DelButtonClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  PRODUCT: TPRODUCT;
+
+implementation
+
+uses DataModuleForm;
+
+{$R *.dfm}
+
+procedure TPRODUCT.CloseButtonClick(Sender: TObject);
+begin
+ Close;
+end;
+
+procedure TPRODUCT.DelButtonClick(Sender: TObject);
+begin
+  DataModule.ds_product.Delete;
+end;
+
+procedure TPRODUCT.FormShow(Sender: TObject);
+begin
+  DataModule.ds_ProdGroup.ParamByName('X').AsInteger:=DataModule.ds_ProdGroup.FieldByName('PG_ID').AsInteger;
+  DataModule.ds_ProdGroup.Open;
+  Panel1.Caption :=DataModule.ds_ProdGroup.FieldByName('PG_NAME').AsString;
+  MonEdit.Text :=DataModule.ds_ProdGroup.FieldByName('PG_ID').AsString;
+  DataModule.ds_product.Close;
+  DataModule.ds_product.ParamByName('Perem').Value:=Trim(MOnEdit.Text);
+  DataModule.ds_product.Open;
+  //cxButtonEdit2.Text:=DataModule.DS_T_USERS.FieldByName('Clients').AsString;
+  //Edit1.Text:=DataModule.DS_T_USERS.FieldByName('U_NAME').AsString;
+end;
+
+end.

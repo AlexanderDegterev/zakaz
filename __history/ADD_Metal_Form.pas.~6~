@@ -1,0 +1,55 @@
+unit ADD_Metal_Form;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons, ExtCtrls;
+
+type
+  TADD_Metal = class(TForm)
+    Panel1: TPanel;
+    SaveButton: TBitBtn;
+    CancelButton: TBitBtn;
+    GroupBox4: TGroupBox;
+    Label3: TLabel;
+    Edit3: TEdit;
+    Edit4: TEdit;
+    GroupBox9: TGroupBox;
+    Label6: TLabel;
+    GroupBox2: TGroupBox;
+    Label1: TLabel;
+    Edit1: TEdit;
+    procedure CancelButtonClick(Sender: TObject);
+    procedure SaveButtonClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ADD_Metal: TADD_Metal;
+
+implementation
+
+uses DataModuleForm;
+
+{$R *.dfm}
+
+procedure TADD_Metal.CancelButtonClick(Sender: TObject);
+begin
+ Release;
+end;
+
+procedure TADD_Metal.SaveButtonClick(Sender: TObject);
+begin
+ DataModule.ds_Metal.Insert;
+ DataModule.ds_Metal.FieldByName('TM_NAME').AsString := Trim(Edit1.Text);
+ DataModule.ds_Metal.FieldByName('TM_UNITM').AsString := Trim(Edit3.Text);
+ DataModule.ds_Metal.FieldByName('TM_GOST').AsString := Trim(Edit4.Text);
+ DataModule.ds_Metal.Post;
+ Release;
+end;
+
+end.

@@ -1,0 +1,25 @@
+unit DelUsers_Forn;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Grids, DBGrids;
+
+type
+  TFormDelUsers = class(TForm)
+    DBGrid1: TDBGrid;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormDelUsers: TFormDelUsers;
+
+implementation
+
+{$R *.dfm}
+
+end.

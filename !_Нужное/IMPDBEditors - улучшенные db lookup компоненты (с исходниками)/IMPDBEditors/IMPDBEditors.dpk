@@ -1,0 +1,48 @@
+package IMPDBEditors;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'Extention for Developer Express Visual Component Library from http://pyatochkin.blogspot.com/'}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  vcl,
+  vcljpg,
+  dbrtl,
+  vcldb,
+  dxGDIPlusD11,
+  cxLibraryD11,
+  dxThemeD11,
+  dxCoreD11,
+  cxEditorsD11,
+  cxDataD11,
+  dac105,
+  odac105,
+  adortl;
+
+contains
+  cxDBLookupComboBoxIMPOra in 'cxDBLookupComboBoxIMPOra.pas',
+  cxDBLookupComboBoxIMP in 'cxDBLookupComboBoxIMP.pas';
+
+end.

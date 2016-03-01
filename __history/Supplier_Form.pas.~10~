@@ -1,0 +1,77 @@
+unit Supplier_Form;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons, Grids, DBGrids, cxGraphics, cxControls,
+  cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore, dxSkinsDefaultPainters,
+  cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage, cxEdit, DB, cxDBData,
+  cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGridLevel,
+  cxClasses, cxGridCustomView, cxGrid;
+
+type
+  TSupplier = class(TForm)
+    EditButton: TBitBtn;
+    ADDButton: TBitBtn;
+    DelButton: TBitBtn;
+    CloseButton: TBitBtn;
+    eFilter: TEdit;
+    ButtonClear: TBitBtn;
+    cxGrid1DBTableView1: TcxGridDBTableView;
+    cxGrid1Level1: TcxGridLevel;
+    cxGrid1: TcxGrid;
+    cxGrid1DBTableView1SUP_ID: TcxGridDBColumn;
+    cxGrid1DBTableView1SUP_NAME: TcxGridDBColumn;
+    cxGrid1DBTableView1SUP_ADRES: TcxGridDBColumn;
+    cxGrid1DBTableView1SUP_STATUS: TcxGridDBColumn;
+    cxGrid1DBTableView1SUP_COUNTRY: TcxGridDBColumn;
+    cxGrid1DBTableView1SUP_TELEPHONE: TcxGridDBColumn;
+    cxGrid1DBTableView1SUP_UNN: TcxGridDBColumn;
+    procedure DelButtonClick(Sender: TObject);
+    procedure ADDButtonClick(Sender: TObject);
+    procedure EditButtonClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Supplier: TSupplier;
+
+implementation
+
+uses DataModuleForm, Supplier_Add_Form, Supplier_Edit_Form;
+
+{$R *.dfm}
+
+procedure TSupplier.ADDButtonClick(Sender: TObject);
+begin
+Application.CreateForm(TSupplier_Add, Supplier_Add);
+  try
+  Supplier_Add:=TSupplier_Add.create(self);
+  Supplier_Add.ShowModal;
+ finally
+ Supplier_Add.free;
+end;
+end;
+
+procedure TSupplier.DelButtonClick(Sender: TObject);
+begin
+ShowMessage('Удаление запрещено ! (временно)');
+  //DataModule.ds_Supplier.Delete;
+end;
+
+procedure TSupplier.EditButtonClick(Sender: TObject);
+begin
+ Application.CreateForm(TSupplier_Edit, Supplier_Edit);
+  try
+  Supplier_Edit:=TSupplier_Edit.create(self);
+  Supplier_Edit.ShowModal;
+ finally
+ Supplier_Edit.free;
+end;
+end;
+
+end.

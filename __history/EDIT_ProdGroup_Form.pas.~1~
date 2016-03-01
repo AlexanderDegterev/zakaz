@@ -1,0 +1,28 @@
+unit EDIT_ProdGroup_Form;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons, ExtCtrls;
+
+type
+  TEdit_ProdGroup = class(TForm)
+    Panel1: TPanel;
+    Edit1: TEdit;
+    SaveButton: TBitBtn;
+    CancelButton: TBitBtn;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Edit_ProdGroup: TEdit_ProdGroup;
+
+implementation
+
+{$R *.dfm}
+
+end.

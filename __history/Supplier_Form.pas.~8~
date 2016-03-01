@@ -1,0 +1,52 @@
+unit Supplier_Form;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons, Grids, DBGrids;
+
+type
+  TSupplier = class(TForm)
+    DBGrid1: TDBGrid;
+    EditButton: TBitBtn;
+    ADDButton: TBitBtn;
+    DelButton: TBitBtn;
+    CloseButton: TBitBtn;
+    eFilter: TEdit;
+    ButtonClear: TBitBtn;
+    procedure DelButtonClick(Sender: TObject);
+    procedure ADDButtonClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Supplier: TSupplier;
+
+implementation
+
+uses DataModuleForm, Supplier_Add_Form;
+
+{$R *.dfm}
+
+procedure TSupplier.ADDButtonClick(Sender: TObject);
+begin
+Application.CreateForm(TSupplier_Add, Supplier_Add_S);
+  try
+  Supplier_Add:=TSupplier_Add.create(self);
+  Supplier_Add.ShowModal;
+ finally
+ Supplier_Add.free;
+end;
+end;
+
+procedure TSupplier.DelButtonClick(Sender: TObject);
+begin
+ShowMessage('Удаление запрещено ! (временно)');
+  //DataModule.ds_Supplier.Delete;
+end;
+
+end.

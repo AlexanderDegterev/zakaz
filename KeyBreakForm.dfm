@@ -1,0 +1,61 @@
+object KeyBreak: TKeyBreak
+  Left = 0
+  Top = 0
+  Caption = #1048#1089#1087#1086#1088#1095#1077#1085#1085#1099#1077' '#1082#1083#1102#1095#1080' '#1069#1062#1055
+  ClientHeight = 343
+  ClientWidth = 422
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  DesignSize = (
+    422
+    343)
+  PixelsPerInch = 96
+  TextHeight = 13
+  object cxGrid1: TcxGrid
+    Left = 16
+    Top = 8
+    Width = 390
+    Height = 295
+    Anchors = [akLeft, akTop, akRight]
+    TabOrder = 0
+    object cxGrid1DBTableView1: TcxGridDBTableView
+      DataController.DataSource = DataModule.Source_KeyBreak
+      DataController.Summary.DefaultGroupSummaryItems = <>
+      DataController.Summary.FooterSummaryItems = <>
+      DataController.Summary.SummaryGroups = <>
+      OptionsSelection.CellSelect = False
+      OptionsView.GroupByBox = False
+      object cxGrid1DBTableView1K_ID: TcxGridDBColumn
+        DataBinding.FieldName = 'K_ID'
+      end
+      object cxGrid1DBTableView1K_KEY: TcxGridDBColumn
+        DataBinding.FieldName = 'K_KEY'
+      end
+      object cxGrid1DBTableView1K_INV: TcxGridDBColumn
+        DataBinding.FieldName = 'K_INV'
+      end
+      object cxGrid1DBTableView1K_DATE: TcxGridDBColumn
+        DataBinding.FieldName = 'K_DATE'
+      end
+    end
+    object cxGrid1Level1: TcxGridLevel
+      GridView = cxGrid1DBTableView1
+    end
+  end
+  object ButtonClose: TBitBtn
+    Left = 306
+    Top = 309
+    Width = 100
+    Height = 25
+    Caption = #1047#1072#1082#1088#1099#1090#1100
+    DoubleBuffered = True
+    ModalResult = 11
+    ParentDoubleBuffered = False
+    TabOrder = 1
+  end
+end

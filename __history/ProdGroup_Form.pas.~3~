@@ -1,0 +1,31 @@
+unit ProdGroup_Form;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons, Grids, DBGrids;
+
+type
+  TProdGroup = class(TForm)
+    DBGrid1: TDBGrid;
+    EditButton: TBitBtn;
+    ADDButton: TBitBtn;
+    DelButton: TBitBtn;
+    CloseButton: TBitBtn;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ProdGroup: TProdGroup;
+
+implementation
+
+uses DataModuleForm;
+
+{$R *.dfm}
+
+end.

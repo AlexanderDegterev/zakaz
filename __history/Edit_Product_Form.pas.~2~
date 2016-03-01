@@ -1,0 +1,39 @@
+unit Edit_Product_Form;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, DBCtrls, ExtCtrls, Buttons;
+
+type
+  TEdit_Product = class(TForm)
+    Panel1: TPanel;
+    GroupBox1: TGroupBox;
+    Label8: TLabel;
+    DBLookupComboBox1: TDBLookupComboBox;
+    GroupBox2: TGroupBox;
+    Label1: TLabel;
+    Edit1: TEdit;
+    GroupBox3: TGroupBox;
+    Label2: TLabel;
+    GroupBox4: TGroupBox;
+    Label3: TLabel;
+    Edit2: TEdit;
+    Edit3: TEdit;
+    SaveButton: TBitBtn;
+    CancelButton: TBitBtn;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Edit_Product: TEdit_Product;
+
+implementation
+
+{$R *.dfm}
+
+end.

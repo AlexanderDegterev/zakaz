@@ -1,0 +1,13 @@
+CREATE TABLE ProdGroup (
+    PG_ID    INTEGER NOT NULL,
+    PG_NAME  VARCHAR(100) CHARACTER SET NONE
+);
+
+
+
+
+/******************************************************************************/
+/***                              Primary Keys                              ***/
+/******************************************************************************/
+
+ALTER TABLE ProdGroup ADD CONSTRAINT PK_ProdGroup PRIMARY KEY (PG_ID);

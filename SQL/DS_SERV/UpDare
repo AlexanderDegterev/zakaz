@@ -1,0 +1,11 @@
+UPDATE T_SERV
+SET 
+    SV_UID = :SV_UID,
+    SV_TPID = :SV_TPID,
+    SV_COUNT = :SV_COUNT,
+    SV_READY = :SV_READY,
+    SV_SHIP = :SV_SHIP,
+    SV_UNITM = :SV_UNITM
+WHERE
+    SV_ID = :OLD_SV_ID
+    

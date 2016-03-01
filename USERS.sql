@@ -1,0 +1,6 @@
+INSERT INTO USERS (ID, LOGIN, PWD, PID)
+           VALUES (0, 'Администратор', '202cb962ac59075b964b07152d234b70', 0);
+INSERT INTO USERS (ID, LOGIN, PWD, PID)
+           VALUES (1, 'Пользователь', '202cb962ac59075b964b07152d234b70', 1);
+
+COMMIT WORK;

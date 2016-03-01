@@ -1,0 +1,34 @@
+unit Add_Reference_Form;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons, ExtCtrls;
+
+type
+  TAdd_reference = class(TForm)
+    Edit1: TEdit;
+    Panel1: TPanel;
+    SaveButton: TBitBtn;
+    CancelButton: TBitBtn;
+    procedure CancelButtonClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Add_reference: TAdd_reference;
+
+implementation
+
+{$R *.dfm}
+
+procedure TAdd_reference.CancelButtonClick(Sender: TObject);
+begin
+ Close;
+end;
+
+end.

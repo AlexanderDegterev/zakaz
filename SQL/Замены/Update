@@ -1,0 +1,3 @@
+update t_serv_m
+set svm_tmid = 90
+where (svm_tmid=461) or (svm_tmid=508)

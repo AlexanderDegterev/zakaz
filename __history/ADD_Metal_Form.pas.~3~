@@ -1,0 +1,45 @@
+unit ADD_Metal_Form;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons, ExtCtrls;
+
+type
+  TADD_Metal = class(TForm)
+    Panel1: TPanel;
+    Edit1: TEdit;
+    SaveButton: TBitBtn;
+    CancelButton: TBitBtn;
+    procedure CancelButtonClick(Sender: TObject);
+    procedure SaveButtonClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ADD_Metal: TADD_Metal;
+
+implementation
+
+uses DataModuleForm;
+
+{$R *.dfm}
+
+procedure TADD_Metal.CancelButtonClick(Sender: TObject);
+begin
+ Close;
+end;
+
+procedure TADD_Metal.SaveButtonClick(Sender: TObject);
+begin
+ DataModule.ds_Metal.Insert;
+ DataModule.ds_Metal.FieldByName('TM_NAME').AsString := Trim(Edit1.Text);
+ DataModule.ds_Metal.Post;
+ Close;
+end;
+
+end.

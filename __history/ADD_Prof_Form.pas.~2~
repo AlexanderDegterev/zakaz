@@ -1,0 +1,39 @@
+unit ADD_Prof_Form;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons, ExtCtrls;
+
+type
+  TADD_Prof = class(TForm)
+    Panel1: TPanel;
+    Edit1: TEdit;
+    SaveButton: TBitBtn;
+    CancelButton: TBitBtn;
+    procedure SaveButtonClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ADD_Prof: TADD_Prof;
+
+implementation
+
+uses DataModuleForm;
+
+{$R *.dfm}
+
+procedure TADD_Prof.SaveButtonClick(Sender: TObject);
+begin
+ DataModule.ds_Proffesionals.Insert;
+ DataModule.ds_Proffesionals.FieldByName('P_PROF').AsString := Trim(Edit1.Text);
+ DataModule.ds_Proffesionals.Post;
+ Close;
+end;
+
+end.

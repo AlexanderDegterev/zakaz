@@ -1,0 +1,15 @@
+CREATE TABLE T_Metal (
+    TM_ID      INTEGER NOT NULL,
+    TM_NAME    VARCHAR(100) CHARACTER SET NONE,
+    TM_UNITM   VARCHAR(3),
+    TM_GOST    VARCHAR(100)
+);
+
+
+
+
+/******************************************************************************/
+/***                              Primary Keys                              ***/
+/******************************************************************************/
+
+ALTER TABLE T_METAL ADD CONSTRAINT PK_T_METAL PRIMARY KEY (TM_ID);

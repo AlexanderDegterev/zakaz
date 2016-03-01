@@ -1,0 +1,11 @@
+AS
+declare variable temp integer;
+begin
+  temp = old.sv_tpid;
+  IF  ((select count (T_serv.sv_tpid) as CountPROD From t_serv
+  left join t_product on t_product.tp_id=t_serv.sv_tpid
+  where t_serv.sv_UID=old.sv_uid) = 1)
+  then
+  delete from T_Product
+  where t_product.tp_id=:temp;
+END

@@ -1,0 +1,40 @@
+unit Supplier_Add_Form;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons;
+
+type
+  TSupplier_Add = class(TForm)
+    Edit1: TEdit;
+    SaveButton: TBitBtn;
+    CancelButton: TBitBtn;
+    StaticText1: TStaticText;
+    StaticText2: TStaticText;
+    StaticText3: TStaticText;
+    StaticText4: TStaticText;
+    Edit2: TEdit;
+    Edit3: TEdit;
+    Edit4: TEdit;
+    procedure CancelButtonClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Supplier_Add: TSupplier_Add;
+
+implementation
+
+{$R *.dfm}
+
+procedure TSupplier_Add.CancelButtonClick(Sender: TObject);
+begin
+modalResult := mrCancel;
+end;
+
+end.

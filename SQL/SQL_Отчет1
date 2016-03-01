@@ -1,0 +1,7 @@
+select U_ID, U_NAME,CL_NAME,OB_NAME,U_NOMERZAK,U_OBJECT,U_DATEBEG,SV_Count,SV_Ready,SV_SUMM
+from t_users
+left join t_clients on t_clients.cl_id=t_users.u_name
+left join T_OBJECT on T_OBJECT.OB_ID=t_users.U_OBJECT
+left join t_serv on T_SERV.sv_uid=T_USERS.u_id
+where T_SERV.sv_tpid='1'
+order by 2

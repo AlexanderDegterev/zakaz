@@ -1,0 +1,171 @@
+object Izdelie2: TIzdelie2
+  Left = 0
+  Top = 0
+  Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1080#1079#1076#1077#1083#1080#1103' '#1082' '#1079#1072#1082#1072#1079#1091'_2'
+  ClientHeight = 686
+  ClientWidth = 966
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object cxGrid1: TcxGrid
+    Left = 8
+    Top = 8
+    Width = 704
+    Height = 302
+    TabOrder = 0
+    LookAndFeel.Kind = lfStandard
+    LookAndFeel.NativeStyle = True
+    LookAndFeel.SkinName = ''
+    object cxGrid1DBTableView1: TcxGridDBTableView
+      DataController.DataSource = DataModule.Source_SERV
+      DataController.Options = [dcoAssignGroupingValues, dcoAssignMasterDetailKeys, dcoSaveExpanding, dcoImmediatePost]
+      DataController.Summary.DefaultGroupSummaryItems = <>
+      DataController.Summary.FooterSummaryItems = <>
+      DataController.Summary.SummaryGroups = <>
+      OptionsView.Footer = True
+      OptionsView.GroupByBox = False
+      OptionsView.Indicator = True
+      object cxGrid1DBTableView1SV_ID: TcxGridDBColumn
+        DataBinding.FieldName = 'SV_ID'
+        Visible = False
+        Options.Editing = False
+        Width = 34
+      end
+      object cxGrid1DBTableView1SV_UID: TcxGridDBColumn
+        DataBinding.FieldName = 'SV_UID'
+        Visible = False
+        Options.Editing = False
+        Width = 37
+      end
+      object cxGrid1DBTableView1SV_TPID: TcxGridDBColumn
+        DataBinding.FieldName = 'SV_TPID'
+        Visible = False
+        Options.Editing = False
+        Width = 42
+      end
+      object cxGrid1DBTableView1Column1: TcxGridDBColumn
+        Caption = #1048#1079#1076#1077#1083#1080#1103
+        DataBinding.FieldName = 'TP_NAME'
+        Options.Editing = False
+        Width = 274
+      end
+      object cxGrid1DBTableView1SV_COUNT: TcxGridDBColumn
+        Caption = #1050#1086#1083'-'#1074#1086
+        DataBinding.FieldName = 'SV_COUNT'
+      end
+      object cxGrid1DBTableView1SV_ZAGOTOVKI: TcxGridDBColumn
+        Caption = #1047#1072#1075#1086#1090#1086#1074#1082#1080
+        DataBinding.FieldName = 'SV_ZAGOTOVKI'
+      end
+      object cxGrid1DBTableView1SV_READY: TcxGridDBColumn
+        Caption = #1043#1086#1090#1086#1074#1086
+        DataBinding.FieldName = 'SV_READY'
+      end
+      object cxGrid1DBTableView1SV_DATEOTGRUZ: TcxGridDBColumn
+        Caption = #1044#1072#1090#1072' '#1086#1090#1075#1088#1091#1079#1082#1080
+        DataBinding.FieldName = 'SV_DATEOTGRUZ'
+        Width = 81
+      end
+      object cxGrid1DBTableView1SV_SHIP: TcxGridDBColumn
+        Caption = #1054#1090#1075#1088#1091#1078#1077#1085#1086
+        DataBinding.FieldName = 'SV_SHIP'
+      end
+      object cxGrid1DBTableView1SV_UNITM: TcxGridDBColumn
+        Caption = #1045#1076'.'#1080#1079#1084'.'
+        DataBinding.FieldName = 'SV_UNITM'
+        Options.Editing = False
+      end
+    end
+    object cxGrid1Level1: TcxGridLevel
+      GridView = cxGrid1DBTableView1
+    end
+  end
+  object cxGrid2: TcxGrid
+    Left = 8
+    Top = 324
+    Width = 704
+    Height = 285
+    TabOrder = 1
+    object cxGrid2DBTableView1: TcxGridDBTableView
+      DataController.DataSource = DataModule.Source_Product
+      DataController.Summary.DefaultGroupSummaryItems = <>
+      DataController.Summary.FooterSummaryItems = <>
+      DataController.Summary.SummaryGroups = <>
+      OptionsData.Editing = False
+      OptionsData.Inserting = False
+      OptionsView.GroupByBox = False
+      OptionsView.Indicator = True
+      object cxGrid2DBTableView1TP_ID: TcxGridDBColumn
+        DataBinding.FieldName = 'TP_ID'
+        Visible = False
+      end
+      object cxGrid2DBTableView1TP_PGID: TcxGridDBColumn
+        DataBinding.FieldName = 'TP_PGID'
+        Visible = False
+      end
+      object cxGrid2DBTableView1TP_NAME: TcxGridDBColumn
+        DataBinding.FieldName = 'TP_NAME'
+        Width = 300
+      end
+      object cxGrid2DBTableView1TP_VOLUME: TcxGridDBColumn
+        DataBinding.FieldName = 'TP_VOLUME'
+        Visible = False
+      end
+      object cxGrid2DBTableView1TP_UNITM: TcxGridDBColumn
+        DataBinding.FieldName = 'TP_UNITM'
+        Width = 50
+      end
+      object cxGrid2DBTableView1TP_GOST: TcxGridDBColumn
+        DataBinding.FieldName = 'TP_GOST'
+        Width = 200
+      end
+    end
+    object cxGrid2Level1: TcxGridLevel
+      GridView = cxGrid2DBTableView1
+    end
+  end
+  object SaveButton: TBitBtn
+    Left = 740
+    Top = 567
+    Width = 189
+    Height = 25
+    Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1080' '#1079#1072#1082#1088#1099#1090#1100
+    DoubleBuffered = True
+    Glyph.Data = {
+      36030000424D3603000000000000360000002800000010000000100000000100
+      18000000000000030000120B0000120B00000000000000000000FB00FFFB00FF
+      FB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00
+      FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB
+      00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF
+      FB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00
+      FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF64B89C64B89CFB
+      00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF
+      FB00FFFB00FF64B89C98EECA98EECA64B89CFB00FFFB00FFFB00FFFB00FFFB00
+      FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF64B89C9CF1CD60E3A560E3A59C
+      F1CD64B89CFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF
+      64B89CA1F3D166E8AB66E8AB66E8AB66E8ABA1F3D164B89CFB00FFFB00FFFB00
+      FFFB00FFFB00FFFB00FFFB00FFFB00FF64B89C6DEDB26DEDB264B89C64B89C6D
+      EDB26DEDB2A7F6D564B89CFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF
+      FB00FF64B89C64B89CFB00FFFB00FF64B89C73F3B973F3B9ABF9D964B89CFB00
+      FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB
+      00FF64B89C79F8BF79F8BFB0FBDD64B89CFB00FFFB00FFFB00FFFB00FFFB00FF
+      FB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF64B89C7EFCC47EFCC4B3FD
+      E064B89CFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB
+      00FFFB00FFFB00FF64B89C81FFC881FFC864B89CFB00FFFB00FFFB00FFFB00FF
+      FB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF64B89C64B8
+      9CFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB
+      00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF
+      FB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00
+      FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB
+      00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF}
+    ParentDoubleBuffered = False
+    TabOrder = 2
+  end
+end

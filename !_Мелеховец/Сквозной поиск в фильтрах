@@ -1,0 +1,18 @@
+procedure TfMain.eFilterCTPropertiesChange(Sender: TObject);
+begin
+  if (Length(Trim(eFilterCT.Text)) > 0) and (eFilterCT.Text <> filterText) then
+  begin
+    dsContract.Filtered := False;
+    dsContract.FilterOptions := [foCaseInsensitive];
+    dsContract.Filter   := 'CT_NUMBER LIKE ' + QuotedStr('%' + Trim(eFilterCT.Text) + '%') +
+                           ' OR CS_NAME LIKE ' + QuotedStr('%' + Trim(eFilterCT.Text) + '%');
+    dsContract.Filtered := True;
+  end
+  else
+    dsContract.Filtered := False;
+end;
+
+
+[17:19:11] Татьяна Мелеховец: 
+filterText = "Введите строку для поиска"
+dsContract - FIBDataSet

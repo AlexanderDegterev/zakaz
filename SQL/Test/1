@@ -1,0 +1,11 @@
+Select U_ID,U_NAME,CL_Name, U_Nomerzak, U_Datebeg, SV_Count,SV_SUMM
+from T_Users
+left join t_clients on t_clients.cl_id=t_users.u_name
+left join T_OBJECT on T_OBJECT.OB_ID=t_users.U_OBJECT
+left join T_serv on t_serv.sv_uid=t_users.u_id
+left join T_serv_m on T_serv_m.svm_uid=t_users.u_id
+left join t_metal on t_metal.tm_id=t_serv_m.svm_tmid
+left join t_product on t_product.tp_id=t_serv.sv_tpid
+where U_Object =:Perem              
+group by U_ID,U_NAME,CL_Name, U_Nomerzak, U_Datebeg, SV_Count,SV_SUMM
+Order by 2

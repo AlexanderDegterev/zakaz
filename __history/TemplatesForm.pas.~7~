@@ -1,0 +1,40 @@
+unit TemplatesForm;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ExtCtrls, Buttons, Grids, DBGrids, ComCtrls, DataModuleForm;
+
+type
+  TTemplates = class(TForm)
+    DBGrid1: TDBGrid;
+    Panel1: TPanel;
+    Panel_Name: TPanel;
+    GroupBox1: TGroupBox;
+    Panel2: TPanel;
+    ButtonReport: TBitBtn;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    DateTimePicker1: TDateTimePicker;
+    DateTimePicker2: TDateTimePicker;
+    procedure DBGrid1CellClick(Column: TColumn);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Templates: TTemplates;
+
+implementation
+
+{$R *.dfm}
+
+procedure TTemplates.DBGrid1CellClick(Column: TColumn);
+begin
+ Panel_Name.Caption:=DataModule.ds_Template.FieldByName('T_NAME').AsString;//'реяр';
+end;
+
+end.

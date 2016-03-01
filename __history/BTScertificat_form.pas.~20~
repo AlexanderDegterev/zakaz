@@ -1,0 +1,141 @@
+unit BTScertificat_form;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, About, DataModuleUnit, Menus, Grids, DBGrids, StdCtrls, EditForm,
+  ADD_Form, Reference_Form, DB, ExtCtrls;
+
+type
+  TForm1 = class(TForm)
+    MainMenu1: TMainMenu;
+    N1: TMenuItem;
+    N6: TMenuItem;
+    N2: TMenuItem;
+    N31: TMenuItem;
+    N5: TMenuItem;
+    N8: TMenuItem;
+    N3: TMenuItem;
+    N4: TMenuItem;
+    N7: TMenuItem;
+    DBGrid1: TDBGrid;
+    ButtonClose: TButton;
+    SearchButton: TButton;
+    ButtonALL: TButton;
+    EditButton: TButton;
+    Label1: TLabel;
+    FREE_EPI: TButton;
+    DelButton: TButton;
+    ADDButton: TButton;
+    eFilterCT: TEdit;
+    N9: TMenuItem;
+    N10: TMenuItem;
+    N11: TMenuItem;
+    Panel1: TPanel;
+    procedure N6Click(Sender: TObject);
+    procedure N4Click(Sender: TObject);
+    procedure ButtonCloseClick(Sender: TObject);
+    procedure EditButtonClick(Sender: TObject);
+    procedure DelButtonClick(Sender: TObject);
+    procedure ADDButtonClick(Sender: TObject);
+    procedure N10Click(Sender: TObject);
+    procedure eFilterCTChange(Sender: TObject);
+
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.DelButtonClick(Sender: TObject);
+begin
+  DataModuleUnit.DataModule1.DS_user_del.Open;
+  DataModuleUnit.DataModule1.DS_user_del.Insert;
+  DataModuleUnit.DataModule1.DS_user_del.FieldByName('U_ID_OLD').AsInteger:=DataModuleUnit.DataModule1.FIBDataSet.FieldByName('U_ID').AsInteger;
+  DataModuleUnit.DataModule1.DS_user_del.FieldByName('U_NAME').AsString := DataModuleUnit.DataModule1.FIBDataSet.FieldByName('U_NAME').AsString;
+  DataModuleUnit.DataModule1.DS_user_del.FieldByName('U_LOGIN').AsString := DataModuleUnit.DataModule1.FIBDataSet.FieldByName('U_LOGIN').AsString;
+  DataModuleUnit.DataModule1.DS_user_del.FieldByName('U_PASS').AsString := DataModuleUnit.DataModule1.FIBDataSet.FieldByName('U_PASS').AsString;
+  DataModuleUnit.DataModule1.DS_user_del.FieldByName('U_NASED').AsString := DataModuleUnit.DataModule1.FIBDataSet.FieldByName('U_NASED').AsString;
+  DataModuleUnit.DataModule1.DS_user_del.FieldByName('U_OTD').AsString := DataModuleUnit.DataModule1.FIBDataSet.FieldByName('U_OTD').AsString;
+  DataModuleUnit.DataModule1.DS_user_del.FieldByName('U_PROFFIO').AsString := DataModuleUnit.DataModule1.FIBDataSet.FieldByName('U_PROFFIO').AsString;
+  DataModuleUnit.DataModule1.DS_user_del.FieldByName('U_CERT').AsString := DataModuleUnit.DataModule1.FIBDataSet.FieldByName('U_CERT').AsString;
+  DataModuleUnit.DataModule1.DS_user_del.FieldByName('U_KEY').AsString := DataModuleUnit.DataModule1.FIBDataSet.FieldByName('U_KEY').AsString;
+  DataModuleUnit.DataModule1.DS_user_del.FieldByName('U_INV').AsString := DataModuleUnit.DataModule1.FIBDataSet.FieldByName('U_INV').AsString;
+  DataModuleUnit.DataModule1.DS_user_del.FieldByName('U_PRIM').AsString := DataModuleUnit.DataModule1.FIBDataSet.FieldByName('U_PRIM').AsString;
+  //DataModuleUnit.DataModule1.DS_user_del.Edit;
+  //DataModuleUnit.DataModule1.DS_user_del.Insert;
+  DataModuleUnit.DataModule1.DS_user_del.Post;
+  DataModuleUnit.DataModule1.DS_user_del.Close;
+
+ DataModuleUnit.DataModule1.FIBDataSet.Delete;
+end;
+
+procedure TForm1.ADDButtonClick(Sender: TObject);
+begin
+ DataModuleUnit.DataModule1.FIBDataSet.Open;
+ DataModuleUnit.DataModule1.FIBDataSet.Insert;
+ DBGrid1.SetFocus;
+ ADD_f.Showmodal;
+end;
+
+procedure TForm1.ButtonCloseClick(Sender: TObject);
+begin
+ Close;
+end;
+
+procedure TForm1.EditButtonClick(Sender: TObject);
+var Save,perem:string;
+     perem2:integer;
+
+begin
+ //perem:=DataModuleUnit.DataModule1.FIBDataSet.FieldByName('U_ID').AsString;
+ //Label1.Caption:=perem;
+ //Label1.Caption:=DataModuleUnit.DataModule1.FIBDataSet.FieldByName('U_ID').AsString;
+ EditForm.Edit123.ShowModal;
+       //ShowMessage('Óäàëåííûå ÝÏÈ âîññòàíàâëèâàòü íåëüçÿ!');
+ end;
+
+// ÏÎÈÑÊ â ÔÈËÜÒÐÀÕ
+procedure TForm1.eFilterCTChange(Sender: TObject);
+var
+filterText:string;
+begin
+ eFilterCT.Clear;
+ if (Length(Trim(eFilterCT.Text)) > 0) and (eFilterCT.Text <> filterText) then
+     begin
+       DataModuleUnit.DataModule1.FIBDataSet.Filtered := False;
+       //DataModuleUnit.DataModule1.FIBDataSet.FilterOptions;
+       DataModuleUnit.DataModule1.FIBDataSet.FilterOptions :=[foCaseInsensitive];
+       DataModuleUnit.DataModule1.FIBDataSet.Filter   := 'U_NAME LIKE ' + QuotedStr('%' + Trim(eFilterCT.Text) + '%') +
+                           ' OR U_LOGIN LIKE ' + QuotedStr('%' + Trim(eFilterCT.Text) + '%');
+       DataModuleUnit.DataModule1.FIBDataSet.Filtered := True;
+     end
+      else
+       DataModuleUnit.DataModule1.FIBDataSet.Filtered := False;
+end;
+
+
+procedure TForm1.N10Click(Sender: TObject);
+begin
+ Reference.ShowModal;
+end;
+
+procedure TForm1.N4Click(Sender: TObject);
+begin
+ About.AboutForm.ShowModal;
+end;
+
+procedure TForm1.N6Click(Sender: TObject);
+begin
+ Close;
+end;
+
+end.

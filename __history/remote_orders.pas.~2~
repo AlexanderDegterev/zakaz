@@ -1,0 +1,55 @@
+unit remote_orders;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters,
+  dxSkinsCore, dxSkinsDefaultPainters, cxStyles, dxSkinscxPCPainter,
+  cxCustomData, cxFilter, cxData, cxDataStorage, cxEdit, DB, cxDBData,
+  cxGridLevel, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
+  cxClasses, cxGridCustomView, cxGrid, StdCtrls, Buttons, ExtCtrls;
+
+type
+  TRemot_orders = class(TForm)
+    Panel3: TPanel;
+    Label1: TLabel;
+    ButtonClear: TBitBtn;
+    eFilter: TEdit;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    ButtonEdit: TBitBtn;
+    ButtonDel: TBitBtn;
+    ButtonClose: TBitBtn;
+    cxGrid1: TcxGrid;
+    cxGrid1DBTableView1: TcxGridDBTableView;
+    cxGrid1DBTableView1U_ID: TcxGridDBColumn;
+    cxGrid1DBTableView1U_NAME: TcxGridDBColumn;
+    cxGrid1DBTableView1CL_NAME: TcxGridDBColumn;
+    cxGrid1DBTableView1U_NOMERZAK: TcxGridDBColumn;
+    cxGrid1DBTableView1U_OBJECT: TcxGridDBColumn;
+    cxGrid1DBTableView1OB_NAME: TcxGridDBColumn;
+    cxGrid1DBTableView1U_DATEBEG: TcxGridDBColumn;
+    cxGrid1DBTableView1U_DATESTART: TcxGridDBColumn;
+    cxGrid1DBTableView1U_DATEEND: TcxGridDBColumn;
+    cxGrid1DBTableView1U_NASED: TcxGridDBColumn;
+    cxGrid1DBTableView1U_CERT: TcxGridDBColumn;
+    cxGrid1DBTableView1U_MET: TcxGridDBColumn;
+    cxGrid1DBTableView1U_PRIM: TcxGridDBColumn;
+    cxGrid1DBTableView1U_PROFFIO: TcxGridDBColumn;
+    cxGrid1DBTableView1P_PROF: TcxGridDBColumn;
+    cxGrid1Level1: TcxGridLevel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Remot_orders: TRemot_orders;
+
+implementation
+
+{$R *.dfm}
+
+end.

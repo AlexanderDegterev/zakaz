@@ -1,0 +1,56 @@
+unit ConnectBD_form;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters,
+  dxSkinsCore, dxSkinsDefaultPainters, cxStyles, cxCustomData, cxFilter, cxData,
+  cxDataStorage, cxEdit, DB, cxDBData, RzButton, cxGridLevel,
+  cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxClasses,
+  cxGridCustomView, cxGrid;
+
+type
+  TConnectDB = class(TForm)
+    cxGrid2: TcxGrid;
+    cxGrid2DBTableView1: TcxGridDBTableView;
+    cxGrid2Level1: TcxGridLevel;
+    RzRefrash: TRzBitBtn;
+    cxGrid2DBTableView1MONATTACHMENT_NAME: TcxGridDBColumn;
+    cxGrid2DBTableView1MONUSER: TcxGridDBColumn;
+    cxGrid2DBTableView1MONREMOTE_PROTOCOL: TcxGridDBColumn;
+    cxGrid2DBTableView1MONREMOTE_ADDRESS: TcxGridDBColumn;
+    cxGrid2DBTableView1MONREMOTE_PID: TcxGridDBColumn;
+    cxGrid2DBTableView1MONCHARACTER_SET_ID: TcxGridDBColumn;
+    cxGrid2DBTableView1MONTIMESTAMP: TcxGridDBColumn;
+    cxGrid2DBTableView1MONGARBAGE_COLLECTION: TcxGridDBColumn;
+    cxGrid2DBTableView1MONREMOTE_PROCESS: TcxGridDBColumn;
+    cxGrid2DBTableView1MONSTAT_ID: TcxGridDBColumn;
+    procedure FormShow(Sender: TObject);
+    procedure RzRefrashClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ConnectDB: TConnectDB;
+
+implementation
+
+uses DataModuleForm;
+
+{$R *.dfm}
+
+procedure TConnectDB.FormShow(Sender: TObject);
+begin
+DataModule.ds_connectDB.Open;
+end;
+
+procedure TConnectDB.RzRefrashClick(Sender: TObject);
+begin
+DataModule.ds_connectDB.ReopenLocate('MON$ATTACHMENT_ID');
+end;
+
+end.

@@ -1,0 +1,4 @@
+CREATE TABLE T_Profesionals (
+    O_ID    INTEGER NOT NULL,
+    O_Prof  VARCHAR(50)
+);

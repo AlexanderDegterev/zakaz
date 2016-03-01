@@ -1,0 +1,24 @@
+unit remote_orders;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs;
+
+type
+  TRemot_orders = class(TForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Remot_orders: TRemot_orders;
+
+implementation
+
+{$R *.dfm}
+
+end.

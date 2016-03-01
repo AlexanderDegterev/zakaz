@@ -1,0 +1,28 @@
+unit ADD_Object_Form;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons, ExtCtrls;
+
+type
+  TAdd_Object = class(TForm)
+    Panel1: TPanel;
+    Edit1: TEdit;
+    SaveButton: TBitBtn;
+    CancelButton: TBitBtn;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Add_Object: TAdd_Object;
+
+implementation
+
+{$R *.dfm}
+
+end.

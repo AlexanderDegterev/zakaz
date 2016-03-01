@@ -1,0 +1,27 @@
+на RzToolBar нужно прикрепить ImageList любой
+тогда по двойному клику по этому toolBar по€витс€ окошко, где можно управл€ть пор€дком кнопок и добавл€ть разделители
+
+//***** ѕрорисовка значка в таблице "—ертификаты" *****
+procedure TfMain.cxGrid1DBTableView1Column15CustomDrawCell(
+  Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
+  AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
+var X, Y, Index : Integer;
+begin
+  ADone := True;
+  ACanvas.FillRect(AViewInfo.Bounds);
+  with AViewInfo.Bounds do
+  begin
+    X := (Left + Right - ImageList1.Width) div 2;
+    Y := (Top + Bottom - ImageList1.Height) div 2;
+  end;
+  if (AViewInfo.Value = 0) then
+    Index := 23
+  else
+    Index := 22;
+  ImageList1.Draw(ACanvas.Canvas, X, Y, Index, True);
+end;
+
+22 - номер красной иконки в ImageList, 
+23 - зеленой или наоборот
+
+а суммирование в свойстве Footer cxGrid-а

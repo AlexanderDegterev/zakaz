@@ -1,0 +1,78 @@
+unit Edit_Product_Form;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, DBCtrls, ExtCtrls, Buttons;
+
+type
+  TEdit_Product = class(TForm)
+    Panel1: TPanel;
+    GroupBox1: TGroupBox;
+    Label8: TLabel;
+    DBLookupComboBox1: TDBLookupComboBox;
+    GroupBox2: TGroupBox;
+    Label1: TLabel;
+    Edit1: TEdit;
+    GroupBox3: TGroupBox;
+    Label2: TLabel;
+    GroupBox4: TGroupBox;
+    Label3: TLabel;
+    Edit2: TEdit;
+    Edit3: TEdit;
+    SaveButton: TBitBtn;
+    CancelButton: TBitBtn;
+    Edit4: TEdit;
+    GroupBox9: TGroupBox;
+    Label6: TLabel;
+    Edit5: TEdit;
+    procedure FormShow(Sender: TObject);
+    procedure CancelButtonClick(Sender: TObject);
+    procedure SaveButtonClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Edit_Product: TEdit_Product;
+
+implementation
+
+uses DataModuleForm;
+
+{$R *.dfm}
+
+procedure TEdit_Product.CancelButtonClick(Sender: TObject);
+begin
+ Close;
+end;
+
+procedure TEdit_Product.FormShow(Sender: TObject);
+var Vrem:Integer;
+begin
+ DataModule.ds_product.Open;
+ vrem:=DataModule.ds_product.FieldByName('TP_PGID').AsInteger;
+ Edit1.Text:=DataModule.ds_product.FieldByName('TP_Name').AsString;
+ Edit2.Text:=DataModule.ds_product.FieldByName('TP_VOLUME').AsString;
+ Edit3.Text:=DataModule.ds_product.FieldByName('TP_UNITM').AsString;
+ Edit4.Text:=DataModule.ds_product.FieldByName('TP_GOST').AsString;
+ Edit5.Text:=IntToStr(vrem);
+
+end;
+
+procedure TEdit_Product.SaveButtonClick(Sender: TObject);
+begin
+  DataModule.ds_product.Edit;
+  DataModule.ds_product.FieldByName('TP_Name').AsString := Trim(Edit1.Text);
+  DataModule.ds_product.FieldByName('TP_VOLUME').AsString := Trim(Edit2.Text);
+  DataModule.ds_product.FieldByName('TP_UNITM').AsString := Trim(Edit3.Text);
+  DataModule.ds_product.FieldByName('TP_GOST').AsString := Trim(Edit4.Text);
+  DataModule.ds_product.Post;
+  Close;
+
+end;
+
+end.

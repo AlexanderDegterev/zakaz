@@ -1,0 +1,24 @@
+unit Edit_Reference_Form;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs;
+
+type
+  TEdit_Reference = class(TForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Edit_Reference: TEdit_Reference;
+
+implementation
+
+{$R *.dfm}
+
+end.

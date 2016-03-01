@@ -1,0 +1,49 @@
+program BTScertificat;
+
+uses
+  Forms,
+  About in 'About.pas' {FormAbout},
+  EditForm in 'EditForm.pas' {FormEdit},
+  ADD_Form in 'ADD_Form.pas' {FormAdd},
+  Reference_Form in 'Reference_Form.pas' {Reference},
+  Edit_Reference_Form in 'Edit_Reference_Form.pas' {Edit_Reference},
+  Add_Reference_Form in 'Add_Reference_Form.pas' {Add_reference},
+  DataBaseConnection in 'DataBaseConnection.pas' {DataBase},
+  registration_form in 'registration_form.pas' {registration},
+  BTS_Office_form in 'BTS_Office_form.pas' {Main},
+  DataModuleForm in 'DataModuleForm.pas' {DataModule},
+  DelUsers_Forn in 'DelUsers_Forn.pas' {FormDelUsers},
+  professionals_Form in 'professionals_Form.pas' {Professionals},
+  ADD_Prof_Form in 'ADD_Prof_Form.pas' {ADD_Prof},
+  GenerateReportForm in 'GenerateReportForm.pas' {GenerateReport},
+  ControlOfTemplates_Form in 'ControlOfTemplates_Form.pas' {ControlOfTemplates},
+  Edit_Template_Form in 'Edit_Template_Form.pas' {Edit_Templates};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  if Tregistration.Execute then
+  begin
+    Application.MainFormOnTaskbar := True;
+    Application.Title := 'БТС-офис';
+    Application.CreateForm(TMain, Main);
+  Application.Run;
+
+  end;
+
+  {Application.MainFormOnTaskbar := True;
+  Application.Title := 'БТС-офис';
+  Application.CreateForm(Tregistration, registration);
+  Application.CreateForm(TMain, Main);
+  Application.CreateForm(TDataBase, DataBase);
+  Application.CreateForm(TFormAbout, FormAbout);
+  Application.CreateForm(TFormEdit, FormEdit);
+  Application.CreateForm(TFormAdd, FormAdd);
+  Application.CreateForm(TReference, Reference);
+  Application.CreateForm(TEdit_Reference, Edit_Reference);
+  Application.CreateForm(TAdd_reference, Add_reference);
+  //Application.CreateForm(TDataModule1, DataModule1);
+  Application.CreateForm(TDataModule, DataModule);
+  Application.Run;}
+end.

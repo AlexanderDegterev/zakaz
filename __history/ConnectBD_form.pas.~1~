@@ -1,0 +1,36 @@
+unit ConnectBD_form;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters,
+  dxSkinsCore, dxSkinsDefaultPainters, cxStyles, cxCustomData, cxFilter, cxData,
+  cxDataStorage, cxEdit, DB, cxDBData, RzButton, cxGridLevel,
+  cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxClasses,
+  cxGridCustomView, cxGrid;
+
+type
+  TForm1 = class(TForm)
+    cxGrid2: TcxGrid;
+    cxGrid2DBTableView1: TcxGridDBTableView;
+    cxGrid2DBTableView1TM_ID: TcxGridDBColumn;
+    cxGrid2DBTableView1TM_NAME: TcxGridDBColumn;
+    cxGrid2DBTableView1TM_UNITM: TcxGridDBColumn;
+    cxGrid2DBTableView1TM_GOST: TcxGridDBColumn;
+    cxGrid2Level1: TcxGridLevel;
+    RzRefrash: TRzBitBtn;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+end.

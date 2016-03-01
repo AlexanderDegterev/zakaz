@@ -1,0 +1,1 @@
+UPDATE t_product set TP_NAME = UPPER(TP_NAME)

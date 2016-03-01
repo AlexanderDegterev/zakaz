@@ -1,0 +1,22 @@
+на RzToolBar нужно прикрепить ImageList любой
+тогда по двойному клику по этому toolBar появится окошко, где можно управлять порядком кнопок и добавлять разделители
+[11.03.2013 10:26:26] Татьяна Мелеховец: //***** Прорисовка значка в таблице "Сертификаты" *****
+procedure TfMain.cxGrid1DBTableView1Column15CustomDrawCell(
+  Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
+  AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
+var X, Y, Index : Integer;
+begin
+  ADone := True;
+  ACanvas.FillRect(AViewInfo.Bounds);
+  with AViewInfo.Bounds do
+  begin
+    X := (Left + Right - ImageList1.Width) div 2;
+    Y := (Top + Bottom - ImageList1.Height) div 2;
+  end;
+  if (AViewInfo.Value = 0) then
+    Index := 23
+  else
+    Index := 22;
+  ImageList1.Draw(ACanvas.Canvas, X, Y, Index, True);
+end;
+[11.03.2013 10:27:14] Татьяна Мелеховец: 22 - номер красной иконки в ImageList, 23 - зеленой
