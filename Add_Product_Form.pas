@@ -47,19 +47,19 @@ uses DataModuleForm;
 
 procedure TAdd_product.CancelButtonClick(Sender: TObject);
 begin
- DataModule.ds_product.ReopenLocate('TP_ID');
- Close;
+  DataModule.ds_product.ReopenLocate('TP_ID');
+  Close;
 end;
 
 procedure TAdd_product.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
- DataModule.ds_product.ReopenLocate('TP_ID');
+  DataModule.ds_product.ReopenLocate('TP_ID');
 end;
 
 procedure TAdd_product.FormShow(Sender: TObject);
 begin
- DataModule.ds_product.Open;
- DataModule.ds_product.Insert;
+  DataModule.ds_product.Open;
+  DataModule.ds_product.Insert;
 end;
 
 procedure TAdd_product.SaveButtonClick(Sender: TObject);
@@ -67,34 +67,36 @@ var
   IzdName: string;
   IzdQuantity: integer;
 begin
-  IzdName:=Trim(Edit1.Text); //наименование
+  IzdName := Trim(Edit1.Text); // наименование
   //
   // Переделка через FIBQuery (Кол-во наименования)
-  DataModule.Query_QuantityT_Product.ParamByName('Perem1').Value:=TRIM(Edit1.Text);
+  DataModule.Query_QuantityT_Product.ParamByName('Perem1').Value :=
+    Trim(Edit1.Text);
   DataModule.Query_QuantityT_Product.ExecQuery;
 
-  IzdQuantity:=DataModule.Query_QuantityT_Product.FieldByName('COUNT').AsInteger;
+  IzdQuantity := DataModule.Query_QuantityT_Product.FieldByName('COUNT')
+    .AsInteger;
 
-  if IzdQuantity>=1 then
-    begin
-     ShowMessage('Изделие: '+IzdName+' уже есть с справочнике');
-     DataModule.ds_product.FieldByName('TP_Name').AsString := Trim(Edit1.Text);
-     DataModule.ds_product.FieldByName('TP_VOLUME').AsString := Trim(Edit2.Text);
-     DataModule.ds_product.FieldByName('TP_UNITM').AsString := Trim(Edit3.Text);
-     DataModule.ds_product.FieldByName('TP_GOST').AsString := Trim(Edit4.Text);
-     DataModule.ds_product.Post;
-    close;
-    end
-   else
-   begin
-    //DataModule.ds_product.Insert;
+  if IzdQuantity >= 1 then
+  begin
+    ShowMessage('Изделие: ' + IzdName + ' уже есть с справочнике');
     DataModule.ds_product.FieldByName('TP_Name').AsString := Trim(Edit1.Text);
     DataModule.ds_product.FieldByName('TP_VOLUME').AsString := Trim(Edit2.Text);
     DataModule.ds_product.FieldByName('TP_UNITM').AsString := Trim(Edit3.Text);
     DataModule.ds_product.FieldByName('TP_GOST').AsString := Trim(Edit4.Text);
     DataModule.ds_product.Post;
-    close;
-   end;
+    Close;
+  end
+  else
+  begin
+    // DataModule.ds_product.Insert;
+    DataModule.ds_product.FieldByName('TP_Name').AsString := Trim(Edit1.Text);
+    DataModule.ds_product.FieldByName('TP_VOLUME').AsString := Trim(Edit2.Text);
+    DataModule.ds_product.FieldByName('TP_UNITM').AsString := Trim(Edit3.Text);
+    DataModule.ds_product.FieldByName('TP_GOST').AsString := Trim(Edit4.Text);
+    DataModule.ds_product.Post;
+    Close;
+  end;
 end;
 
 end.

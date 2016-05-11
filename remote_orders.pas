@@ -57,7 +57,7 @@ uses DataModuleForm;
 
 procedure TRemot_orders.ButtonCloseClick(Sender: TObject);
 begin
-Close()
+  Close()
 end;
 
 end.

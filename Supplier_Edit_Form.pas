@@ -37,22 +37,23 @@ uses DataModuleForm;
 
 procedure TSupplier_Edit.FormShow(Sender: TObject);
 begin
- DataModule.ds_Supplier.Open;
- Edit1.Text:=DataModule.ds_Supplier.FieldByName('SUP_NAME').AsString;
- Edit2.Text:=DataModule.ds_Supplier.FieldByName('SUP_ADRES').AsString;
- Edit3.Text:=DataModule.ds_Supplier.FieldByName('SUP_UNN').AsString;
- Edit4.Text:=DataModule.ds_Supplier.FieldByName('SUP_TELEPHONE').AsString;
+  DataModule.ds_Supplier.Open;
+  Edit1.Text := DataModule.ds_Supplier.FieldByName('SUP_NAME').AsString;
+  Edit2.Text := DataModule.ds_Supplier.FieldByName('SUP_ADRES').AsString;
+  Edit3.Text := DataModule.ds_Supplier.FieldByName('SUP_UNN').AsString;
+  Edit4.Text := DataModule.ds_Supplier.FieldByName('SUP_TELEPHONE').AsString;
 end;
 
 procedure TSupplier_Edit.SaveButtonClick(Sender: TObject);
 begin
- DataModule.ds_Supplier.Edit;
- DataModule.ds_Supplier.FieldByName('SUP_NAME').AsString := Trim(Edit1.Text);
- DataModule.ds_Supplier.FieldByName('SUP_ADRES').AsString := Trim(Edit2.Text);
- DataModule.ds_Supplier.FieldByName('SUP_UNN').AsString := Trim(Edit3.Text);
- DataModule.ds_Supplier.FieldByName('SUP_TELEPHONE').AsString := Trim(Edit4.Text);
- DataModule.ds_Supplier.Post;
- modalResult :=mrOk;
+  DataModule.ds_Supplier.Edit;
+  DataModule.ds_Supplier.FieldByName('SUP_NAME').AsString := Trim(Edit1.Text);
+  DataModule.ds_Supplier.FieldByName('SUP_ADRES').AsString := Trim(Edit2.Text);
+  DataModule.ds_Supplier.FieldByName('SUP_UNN').AsString := Trim(Edit3.Text);
+  DataModule.ds_Supplier.FieldByName('SUP_TELEPHONE').AsString :=
+    Trim(Edit4.Text);
+  DataModule.ds_Supplier.Post;
+  modalResult := mrOk;
 end;
 
 end.

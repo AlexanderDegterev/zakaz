@@ -34,30 +34,30 @@ implementation
 
 procedure TReference.ADDButtonClick(Sender: TObject);
 begin
- Application.CreateForm(TAdd_reference, Add_reference);
- Add_reference.ShowModal;
+  Application.CreateForm(TAdd_reference, Add_reference);
+  Add_reference.ShowModal;
 end;
 
 procedure TReference.CloseButtonClick(Sender: TObject);
 begin
- Close;
+  Close;
 end;
 
 procedure TReference.DelButtonClick(Sender: TObject);
 begin
- ShowMessage('Удаление запрещено ! (временно)');
- //DataModule.DS_OTD.Delete;
+  ShowMessage('Удаление запрещено ! (временно)');
+  // DataModule.DS_OTD.Delete;
 end;
 
 procedure TReference.EditButtonClick(Sender: TObject);
 begin
- Application.CreateForm(TEdit_Reference, Edit_Reference);
- Edit_Reference.ShowModal;
+  Application.CreateForm(TEdit_Reference, Edit_Reference);
+  Edit_Reference.ShowModal;
 end;
 
 procedure TReference.FormShow(Sender: TObject);
 begin
- DataModule.ds_OTD.FieldByName('O_ID').Visible:=False;
+  DataModule.ds_OTD.FieldByName('O_ID').Visible := False;
 end;
 
 end.

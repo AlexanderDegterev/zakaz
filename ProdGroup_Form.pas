@@ -36,34 +36,35 @@ uses DataModuleForm, ADD_ProdGroup_Form, EDIT_ProdGroup_Form, Product_Form;
 
 procedure TProdGroup.ADDButtonClick(Sender: TObject);
 begin
- Application.CreateForm(TADD_ProdGroup, ADD_ProdGroup);
- ADD_ProdGroup.ShowModal;
+  Application.CreateForm(TADD_ProdGroup, ADD_ProdGroup);
+  ADD_ProdGroup.ShowModal;
 end;
 
 procedure TProdGroup.CloseButtonClick(Sender: TObject);
 begin
- DataModule.ds_product.Close;
- DataModule.ds_product.SelectSQL.Text:='SELECT TP_ID, TP_PGID, TP_NAME, TP_VOLUME, TP_UNITM, TP_GOST FROM T_PRODUCT order by TP_ID DESC';
- DataModule.ds_product.Open;
- ModalResult:= mrOk;
+  DataModule.ds_product.Close;
+  DataModule.ds_product.SelectSQL.Text :=
+    'SELECT TP_ID, TP_PGID, TP_NAME, TP_VOLUME, TP_UNITM, TP_GOST FROM T_PRODUCT order by TP_ID DESC';
+  DataModule.ds_product.Open;
+  ModalResult := mrOk;
 end;
 
 procedure TProdGroup.DelButtonClick(Sender: TObject);
 begin
-ShowMessage('Удаление запрещено ! (временно)');
-//DataModule.ds_ProdGroup.Delete;
+  ShowMessage('Удаление запрещено ! (временно)');
+  // DataModule.ds_ProdGroup.Delete;
 end;
 
 procedure TProdGroup.EditButtonClick(Sender: TObject);
 begin
- Application.CreateForm(TEdit_ProdGroup, Edit_ProdGroup);
- Edit_ProdGroup.ShowModal;
+  Application.CreateForm(TEdit_ProdGroup, Edit_ProdGroup);
+  Edit_ProdGroup.ShowModal;
 end;
 
 procedure TProdGroup.EditIzdButtonClick(Sender: TObject);
 begin
- Application.CreateForm(TPRODUCT, PRODUCT);
- PRODUCT.ShowModal;
+  Application.CreateForm(TPRODUCT, PRODUCT);
+  PRODUCT.ShowModal;
 end;
 
 end.

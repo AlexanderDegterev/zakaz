@@ -34,22 +34,22 @@ uses DataModuleForm, ADD_Metal_Form, Edit_Metal_Form, BTS_Office_form;
 
 procedure TMetal.CloseButtonClick(Sender: TObject);
 begin
- Close;
+  Close;
 end;
 
 procedure TMetal.DelButtonClick(Sender: TObject);
 begin
- DataModule.ds_Metal.Delete;
+  DataModule.ds_Metal.Delete;
 end;
 
 procedure TMetal.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-DataModule.ds_Metal.Close;
+  DataModule.ds_Metal.Close;
 end;
 
 procedure TMetal.FormShow(Sender: TObject);
 begin
-DataModule.ds_Metal.Open;
+  DataModule.ds_Metal.Open;
 end;
 
 end.

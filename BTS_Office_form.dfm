@@ -3,7 +3,7 @@
   Top = 0
   Caption = #1055#1054' "'#1047#1040#1050#1040#1047'" '#1047#1072#1074#1086#1076' '#1046#1041#1050
   ClientHeight = 694
-  ClientWidth = 1058
+  ClientWidth = 1128
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,6 +14,8 @@
   Menu = MainMenu1
   OldCreateOrder = False
   WindowState = wsMaximized
+  OnClose = FormClose
+  OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   OnShow = FormShow
   PixelsPerInch = 96
@@ -21,23 +23,25 @@
   object RzStatusBar1: TRzStatusBar
     Left = 0
     Top = 675
-    Width = 1058
+    Width = 1128
     Height = 19
     BorderInner = fsNone
     BorderOuter = fsNone
     BorderSides = [sdLeft, sdTop, sdRight, sdBottom]
     BorderWidth = 0
     TabOrder = 0
+    ExplicitWidth = 1058
     DesignSize = (
-      1058
+      1128
       19)
     object RzClockStatus1: TRzClockStatus
-      Left = 903
+      Left = 973
       Top = 6
       Width = 262
       Anchors = [akTop, akRight]
       Format = 'ddddd t'
       Alignment = taRightJustify
+      ExplicitLeft = 903
     end
     object Label2: TLabel
       Left = 8
@@ -50,14 +54,17 @@
   object PageControl: TPageControl
     Left = 0
     Top = 0
-    Width = 1058
+    Width = 1128
     Height = 675
-    ActivePage = TabPrice
+    ActivePage = TabZakaz
     Align = alClient
     Style = tsFlatButtons
     TabOrder = 1
+    ExplicitTop = 11
+    ExplicitWidth = 1058
     object TabSheet1: TTabSheet
       Caption = #1047#1072#1103#1074#1082#1080
+      ExplicitWidth = 1050
       object Panel8: TPanel
         Left = 0
         Top = 65
@@ -70,11 +77,9 @@
           Left = 1
           Top = 1
           Width = 591
-          Height = 573
+          Height = 577
           Align = alClient
           TabOrder = 0
-          ExplicitWidth = 531
-          ExplicitHeight = 577
           object cxGrid4DBTableView1: TcxGridDBTableView
             OnDblClick = ActionEditForm_RExecute
             DataController.DataSource = DataModule.Source_Request
@@ -130,10 +135,11 @@
       object Panel9: TPanel
         Left = 0
         Top = 0
-        Width = 1050
+        Width = 1120
         Height = 65
         Align = alTop
         TabOrder = 1
+        ExplicitWidth = 1050
         object BtnEdit_R: TBitBtn
           Left = 4
           Top = 0
@@ -141,7 +147,6 @@
           Height = 40
           Action = ActionEditForm_R
           Caption = #1056#1077#1076#1072#1082#1090#1080#1088#1086#1074#1072#1090#1100
-          DoubleBuffered = True
           Glyph.Data = {
             36030000424D3603000000000000360000002800000010000000100000000100
             18000000000000030000120B0000120B00000000000000000000FB00FFFB00FF
@@ -169,7 +174,6 @@
             FB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00
             FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB
             00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF}
-          ParentDoubleBuffered = False
           TabOrder = 0
         end
         object BtnAdd_R: TBitBtn
@@ -179,7 +183,6 @@
           Height = 40
           Action = ActionAddForm_R
           Caption = #1044#1086#1073#1072#1074#1080#1090#1100
-          DoubleBuffered = True
           Glyph.Data = {
             36030000424D3603000000000000360000002800000010000000100000000100
             18000000000000030000120B0000120B00000000000000000000FB00FFFB00FF
@@ -207,7 +210,6 @@
             FB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00
             FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB
             00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF}
-          ParentDoubleBuffered = False
           TabOrder = 1
         end
         object BtnDel_R: TBitBtn
@@ -216,7 +218,6 @@
           Width = 117
           Height = 40
           Caption = #1059#1076#1072#1083#1080#1090#1100
-          DoubleBuffered = True
           Glyph.Data = {
             36030000424D3603000000000000360000002800000010000000100000000100
             18000000000000030000120B0000120B00000000000000000000FB00FFFB00FF
@@ -244,7 +245,6 @@
             FB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00
             FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB
             00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF}
-          ParentDoubleBuffered = False
           TabOrder = 2
           OnClick = BtnDel_RClick
         end
@@ -255,7 +255,6 @@
           Height = 40
           Action = ActionClose
           Caption = #1047#1072#1082#1088#1099#1090#1100
-          DoubleBuffered = True
           Glyph.Data = {
             36030000424D3603000000000000360000002800000010000000100000000100
             18000000000000030000120B0000120B00000000000000000000FB00FFFB00FF
@@ -284,7 +283,6 @@
             FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB
             00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF}
           ModalResult = 11
-          ParentDoubleBuffered = False
           TabOrder = 3
         end
         object BitReport: TBitBtn
@@ -294,7 +292,6 @@
           Height = 40
           Action = ActionReport
           Caption = #1054#1090#1095#1077#1090#1099
-          DoubleBuffered = True
           Glyph.Data = {
             36030000424D3603000000000000360000002800000010000000100000000100
             18000000000000030000120B0000120B00000000000000000000FB00FFFB00FF
@@ -322,7 +319,6 @@
             FB00FFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFB00FFFB00
             FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB
             00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF}
-          ParentDoubleBuffered = False
           TabOrder = 4
         end
         object BitRefrash: TBitBtn
@@ -331,8 +327,6 @@
           Width = 117
           Height = 40
           Caption = #1054#1073#1085#1086#1074#1080#1090#1100
-          DoubleBuffered = True
-          ParentDoubleBuffered = False
           TabOrder = 5
           OnClick = BitRefrashClick
         end
@@ -357,21 +351,20 @@
       object Panel10: TPanel
         Left = 593
         Top = 65
-        Width = 457
+        Width = 527
         Height = 579
         Align = alClient
         Caption = 'Panel8'
         TabOrder = 2
-        ExplicitLeft = 533
-        ExplicitWidth = 517
+        ExplicitWidth = 457
         object cxGrid5: TcxGrid
           Left = 1
           Top = 1
-          Width = 455
+          Width = 525
           Height = 577
           Align = alClient
           TabOrder = 0
-          ExplicitWidth = 515
+          ExplicitWidth = 455
           object cxGridDBTableView2: TcxGridDBTableView
             DataController.DataSource = DataModule.Source_Detail_R
             DataController.Summary.DefaultGroupSummaryItems = <>
@@ -418,6 +411,7 @@
     object TabSheet2: TTabSheet
       Caption = #1055#1086#1089#1090#1072#1074#1097#1080#1082#1080
       ImageIndex = 1
+      ExplicitWidth = 1050
       object Panel6: TPanel
         Left = 0
         Top = 41
@@ -477,17 +471,17 @@
       object Panel4: TPanel
         Left = 0
         Top = 0
-        Width = 1050
+        Width = 1120
         Height = 41
         Align = alTop
         TabOrder = 1
+        ExplicitWidth = 1050
         object BitEdit_S: TBitBtn
           Left = 4
           Top = 0
           Width = 117
           Height = 40
           Caption = #1056#1077#1076#1072#1082#1090#1080#1088#1086#1074#1072#1090#1100
-          DoubleBuffered = True
           Glyph.Data = {
             36030000424D3603000000000000360000002800000010000000100000000100
             18000000000000030000120B0000120B00000000000000000000FB00FFFB00FF
@@ -515,7 +509,6 @@
             FB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00
             FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB
             00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF}
-          ParentDoubleBuffered = False
           TabOrder = 0
           OnClick = BitEdit_SClick
         end
@@ -525,7 +518,6 @@
           Width = 117
           Height = 40
           Caption = #1059#1076#1072#1083#1080#1090#1100
-          DoubleBuffered = True
           Glyph.Data = {
             36030000424D3603000000000000360000002800000010000000100000000100
             18000000000000030000120B0000120B00000000000000000000FB00FFFB00FF
@@ -553,7 +545,6 @@
             FB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00
             FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB
             00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF}
-          ParentDoubleBuffered = False
           TabOrder = 1
           OnClick = BitDel_SClick
         end
@@ -564,7 +555,6 @@
           Height = 40
           Action = ActionClose
           Caption = #1047#1072#1082#1088#1099#1090#1100
-          DoubleBuffered = True
           Glyph.Data = {
             36030000424D3603000000000000360000002800000010000000100000000100
             18000000000000030000120B0000120B00000000000000000000FB00FFFB00FF
@@ -592,7 +582,6 @@
             FB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00
             FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB
             00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF}
-          ParentDoubleBuffered = False
           TabOrder = 2
         end
         object BitBtn1: TBitBtn
@@ -602,7 +591,6 @@
           Height = 40
           Action = ActionReport
           Caption = #1054#1090#1095#1077#1090#1099
-          DoubleBuffered = True
           Glyph.Data = {
             36030000424D3603000000000000360000002800000010000000100000000100
             18000000000000030000120B0000120B00000000000000000000FB00FFFB00FF
@@ -630,7 +618,6 @@
             FB00FFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFB00FFFB00
             FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB
             00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF}
-          ParentDoubleBuffered = False
           TabOrder = 3
         end
         object BitAdd_S: TBitBtn
@@ -640,7 +627,6 @@
           Height = 40
           Action = ActionAddForm_S
           Caption = #1044#1086#1073#1072#1074#1080#1090#1100
-          DoubleBuffered = True
           Glyph.Data = {
             36030000424D3603000000000000360000002800000010000000100000000100
             18000000000000030000120B0000120B00000000000000000000FB00FFFB00FF
@@ -668,33 +654,35 @@
             FB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00
             FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB
             00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF}
-          ParentDoubleBuffered = False
           TabOrder = 4
         end
       end
       object Panel5: TPanel
         Left = 0
         Top = 603
-        Width = 1050
+        Width = 1120
         Height = 41
         Align = alBottom
         TabOrder = 2
+        ExplicitWidth = 1050
       end
       object Panel7: TPanel
         Left = 553
         Top = 41
-        Width = 497
+        Width = 567
         Height = 562
         Align = alClient
         Caption = 'Panel7'
         TabOrder = 3
+        ExplicitWidth = 497
         object cxGrid3: TcxGrid
           Left = 1
           Top = 1
-          Width = 495
+          Width = 565
           Height = 560
           Align = alClient
           TabOrder = 0
+          ExplicitWidth = 495
           object cxGrid2DBTableView1: TcxGridDBTableView
             DataController.DataSource = DataModule.Source_Detail
             DataController.Summary.DefaultGroupSummaryItems = <>
@@ -765,18 +753,24 @@
     object TabSheet3: TTabSheet
       Caption = #1054#1090#1095#1077#1090#1099
       ImageIndex = 2
+      ExplicitWidth = 1050
     end
     object TabZakaz: TTabSheet
       AlignWithMargins = True
       Caption = #1047#1072#1082#1072#1079#1099
       ImageIndex = 3
+      ExplicitWidth = 1044
       object Panel3: TPanel
         Left = 0
         Top = 0
-        Width = 1044
+        Width = 1114
         Height = 81
         Align = alTop
         TabOrder = 0
+        ExplicitWidth = 1044
+        DesignSize = (
+          1114
+          81)
         object Label1: TLabel
           Left = 328
           Top = 15
@@ -788,12 +782,14 @@
           Visible = False
         end
         object RadioGroup2: TRadioGroup
-          Left = 723
+          Left = 793
           Top = 0
           Width = 166
           Height = 67
+          Anchors = [akRight, akBottom]
           Caption = #1054#1090#1086#1073#1088#1072#1078#1077#1085#1080#1077
           TabOrder = 1
+          ExplicitLeft = 723
         end
         object ButtonClear: TBitBtn
           Left = 279
@@ -801,10 +797,8 @@
           Width = 105
           Height = 25
           Caption = #1054#1095#1080#1089#1090#1080#1090#1100
-          DoubleBuffered = True
-          ParentDoubleBuffered = False
           TabOrder = 5
-          OnClick = ButtonClearClick
+          OnClick = ButtonClearClickZakaz
         end
         object eFilter: TEdit
           Left = 16
@@ -824,24 +818,28 @@
           TabOrder = 2
         end
         object RadioButton1: TRadioButton
-          Left = 734
+          Left = 804
           Top = 20
           Width = 99
           Height = 17
+          Anchors = [akRight, akBottom]
           Caption = #1089#1090#1072#1085#1076#1072#1088#1090#1085#1086#1077
           Checked = True
           TabOrder = 3
           TabStop = True
           OnClick = RadioButton1Click
+          ExplicitLeft = 734
         end
         object RadioButton2: TRadioButton
-          Left = 734
+          Left = 804
           Top = 38
           Width = 139
           Height = 17
+          Anchors = [akRight, akBottom]
           Caption = #1086#1090#1075#1088#1091#1078#1077#1085#1085#1099#1077' '#1080' '#1089#1085#1103#1090#1099#1077
           TabOrder = 4
           OnClick = RadioButton2Click
+          ExplicitLeft = 734
         end
         object Обновить: TBitBtn
           Left = 415
@@ -849,32 +847,53 @@
           Width = 105
           Height = 25
           Caption = #1054#1073#1085#1086#1074#1080#1090#1100
-          DoubleBuffered = True
-          ParentDoubleBuffered = False
           TabOrder = 6
           OnClick = ОбновитьClick
+        end
+        object Get_Selection: TButton
+          Left = 544
+          Top = 38
+          Width = 75
+          Height = 25
+          Caption = 'Get Selection'
+          TabOrder = 7
+          Visible = False
+          OnClick = Get_SelectionClick
+        end
+        object Memo1: TMemo
+          Left = 625
+          Top = 1
+          Width = 185
+          Height = 74
+          Lines.Strings = (
+            '')
+          TabOrder = 8
+          Visible = False
         end
       end
       object cxGrid1: TcxGrid
         Left = 0
         Top = 81
-        Width = 1044
+        Width = 1114
         Height = 516
         Touch.ParentTabletOptions = False
         Touch.TabletOptions = [toPressAndHold]
         Align = alClient
         TabOrder = 1
+        ExplicitWidth = 1044
         object cxGrid1DBTableView1: TcxGridDBTableView
           OnDblClick = ButtonEditClick
+          OnMouseDown = cxGrid1DBTableView1MouseDown
+          OnCustomDrawCell = cxGrid1DBTableView1CustomDrawCell
+          OnFocusedRecordChanged = cxGrid1DBTableView1FocusedRecordChanged
+          DataController.DataModeController.SmartRefresh = True
           DataController.DataSource = DataModule.Source_T_Users
+          DataController.KeyFieldNames = 'U_ID'
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
           OptionsData.Inserting = False
-          OptionsSelection.HideSelection = True
-          OptionsSelection.InvertSelect = False
           OptionsSelection.MultiSelect = True
-          OptionsSelection.CellMultiSelect = True
           OptionsView.GroupByBox = False
           object cxGrid1DBTableView1U_ID: TcxGridDBColumn
             DataBinding.FieldName = 'U_ID'
@@ -884,31 +903,37 @@
             DataBinding.FieldName = 'U_NAME'
             Visible = False
           end
-          object cxGrid1DBTableView1Checked: TcxGridDBColumn
+          object colCheck: TcxGridDBColumn
+            Caption = 'Check'
             DataBinding.ValueType = 'Boolean'
             PropertiesClassName = 'TcxCheckBoxProperties'
-            Properties.DisplayUnchecked = 'True'
+            Properties.ImmediatePost = True
             Properties.NullStyle = nssUnchecked
-            Width = 35
+            Properties.OnEditValueChanged = colCheckPropertiesEditValueChanged
+            Width = 34
           end
           object cxGrid1DBTableView1CL_NAME: TcxGridDBColumn
             Caption = #1047#1072#1082#1072#1079#1095#1080#1082
             DataBinding.FieldName = 'CL_NAME'
+            Options.Editing = False
             Width = 200
           end
           object cxGrid1DBTableView1U_NOMERZAK: TcxGridDBColumn
             Caption = #1053#1086#1084#1077#1088' '#1079#1072#1082#1072#1079#1072
             DataBinding.FieldName = 'U_NOMERZAK'
+            Options.Editing = False
           end
           object cxGrid1DBTableView1U_OBJECT: TcxGridDBColumn
             DataBinding.FieldName = 'U_OBJECT'
             Visible = False
+            Options.Editing = False
             Width = 30
             IsCaptionAssigned = True
           end
           object cxGrid1DBTableView1OB_NAME: TcxGridDBColumn
             Caption = #1054#1073#1098#1077#1082#1090
             DataBinding.FieldName = 'OB_NAME'
+            Options.Editing = False
             Width = 150
           end
           object cxGrid1DBTableView1U_DIVISION: TcxGridDBColumn
@@ -919,39 +944,47 @@
           object cxGrid1DBTableView1DV_NAME: TcxGridDBColumn
             Caption = #1055#1086#1076#1088#1072#1079#1076#1077#1083#1077#1085#1080#1077
             DataBinding.FieldName = 'DV_NAME'
+            Options.Editing = False
             Width = 85
           end
           object cxGrid1DBTableView1U_DATEBEG: TcxGridDBColumn
             Caption = #1055#1086#1089#1090#1091#1087#1083#1077#1085#1080#1077
             DataBinding.FieldName = 'U_DATEBEG'
+            Options.Editing = False
             Width = 62
           end
           object cxGrid1DBTableView1U_DATESTART: TcxGridDBColumn
             Caption = #1053#1072#1095#1072#1083#1086
             DataBinding.FieldName = 'U_DATESTART'
+            Options.Editing = False
             Width = 62
           end
           object cxGrid1DBTableView1U_DATEEND: TcxGridDBColumn
             Caption = #1057#1088#1086#1082' '#1080#1089#1087#1086#1083#1085#1077#1085#1080#1103
             DataBinding.FieldName = 'U_DATEEND'
+            Options.Editing = False
             Width = 62
           end
           object cxGrid1DBTableView1U_NASED: TcxGridDBColumn
             Caption = #1057#1090#1072#1090#1091#1089
             DataBinding.FieldName = 'U_NASED'
+            Options.Editing = False
             Width = 134
           end
           object cxGrid1DBTableView1U_CERT: TcxGridDBColumn
             Caption = #1042#1077#1089' '#1080#1079#1076#1077#1083#1080#1081
             DataBinding.FieldName = 'U_CERT'
+            Options.Editing = False
           end
           object cxGrid1DBTableView1U_MET: TcxGridDBColumn
             Caption = #1042#1077#1089' '#1084#1072#1090#1077#1088#1080#1072#1083#1086#1074
             DataBinding.FieldName = 'U_MET'
+            Options.Editing = False
           end
           object cxGrid1DBTableView1U_PRIM: TcxGridDBColumn
             Caption = #1055#1088#1080#1084#1077#1095#1072#1085#1080#1077
             DataBinding.FieldName = 'U_PRIM'
+            Options.Editing = False
             Width = 150
           end
           object cxGrid1DBTableView1U_PROFFIO: TcxGridDBColumn
@@ -961,6 +994,7 @@
           end
           object cxGrid1DBTableView1P_PROF: TcxGridDBColumn
             DataBinding.FieldName = 'P_PROF'
+            Options.Editing = False
             Width = 150
           end
         end
@@ -971,17 +1005,20 @@
       object Panel2: TPanel
         Left = 0
         Top = 597
-        Width = 1044
+        Width = 1114
         Height = 41
         Align = alBottom
         TabOrder = 2
+        ExplicitWidth = 1044
+        DesignSize = (
+          1114
+          41)
         object ButtonEdit: TBitBtn
           Left = 16
           Top = 10
           Width = 105
           Height = 25
           Caption = #1056#1077#1076#1072#1082#1090#1080#1088#1086#1074#1072#1090#1100
-          DoubleBuffered = True
           Glyph.Data = {
             36030000424D3603000000000000360000002800000010000000100000000100
             18000000000000030000120B0000120B00000000000000000000FB00FFFB00FF
@@ -1009,7 +1046,6 @@
             FB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00
             FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB
             00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF}
-          ParentDoubleBuffered = False
           TabOrder = 1
           OnClick = ButtonEditClick
         end
@@ -1019,7 +1055,6 @@
           Width = 105
           Height = 25
           Caption = #1044#1086#1073#1072#1074#1080#1090#1100
-          DoubleBuffered = True
           Glyph.Data = {
             36030000424D3603000000000000360000002800000010000000100000000100
             18000000000000030000120B0000120B00000000000000000000FB00FFFB00FF
@@ -1047,7 +1082,6 @@
             FB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00
             FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB
             00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF}
-          ParentDoubleBuffered = False
           TabOrder = 0
           OnClick = ButtonAddClick
         end
@@ -1057,7 +1091,6 @@
           Width = 105
           Height = 25
           Caption = #1059#1076#1072#1083#1080#1090#1100
-          DoubleBuffered = True
           Glyph.Data = {
             36030000424D3603000000000000360000002800000010000000100000000100
             18000000000000030000120B0000120B00000000000000000000FB00FFFB00FF
@@ -1085,18 +1118,17 @@
             FB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00
             FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB
             00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF}
-          ParentDoubleBuffered = False
           TabOrder = 3
           OnClick = ButtonDelClick
         end
         object ButtonClose: TBitBtn
-          Left = 899
+          Left = 969
           Top = 10
           Width = 105
           Height = 25
           Action = ActionClose
+          Anchors = [akRight, akBottom]
           Caption = #1047#1072#1082#1088#1099#1090#1100
-          DoubleBuffered = True
           Glyph.Data = {
             36030000424D3603000000000000360000002800000010000000100000000100
             18000000000000030000120B0000120B00000000000000000000FB00FFFB00FF
@@ -1124,21 +1156,23 @@
             FB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00
             FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB
             00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF}
-          ParentDoubleBuffered = False
           TabOrder = 2
+          ExplicitLeft = 899
         end
       end
     end
     object TabPrice: TTabSheet
       Caption = #1062#1077#1085#1099
       ImageIndex = 4
+      ExplicitWidth = 1050
       object Panel12: TPanel
         Left = 0
         Top = 0
-        Width = 1050
+        Width = 1120
         Height = 65
         Align = alTop
         TabOrder = 0
+        ExplicitWidth = 1050
         object BitBtn3: TBitBtn
           Left = 4
           Top = 0
@@ -1146,7 +1180,6 @@
           Height = 40
           Action = ActionEditFormPrice
           Caption = #1056#1077#1076#1072#1082#1090#1080#1088#1086#1074#1072#1090#1100
-          DoubleBuffered = True
           Glyph.Data = {
             36030000424D3603000000000000360000002800000010000000100000000100
             18000000000000030000120B0000120B00000000000000000000FB00FFFB00FF
@@ -1174,7 +1207,6 @@
             FB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00
             FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB
             00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF}
-          ParentDoubleBuffered = False
           TabOrder = 0
         end
         object BitBtn4: TBitBtn
@@ -1184,7 +1216,6 @@
           Height = 40
           Action = ActionAddFormPrice
           Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1080#1079#1076#1077#1083#1080#1077
-          DoubleBuffered = True
           Glyph.Data = {
             36030000424D3603000000000000360000002800000010000000100000000100
             18000000000000030000120B0000120B00000000000000000000FB00FFFB00FF
@@ -1212,7 +1243,6 @@
             FB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00
             FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB
             00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF}
-          ParentDoubleBuffered = False
           TabOrder = 1
         end
         object BtnPriceDelete: TBitBtn
@@ -1222,7 +1252,6 @@
           Height = 40
           Action = ActionDelProduction
           Caption = #1059#1076#1072#1083#1080#1090#1100' '#1080#1079#1076#1077#1083#1080#1077
-          DoubleBuffered = True
           Glyph.Data = {
             36030000424D3603000000000000360000002800000010000000100000000100
             18000000000000030000120B0000120B00000000000000000000FB00FFFB00FF
@@ -1250,17 +1279,15 @@
             FB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00
             FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB
             00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF}
-          ParentDoubleBuffered = False
           TabOrder = 2
         end
         object BitBtn6: TBitBtn
-          Left = 899
+          Left = 955
           Top = 0
           Width = 117
           Height = 40
           Action = ActionClose
           Caption = #1047#1072#1082#1088#1099#1090#1100
-          DoubleBuffered = True
           Glyph.Data = {
             36030000424D3603000000000000360000002800000010000000100000000100
             18000000000000030000120B0000120B00000000000000000000FB00FFFB00FF
@@ -1289,7 +1316,6 @@
             FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB
             00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF}
           ModalResult = 11
-          ParentDoubleBuffered = False
           TabOrder = 3
         end
         object BitBtn7: TBitBtn
@@ -1299,7 +1325,6 @@
           Height = 40
           Action = ActionReport
           Caption = #1054#1090#1095#1077#1090#1099
-          DoubleBuffered = True
           Glyph.Data = {
             36030000424D3603000000000000360000002800000010000000100000000100
             18000000000000030000120B0000120B00000000000000000000FB00FFFB00FF
@@ -1327,17 +1352,14 @@
             FB00FFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFB00FFFB00
             FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB
             00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF}
-          ParentDoubleBuffered = False
           TabOrder = 4
         end
-        object BitBtn8: TBitBtn
+        object BitRefreshProduct: TBitBtn
           Left = 520
           Top = 0
           Width = 117
           Height = 40
           Caption = #1054#1073#1085#1086#1074#1080#1090#1100
-          DoubleBuffered = True
-          ParentDoubleBuffered = False
           TabOrder = 5
           OnClick = BitRefrashClick
         end
@@ -1354,6 +1376,15 @@
           Top = 42
           Width = 240
           Height = 21
+          HelpType = htKeyword
+          Ctl3D = True
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentCtl3D = False
+          ParentFont = False
           TabOrder = 7
           OnChange = eFilterPriceChange
         end
@@ -1363,10 +1394,120 @@
           Width = 117
           Height = 25
           Caption = #1054#1095#1080#1089#1090#1080#1090#1100
-          DoubleBuffered = True
-          ParentDoubleBuffered = False
           TabOrder = 8
-          OnClick = ButtonClearClick
+          OnClick = BtnClearFindPriceClick
+        end
+        object BtnPrint: TBitBtn
+          Left = 643
+          Top = 0
+          Width = 192
+          Height = 40
+          Action = PrintSpecProduction
+          Caption = #1055#1077#1095#1072#1090#1100' '#1089#1087#1077#1094#1080#1092#1080#1082#1072#1094#1080#1080' '#1080#1079#1076#1077#1083#1080#1103
+          Glyph.Data = {
+            36030000424D3603000000000000360000002800000010000000100000000100
+            18000000000000030000120B0000120B00000000000000000000FF00FFFF00FF
+            FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+            FFFF00FFFF00FFFF00FFFF00FFFF00FFF710EFD259A9D651B1E631D0F710EFFF
+            00FFED22B8D17744DCA26DD95B63F11BC6FF00FFFF00FFFF00FFFF00FFE239C8
+            C98797E0C4C4DDBBBBC79292C48C8CCE7887E7B180FFECD8FFF0E2FCECDEE3B2
+            86D95B63F11BC6FF00FFD651B1D9B6B6EFE0E0EFDFDFF0E1E1DEBDBDCC9999CC
+            9999E9C1AFFFE2C4FFE6CEFFEBD7FFF0E1FCECDDD59154F11BC6D4AEAEF9F3F3
+            F6EDEDF3E7E7F0E2E2F1E4E4CC9999CC9999CC9999D7ADA8E8C4B4F9DAC1F2CF
+            B1D78A6EE3378EFF00FFDEC0C0FDFBFBFAF6F6F8F0F0F3E8E8D8B1B1CD9A9ACC
+            9999CC9999D7AFAFDCBABAD5AEAEBF857BBA7D7DDA49B9FF00FFDEC1C1FFFFFF
+            FEFDFDEFDFDFD8B1B1D2A6A6CFA0A0CD9B9BD0A2A2E7CFCFE8D1D1E4C9C9DEBD
+            BDB87D7DC69090DA49B9DEC1C1F8F0F0E7CECEDCB8B8D9B2B2D6ADADD3A7A7D9
+            B4B4F0E1E1EFE0E0ECDADAEAD4D4E7CFCFBE8686CC9999C38B8BC98999E0C1C1
+            E2C5C562EF8A8CBB81DCB8B8E9D3D3F9F3F3F6EEEEF4E8E8F1E3E3EEDDDDCEA3
+            A3CC9C9CCD9B9BC47F8FF711F0D753B3CE9E9AE9CBC3F3D0B9FDD5AFFFD7AEFE
+            E1C5F9E1CEF2E1D7F0E2E2D2A9A9D5ACACD3A7A7C58090F318E7FF00FFFA13E9
+            E7B381FFE2C4FFDFBFFFDCB9FFD9B4FFD7AEE2A66FCDA198DAB9B9DEBEBECD9F
+            9FCF64A4F710EFFF00FFFF00FFE86C8EFBE2CAFFE7CFFFE4CAFFE2C4FFDFBFF4
+            C79BD17C85D188A8C89696D45EAEE631D0FF00FFFF00FFFF00FFF82AD9EDC398
+            FFEFE0FFEDDAFFEAD5FFE7CFFFE4CAE49C74FC09F3FF00FFFF00FFFF00FFFF00
+            FFFF00FFFF00FFFF00FFF358B9F4D9BBFDF1E5FFF2E5FFEFE0FFEDDAF5D2AFED
+            4DAAFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFE0BF7F743CC
+            F263B0EF8DA7EEC396F2CEA9E99B89FD0AF5FF00FFFF00FFFF00FFFF00FFFF00
+            FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+            00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
+          TabOrder = 9
+        end
+        object BitExportExcel: TBitBtn
+          Left = 643
+          Top = 40
+          Width = 192
+          Height = 25
+          Align = alCustom
+          BiDiMode = bdLeftToRight
+          Caption = #1069#1082#1089#1087#1086#1088#1090' '#1074' Excel'
+          Glyph.Data = {
+            36030000424D3603000000000000360000002800000010000000100000000100
+            18000000000000030000120B0000120B00000000000000000000FB00FFFB00FF
+            FB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00
+            FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB
+            00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF
+            FB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00
+            FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB
+            00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF
+            FB00FFFB00FFFB00FFFB00FFFB00FFBA945DBA945DFB00FFFB00FFFB00FFFB00
+            FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFBA
+            945DF2D2AFBA945DFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF
+            FB00FFBA945DBA945DBA945DBA945DBA945DE8A962F4D4B1BA945DFB00FFFB00
+            FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFBA945DF6D8B4F6D8B4F6D8B4F6
+            D8B4EDB069EDB069F6D8B4BA945DFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF
+            FB00FFBA945DF2B870F2B870F2B870F2B870F2B870F2B870F2B870F9DCB8BA94
+            5DFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFBA945DF7C077F7C077F7C077F7
+            C077F7C077F7C077F7C077BA945DFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF
+            FB00FFBA945DBA945DBA945DBA945DBA945DFCC67DFCC67DBA945DFB00FFFB00
+            FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFBA
+            945DFFCB81BA945DFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF
+            FB00FFFB00FFFB00FFFB00FFFB00FFBA945DBA945DFB00FFFB00FFFB00FFFB00
+            FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB
+            00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF
+            FB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00
+            FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB
+            00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF}
+          ParentBiDiMode = False
+          TabOrder = 10
+          OnClick = BitExportExcelClick
+        end
+        object BitGroupPrint: TBitBtn
+          Left = 841
+          Top = 0
+          Width = 88
+          Height = 65
+          Action = GroupPrintSpecProd
+          Caption = #1055#1077#1095#1072#1090#1100' '#1074#1099#1076#1077#1083#1077#1085#1085#1099#1093' '#1080#1079#1076#1077#1083#1080#1081
+          Glyph.Data = {
+            36030000424D3603000000000000360000002800000010000000100000000100
+            18000000000000030000120B0000120B00000000000000000000FF00FFFF00FF
+            FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+            FFFF00FFFF00FFFF00FFFF00FFFF00FFF710EFD259A9D651B1E631D0F710EFFF
+            00FFED22B8D17744DCA26DD95B63F11BC6FF00FFFF00FFFF00FFFF00FFE239C8
+            C98797E0C4C4DDBBBBC79292C48C8CCE7887E7B180FFECD8FFF0E2FCECDEE3B2
+            86D95B63F11BC6FF00FFD651B1D9B6B6EFE0E0EFDFDFF0E1E1DEBDBDCC9999CC
+            9999E9C1AFFFE2C4FFE6CEFFEBD7FFF0E1FCECDDD59154F11BC6D4AEAEF9F3F3
+            F6EDEDF3E7E7F0E2E2F1E4E4CC9999CC9999CC9999D7ADA8E8C4B4F9DAC1F2CF
+            B1D78A6EE3378EFF00FFDEC0C0FDFBFBFAF6F6F8F0F0F3E8E8D8B1B1CD9A9ACC
+            9999CC9999D7AFAFDCBABAD5AEAEBF857BBA7D7DDA49B9FF00FFDEC1C1FFFFFF
+            FEFDFDEFDFDFD8B1B1D2A6A6CFA0A0CD9B9BD0A2A2E7CFCFE8D1D1E4C9C9DEBD
+            BDB87D7DC69090DA49B9DEC1C1F8F0F0E7CECEDCB8B8D9B2B2D6ADADD3A7A7D9
+            B4B4F0E1E1EFE0E0ECDADAEAD4D4E7CFCFBE8686CC9999C38B8BC98999E0C1C1
+            E2C5C562EF8A8CBB81DCB8B8E9D3D3F9F3F3F6EEEEF4E8E8F1E3E3EEDDDDCEA3
+            A3CC9C9CCD9B9BC47F8FF711F0D753B3CE9E9AE9CBC3F3D0B9FDD5AFFFD7AEFE
+            E1C5F9E1CEF2E1D7F0E2E2D2A9A9D5ACACD3A7A7C58090F318E7FF00FFFA13E9
+            E7B381FFE2C4FFDFBFFFDCB9FFD9B4FFD7AEE2A66FCDA198DAB9B9DEBEBECD9F
+            9FCF64A4F710EFFF00FFFF00FFE86C8EFBE2CAFFE7CFFFE4CAFFE2C4FFDFBFF4
+            C79BD17C85D188A8C89696D45EAEE631D0FF00FFFF00FFFF00FFF82AD9EDC398
+            FFEFE0FFEDDAFFEAD5FFE7CFFFE4CAE49C74FC09F3FF00FFFF00FFFF00FFFF00
+            FFFF00FFFF00FFFF00FFF358B9F4D9BBFDF1E5FFF2E5FFEFE0FFEDDAF5D2AFED
+            4DAAFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFE0BF7F743CC
+            F263B0EF8DA7EEC396F2CEA9E99B89FD0AF5FF00FFFF00FFFF00FFFF00FFFF00
+            FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+            00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
+          TabOrder = 11
+          WordWrap = True
         end
       end
       object Panel14: TPanel
@@ -1388,12 +1529,16 @@
           TabOrder = 0
           object cxGridDBTableView3: TcxGridDBTableView
             OnDblClick = ActionEditFormPriceExecute
+            OnMouseDown = cxGridDBTableView3MouseDown
+            Navigator.Buttons.Delete.Visible = True
+            DataController.DataModeController.SmartRefresh = True
             DataController.DataSource = DataModule.Source_Product
+            DataController.KeyFieldNames = 'TP_ID'
             DataController.Summary.DefaultGroupSummaryItems = <>
             DataController.Summary.FooterSummaryItems = <>
             DataController.Summary.SummaryGroups = <>
             OptionsData.Inserting = False
-            OptionsSelection.HideSelection = True
+            OptionsSelection.MultiSelect = True
             OptionsView.GroupByBox = False
             object cxGridDBTableView3TP_ID: TcxGridDBColumn
               DataBinding.FieldName = 'TP_ID'
@@ -1402,6 +1547,16 @@
             object cxGridDBTableView3TP_PGID: TcxGridDBColumn
               DataBinding.FieldName = 'TP_PGID'
               Visible = False
+            end
+            object colCheckPrice: TcxGridDBColumn
+              Caption = 'Check'
+              DataBinding.ValueType = 'Boolean'
+              PropertiesClassName = 'TcxCheckBoxProperties'
+              Properties.ImmediatePost = True
+              Properties.NullStyle = nssUnchecked
+              Properties.OnEditValueChanged = colCheckPricePropertiesEditValueChanged
+              Options.Sorting = False
+              Width = 34
             end
             object cxGridDBTableView3TP_NAME: TcxGridDBColumn
               DataBinding.FieldName = 'TP_NAME'
@@ -1433,12 +1588,7 @@
               DataBinding.FieldName = 'TP_PRICE'
               OnCustomDrawCell = cxGridDBTableView3TP_PRICECustomDrawCell
               Options.Editing = False
-            end
-            object cxGridDBTableView3Column1: TcxGridDBColumn
-              DataBinding.ValueType = 'Boolean'
-              PropertiesClassName = 'TcxCheckBoxProperties'
-              Properties.FullFocusRect = True
-              Properties.NullStyle = nssUnchecked
+              Width = 72
             end
             object cxGridDBTableView3TP_DATE: TcxGridDBColumn
               Caption = #1044#1072#1090#1072
@@ -1464,55 +1614,59 @@
       object Panel15: TPanel
         Left = 533
         Top = 65
-        Width = 517
+        Width = 587
         Height = 579
         Align = alClient
         Caption = 'Panel8'
         TabOrder = 2
+        ExplicitWidth = 517
         object cxGrid7: TcxGrid
           Left = 1
           Top = 1
-          Width = 515
+          Width = 585
           Height = 577
           Align = alClient
           TabOrder = 0
-          ExplicitLeft = 5
-          ExplicitTop = 0
+          ExplicitWidth = 515
           object cxGridDBTableView4: TcxGridDBTableView
             DataController.DataModeController.SmartRefresh = True
             DataController.DataSource = DataModule.Source_Spec_Prod_Detail
             DataController.Summary.DefaultGroupSummaryItems = <>
             DataController.Summary.FooterSummaryItems = <>
             DataController.Summary.SummaryGroups = <>
-            OptionsSelection.CellSelect = False
+            OptionsSelection.MultiSelect = True
             OptionsView.GroupByBox = False
-            object cBox: TcxGridDBColumn
-              DataBinding.ValueType = 'Boolean'
-              PropertiesClassName = 'TcxCheckBoxProperties'
-              Properties.NullStyle = nssUnchecked
-            end
             object cxGridDBTableView4TSP_NAME: TcxGridDBColumn
-              Caption = #1052#1072#1090#1077#1088#1080#1072#1083
+              Caption = #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077
               DataBinding.FieldName = 'TSP_NAME'
-              Width = 379
+              Width = 299
             end
             object cxGridDBTableView4TSP_COUNT: TcxGridDBColumn
               Caption = #1050#1086#1083'-'#1074#1086
               DataBinding.FieldName = 'TSP_COUNT'
+              Width = 61
             end
             object cxGridDBTableView4TSP_UNITM: TcxGridDBColumn
-              Caption = #1045#1076'.'#1080#1079#1084
+              Caption = #1045#1076'.'#1080#1079#1084'.'
               DataBinding.FieldName = 'TSP_UNITM'
-              Width = 51
+              Width = 47
+            end
+            object cxGridDBTableView4TSP_PERSENT_WASTE: TcxGridDBColumn
+              Caption = #1055#1088#1086#1094#1077#1085#1090' '#1086#1090#1093#1086#1076#1086#1074
+              DataBinding.FieldName = 'TSP_PERSENT_WASTE'
+              Width = 96
             end
             object cxGridDBTableView4TSP_ID: TcxGridDBColumn
               DataBinding.FieldName = 'TSP_ID'
+              Visible = False
             end
             object cxGridDBTableView4TSP_TMID: TcxGridDBColumn
               DataBinding.FieldName = 'TSP_TMID'
+              Visible = False
             end
             object cxGridDBTableView4TSP_TPID: TcxGridDBColumn
               DataBinding.FieldName = 'TSP_TPID'
+              Visible = False
             end
           end
           object cxGridLevel4: TcxGridLevel
@@ -1553,15 +1707,9 @@
       Caption = 'ActionEditForm_R'
       OnExecute = ActionEditForm_RExecute
     end
-    object Action1: TAction
-      Caption = 'Action1'
-    end
     object ActionAddForm_S: TAction
       Caption = #1044#1086#1073#1072#1074#1080#1090#1100
       OnExecute = ActionAddForm_SExecute
-    end
-    object Action2: TAction
-      Caption = 'Action2'
     end
     object ActionAddFormPrice: TAction
       Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1080#1079#1076#1077#1083#1080#1077
@@ -1575,13 +1723,25 @@
       Caption = #1056#1077#1076#1072#1082#1090#1080#1088#1086#1074#1072#1090#1100
       OnExecute = ActionEditFormPriceExecute
     end
+    object PrintSpecProduction: TAction
+      Caption = #1055#1077#1095#1072#1090#1100' '#1089#1087#1077#1094#1080#1092#1080#1082#1072#1094#1080#1080' '#1080#1079#1076#1077#1083#1080#1103
+      ShortCut = 16507
+      OnExecute = PrintSpecProductionExecute
+    end
+    object Action2: TAction
+      Caption = 'Action2'
+    end
+    object GroupPrintSpecProd: TAction
+      Caption = #1055#1077#1095#1072#1090#1100' '#1075#1088#1091#1087#1087#1099
+      OnExecute = GroupPrintSpecProdExecute
+    end
   end
   object ImageList: TImageList
     DrawingStyle = dsSelected
     Left = 528
     Top = 65520
     Bitmap = {
-      494C01013A004800A00110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01013A004800D00110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000040000000F0000000010020000000000000F0
       00000000000000000000000000000000000000000000CCCCCC00C0C0C000E5E5
       E500000000000000000000000000000000000000000000000000000000000000
@@ -3568,10 +3728,6 @@
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00000000000000000000000000000000
       000000000000}
   end
-  object XPManifest1: TXPManifest
-    Left = 472
-    Top = 65520
-  end
   object frxFIBComponents1: TfrxFIBComponents
     DefaultDatabase = DataModule.DB
     Left = 976
@@ -3592,8 +3748,7 @@
       'Begin'
       ''
       'end.            ')
-    Left = 872
-    Top = 65528
+    Left = 896
     Datasets = <
       item
         DataSetName = 'FIBQuery1'
@@ -4020,12 +4175,12 @@
   object frxDBDataset1: TfrxDBDataset
     UserName = 'frxDBDataset1'
     CloseDataSource = False
+    DataSet = DataModule.ds_product
     BCDToCurrency = False
-    Left = 808
-    Top = 65528
+    Left = 728
   end
   object MainMenu1: TMainMenu
-    Left = 728
+    Left = 664
     Top = 65528
     object N1: TMenuItem
       Caption = #1060#1072#1081#1083
@@ -4058,6 +4213,7 @@
           FBE50AFEFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFB421FF724AFF627FFF7B
           96FF7995FF607DFF7249FFB421FFFF00FFFF00FFFF00FFFF00FF}
         Caption = #1047#1072#1082#1088#1099#1090#1100
+        Hint = #1047#1072#1082#1088#1099#1090#1100' '#1087#1088#1086#1075#1088#1072#1084#1084#1091
         ShortCut = 27
         OnClick = ActionCloseExecute
       end
@@ -4065,6 +4221,33 @@
     object N2: TMenuItem
       Caption = #1040#1076#1084#1080#1085#1080#1089#1090#1088#1080#1088#1086#1074#1072#1085#1080#1077
       object N16: TMenuItem
+        Bitmap.Data = {
+          36030000424D3603000000000000360000002800000010000000100000000100
+          18000000000000030000120B0000120B00000000000000000000FF00FFFF00FF
+          D7864BDA9859DFA66FDEA56DDEA46CDDA26BDDA169DCA068DC9F67DB9E65D58D
+          4AD07836FF00FFFF00FFFF00FFFF00FFDD9E60FFFFFFFFFFFFFFFFFEFFFEFDFF
+          FEFCFFFDFBFFFDFBFFFCFAFFFCF9FFFEFDD6904EFF00FFFF00FFFF00FFFF00FF
+          E3AF7BFFFFFEFFFCFAFFFBF6FFF9F2FFF7EEFFF5EBFFF3E7FFF1E3FFEFE0FFFB
+          F7DDA36CFF00FFFF00FFFF00FFFF00FFE5B380FFFDFCFFF7F0FFF6ECFFF4E8FF
+          F2E5FFF0E1FFEEDDFFECD9FFEAD6FFFAF4DFA770FF00FFFF00FFFF00FFFF00FF
+          E6B684FFFCF90083D260ACD8DFE1DCFFEDDBFFEBD7FFE9D3FFE7CFFFE5CCFFF8
+          F2E1AA75FF00FFFF00FFFF00FFFF00FFE8B989FFFBF760ABD6127BA70090DF60
+          A9D2EFE0CDFFE4C9FFE2C5FFE1C2FFF7EFE2AD79FF00FFFF00FFFF00FFFF00FF
+          EABD8DFFFAF4DFDBD2008BDF00C7FF00B2F03095CFEFD9C0FFDDBCFFDCB8FFF6
+          EDE4B17DFF00FFFF00FFFF00FFFF00FFEBC091FFF8F2FFE4C860A7CD00C2F000
+          DFFF00B7F03093CDEFD3B4FFD7AEFFF5EAE6B482FF00FFFF00FFFF00FFFF00FF
+          EDC496FFF7EFFFDFBEEFD7BC3094CD00C7F000E6FF00BCF03092CAEFCDA7FFF3
+          E8E7B886FF00FFFF00FFFF00FFFF00FFEFC79AFFF6EDFFDAB4FFD8B0EFD1AF30
+          92CA00CBF000EEFF00C1F03091C8EFEBE5E9BB8BFF00FFFF00FFFF00FFFF00FF
+          F0CA9EFFF5EAFFD5AAFFD3A7FFD1A3EFCAA23091C800D0F000F5FF00C5F03098
+          D6DCBA93FF00FFFF00FFFF00FFFF00FFF2CDA3FFF3E8FFD0A0FFCE9DFFCD9AFF
+          CC99EFC89D30A2E000D6F300FCFF00C2E8598295F906F5FF00FFFF00FFFF00FF
+          F3D1A7FFF2E6FFCC99FFCC99FFCC99FFCC99FFCC99EFF8FD30ABE600D4EF88A1
+          A1CCA4A4AF5C98FA08F7FF00FFFF00FFF5D4ABFFF2E6FFCC99FFCC99FFCC99FF
+          CC99FFCC99FFFFFFEEF5F66FADBEE5CDCD3C38B200008F4000A2FF00FFFF00FF
+          F6D4A9FFFFFFFFF2E6FFF2E6FFF2E6FFF2E6FFF2E6FEF8F1F1CB9DEDA79BD0AD
+          CB0000BE153FF40000A1FF00FFFF00FFF5C79EF7D7ACF7D9B1F7D8B0F6D7AFF6
+          D6ADF5D5ACF1C58EF2A79CFF00FFF926F5521FDD0419D16000D1}
         Caption = #1059#1087#1088#1072#1074#1083#1077#1085#1080#1077' '#1096#1072#1073#1083#1086#1085#1072#1084#1080
         OnClick = templatsClick
       end
@@ -4391,5 +4574,52 @@
         OnClick = aboutProgramClick
       end
     end
+  end
+  object frxXLSExport1: TfrxXLSExport
+    ShowDialog = False
+    FileName = 'C:\1.xls'
+    UseFileCache = True
+    ShowProgress = True
+    OverwritePrompt = False
+    DataOnly = False
+    ExportEMF = True
+    OpenExcelAfterExport = True
+    AsText = False
+    Background = True
+    FastExport = True
+    PageBreaks = False
+    EmptyLines = True
+    SuppressPageHeadersFooters = False
+    Left = 936
+    Top = 80
+  end
+  object frxPDFExport1: TfrxPDFExport
+    UseFileCache = True
+    ShowProgress = True
+    OverwritePrompt = False
+    DataOnly = False
+    PrintOptimized = False
+    Outline = False
+    Background = False
+    HTMLTags = True
+    Quality = 95
+    Author = 'FastReport'
+    Subject = 'FastReport PDF export'
+    ProtectionFlags = [ePrint, eModify, eCopy, eAnnot]
+    HideToolbar = False
+    HideMenubar = False
+    HideWindowUI = False
+    FitWindow = False
+    CenterWindow = False
+    PrintScaling = False
+    Left = 992
+    Top = 72
+  end
+  object frxDBDatasetSelect: TfrxDBDataset
+    UserName = 'frxDBDataset1'
+    CloseDataSource = False
+    DataSet = DataModule.DataSetTEST
+    BCDToCurrency = False
+    Left = 816
   end
 end

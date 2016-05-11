@@ -31,15 +31,15 @@ uses DataModuleForm;
 
 procedure TAdd_ProdGroup.CancelButtonClick(Sender: TObject);
 begin
- Close;
+  Close;
 end;
 
 procedure TAdd_ProdGroup.SaveButtonClick(Sender: TObject);
 begin
- DataModule.ds_ProdGroup.Insert;
- DataModule.ds_ProdGroup.FieldByName('PG_NAME').AsString := Trim(Edit1.Text);
- DataModule.ds_ProdGroup.Post;
- Close;
+  DataModule.ds_ProdGroup.Insert;
+  DataModule.ds_ProdGroup.FieldByName('PG_NAME').AsString := Trim(Edit1.Text);
+  DataModule.ds_ProdGroup.Post;
+  Close;
 end;
 
 end.

@@ -29,18 +29,18 @@ implementation
 
 procedure TAdd_reference.CancelButtonClick(Sender: TObject);
 begin
- Close;
+  Close;
 end;
 
 procedure TAdd_reference.SaveButtonClick(Sender: TObject);
 begin
- //DataModule.DS_OTD.Open;
- DataModule.DS_OTD.Insert;
- DataModule.DS_OTD.FieldByName('O_NAME').AsString := Trim(Edit1.Text);
- DataModule.DS_OTD.Post;
- //DataModule.DS_OTD.Close;
- //DataModule.DS_OTD.Open; //если его не сделать - BDGrid - исчезнет
- Close;
+  // DataModule.DS_OTD.Open;
+  DataModule.DS_OTD.Insert;
+  DataModule.DS_OTD.FieldByName('O_NAME').AsString := Trim(Edit1.Text);
+  DataModule.DS_OTD.Post;
+  // DataModule.DS_OTD.Close;
+  // DataModule.DS_OTD.Open; //если его не сделать - BDGrid - исчезнет
+  Close;
 end;
 
 end.

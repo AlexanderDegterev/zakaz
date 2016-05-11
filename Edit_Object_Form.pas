@@ -32,14 +32,15 @@ uses DataModuleForm;
 
 procedure TEdit_Object.CancelButtonClick(Sender: TObject);
 begin
- Close;
+  Close;
 end;
 
 procedure TEdit_Object.FormShow(Sender: TObject);
 begin
- DataModule.ds_Object.ParamByName('X').AsInteger:=DataModule.ds_Object.FieldByName('OB_ID').AsInteger;
- DataModule.ds_Object.Open;
- Edit1.Text:=DataModule.ds_Object.FieldByName('OB_NAME').AsString;
+  DataModule.ds_Object.ParamByName('X').AsInteger :=
+    DataModule.ds_Object.FieldByName('OB_ID').AsInteger;
+  DataModule.ds_Object.Open;
+  Edit1.Text := DataModule.ds_Object.FieldByName('OB_NAME').AsString;
 end;
 
 procedure TEdit_Object.SaveButtonClick(Sender: TObject);

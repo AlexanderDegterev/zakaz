@@ -31,15 +31,15 @@ uses DataModuleForm;
 
 procedure TAdd_Clients.CancelButtonClick(Sender: TObject);
 begin
- Close;
+  Close;
 end;
 
 procedure TAdd_Clients.SaveButtonClick(Sender: TObject);
 begin
- DataModule.ds_Clients.Insert;
- DataModule.ds_Clients.FieldByName('CL_NAME').AsString := Trim(Edit1.Text);
- DataModule.ds_Clients.Post;
- Close;
+  DataModule.ds_Clients.Insert;
+  DataModule.ds_Clients.FieldByName('CL_NAME').AsString := Trim(Edit1.Text);
+  DataModule.ds_Clients.Post;
+  Close;
 end;
 
 end.

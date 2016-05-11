@@ -255,7 +255,7 @@ type
     ds_Specification_ProductionTSP_ID: TFIBIntegerField;
     ds_Specification_ProductionTSP_TMID: TFIBIntegerField;
     ds_Specification_ProductionTSP_TPID: TFIBIntegerField;
-    ds_Specification_ProductionTSP_NAME: TFIBStringField;
+    Ќазвание: TFIBStringField;
     ds_Specification_ProductionTSP_COUNT: TFIBBCDField;
     ds_Specification_ProductionTSP_UNITM: TFIBStringField;
     Source_Specification_Prod: TDataSource;
@@ -268,6 +268,10 @@ type
     ds_Spec_Prod_detailTSP_NAME: TFIBStringField;
     ds_Spec_Prod_detailTSP_COUNT: TFIBBCDField;
     ds_Spec_Prod_detailTSP_UNITM: TFIBStringField;
+    ds_Specification_ProductionTSP_PERSENT_WASTE: TFIBBCDField;
+    ds_Spec_Prod_detailTSP_PERSENT_WASTE: TFIBBCDField;
+    ds_productPG_NAME: TFIBStringField;
+    DataSetTEST: TpFIBDataSet;
     procedure ds_SERVAfterInsert(DataSet: TDataSet);
   private
     { Private declarations }
@@ -282,11 +286,10 @@ implementation
 
 {$R *.dfm}
 
-
 procedure TDataModule.ds_SERVAfterInsert(DataSet: TDataSet);
 begin
- //DataModule.ds_SERV.Edit;    //когда вкл. не вставл€е ds_SERV is not EDIT or INSERT MODE
- //DataModule.ds_SERV.Post;
+  // DataModule.ds_SERV.Edit;    //когда вкл. не вставл€е ds_SERV is not EDIT or INSERT MODE
+  // DataModule.ds_SERV.Post;
 end;
 
 end.

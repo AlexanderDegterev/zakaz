@@ -44,7 +44,10 @@ uses
   ADD_Form_R in 'ADD_Form_R.pas' {FormAdd_R},
   Edit_Form_R in 'Edit_Form_R.pas' {FormEdit_R},
   ADD_FormPrice in 'ADD_FormPrice.pas' {FormAddPrice},
-  Edit_FormPrice in 'Edit_FormPrice.pas' {FormEditPrice};
+  Edit_FormPrice in 'Edit_FormPrice.pas' {FormEditPrice},
+  my_Unit in 'my_Unit.pas',
+  Vcl.Themes,
+  Vcl.Styles;
 
 {$R *.res}
 
@@ -53,20 +56,12 @@ begin
   if Tregistration.Execute then
   begin
     Application.MainFormOnTaskbar := True;
-    Application.Title := 'ПО "ЗАКАЗ"';
-//  Application.Title := 'ПО "Движение металлов"';
-  Application.CreateForm(TMain, Main);
+    TStyleManager.TrySetStyle('Smokey Quartz Kamri');
+  Application.Title := 'ПО "ЗАКАЗ"';
+    // Application.Title := 'ПО "Движение металлов"';
+    Application.CreateForm(TMain, Main);
   Application.CreateForm(TIzdelie2, Izdelie2);
-  Application.CreateForm(TFormAdd_S, FormAdd_S);
-  Application.CreateForm(TFormEdit_S, FormEdit_S);
-  Application.CreateForm(TSupplier, Supplier);
-  Application.CreateForm(TSupplier_Add, Supplier_Add);
-  Application.CreateForm(TSupplier_Edit, Supplier_Edit);
   Application.CreateForm(TConnectDB, ConnectDB);
-  Application.CreateForm(TFormAdd_R, FormAdd_R);
-  Application.CreateForm(TFormEdit_R, FormEdit_R);
-  Application.CreateForm(TFormAddPrice, FormAddPrice);
-  Application.CreateForm(TFormEditPrice, FormEditPrice);
   Application.Run;
 
   end;

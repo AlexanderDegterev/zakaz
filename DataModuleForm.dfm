@@ -1,4 +1,4 @@
-object DataModule: TDataModule
+﻿object DataModule: TDataModule
   Left = 0
   Top = 0
   Caption = 'DataModule'
@@ -158,6 +158,7 @@ object DataModule: TDataModule
       'WHERE U_NASED <> '#39#1054#1090#1075#1088#1091#1078#1077#1085#1086#39' and '
       '      U_NASED <> '#39#1057#1085#1103#1090#39
       'ORDER BY U_DATEBEG DESC')
+    FilterOptions = [foCaseInsensitive]
     AutoUpdateOptions.KeyFields = 'U_ID'
     AutoUpdateOptions.GeneratorName = 'NEW_USER'
     AutoUpdateOptions.WhenGetGenID = wgBeforePost
@@ -394,6 +395,7 @@ object DataModule: TDataModule
     AutoUpdateOptions.KeyFields = 'U_ID'
     AutoUpdateOptions.GeneratorName = 'NEW_USER_DEL'
     AutoUpdateOptions.WhenGetGenID = wgBeforePost
+    Active = True
     Transaction = TransactionDB
     Database = DB
     AutoCommit = True
@@ -538,6 +540,7 @@ object DataModule: TDataModule
     AutoUpdateOptions.KeyFields = 'O_ID'
     AutoUpdateOptions.GeneratorName = 'NEW_OTDSOURCE'
     AutoUpdateOptions.WhenGetGenID = wgBeforePost
+    Active = True
     Transaction = TransactionDB
     Database = DB
     AutoCommit = True
@@ -599,6 +602,7 @@ object DataModule: TDataModule
       'FROM'
       '    USERS ')
     AutoUpdateOptions.WhenGetGenID = wgBeforePost
+    Active = True
     Transaction = TransactionDB
     Database = DB
     AutoCommit = True
@@ -677,6 +681,7 @@ object DataModule: TDataModule
     AutoUpdateOptions.KeyFields = 'P_ID'
     AutoUpdateOptions.GeneratorName = 'NEW_PROF'
     AutoUpdateOptions.WhenGetGenID = wgBeforePost
+    Active = True
     Transaction = TransactionDB
     Database = DB
     AutoCommit = True
@@ -752,6 +757,7 @@ object DataModule: TDataModule
     AutoUpdateOptions.KeyFields = 'T_ID'
     AutoUpdateOptions.GeneratorName = 'GEN_TEMPLATES_ID'
     AutoUpdateOptions.WhenGetGenID = wgBeforePost
+    Active = True
     Transaction = TransactionDB
     Database = DB
     AutoCommit = True
@@ -826,6 +832,7 @@ object DataModule: TDataModule
     AutoUpdateOptions.KeyFields = 'CL_ID'
     AutoUpdateOptions.GeneratorName = 'NEW_CLIENTS'
     AutoUpdateOptions.WhenGetGenID = wgBeforePost
+    Active = True
     Transaction = TransactionDB
     Database = DB
     AutoCommit = True
@@ -891,6 +898,7 @@ object DataModule: TDataModule
     AutoUpdateOptions.KeyFields = 'PG_ID'
     AutoUpdateOptions.GeneratorName = 'NEW_PRODGROUP'
     AutoUpdateOptions.WhenGetGenID = wgBeforePost
+    Active = True
     Transaction = TransactionDB
     Database = DB
     AutoCommit = True
@@ -1048,6 +1056,7 @@ object DataModule: TDataModule
     AutoUpdateOptions.KeyFields = 'OB_ID'
     AutoUpdateOptions.GeneratorName = 'NEW_OBJECT'
     AutoUpdateOptions.WhenGetGenID = wgBeforePost
+    Active = True
     Transaction = TransactionDB
     Database = DB
     AutoCommit = True
@@ -1083,6 +1092,7 @@ object DataModule: TDataModule
       'SELECT OB_NAME '
       'FROM T_OBJECT '
       'WHERE OB_ID =:perem')
+    Active = True
     Transaction = TransactionDB
     Database = DB
     AutoCommit = True
@@ -1162,6 +1172,7 @@ object DataModule: TDataModule
       'SELECT'
       '    TP_ID,'
       '    TP_PGID,'
+      '    PG_NAME,'
       '    TP_NAME,'
       '    TP_WEIGHT,'
       '    TP_UNITM,'
@@ -1173,10 +1184,12 @@ object DataModule: TDataModule
       '    TP_GOST'
       'FROM'
       '    T_PRODUCT'
-      'order by TP_NAME ')
+      'left join PRODGROUP on T_PRODUCT.TP_PGID=PRODGROUP.PG_ID'
+      'order by TP_DATE DESC')
     AutoUpdateOptions.KeyFields = 'TP_ID'
     AutoUpdateOptions.GeneratorName = 'NEW_T_PRODUCT'
     AutoUpdateOptions.WhenGetGenID = wgBeforePost
+    Active = True
     Transaction = TransactionDB
     Database = DB
     AutoCommit = True
@@ -1191,6 +1204,11 @@ object DataModule: TDataModule
       DisplayWidth = 3
       FieldName = 'TP_PGID'
       Visible = False
+    end
+    object ds_productPG_NAME: TFIBStringField
+      FieldName = 'PG_NAME'
+      Size = 100
+      EmptyStrToNull = True
     end
     object ds_productTP_NAME: TFIBStringField
       DisplayLabel = #1048#1079#1076#1077#1083#1080#1103
@@ -1256,6 +1274,7 @@ object DataModule: TDataModule
       'from t_serv'
       'left join t_product on t_product.tp_id=t_serv.sv_tpid'
       'where t_serv.sv_tpid =:Perem1 and t_serv.sv_uid =:Perem2')
+    Active = True
     Transaction = TransactionDB
     Database = DB
     AutoCommit = True
@@ -1361,6 +1380,7 @@ object DataModule: TDataModule
     AutoUpdateOptions.KeyFields = 'TM_ID'
     AutoUpdateOptions.GeneratorName = 'NEW_T_METAL'
     AutoUpdateOptions.WhenGetGenID = wgBeforePost
+    Active = True
     Transaction = TransactionDB
     Database = DB
     AutoCommit = True
@@ -1490,6 +1510,7 @@ object DataModule: TDataModule
     AutoUpdateOptions.KeyFields = 'SV_ID'
     AutoUpdateOptions.GeneratorName = 'NEW_T_SERV'
     AutoUpdateOptions.WhenGetGenID = wgBeforePost
+    Active = True
     AfterInsert = ds_SERVAfterInsert
     Transaction = TransactionDB
     Database = DB
@@ -1628,6 +1649,7 @@ object DataModule: TDataModule
     AutoUpdateOptions.KeyFields = 'SVM_ID'
     AutoUpdateOptions.GeneratorName = 'NEW_T_SERV_M'
     AutoUpdateOptions.WhenGetGenID = wgBeforePost
+    Active = True
     Transaction = TransactionDB
     Database = DB
     AutoCommit = True
@@ -1772,6 +1794,7 @@ object DataModule: TDataModule
     AutoUpdateOptions.KeyFields = 'T_ID'
     AutoUpdateOptions.GeneratorName = 'NEW_T_FILES'
     AutoUpdateOptions.WhenGetGenID = wgBeforePost
+    Active = True
     Transaction = TransactionDB
     Database = DB
     AutoCommit = True
@@ -1876,6 +1899,7 @@ object DataModule: TDataModule
       'FROM'
       '    T_DIVISION ')
     AutoUpdateOptions.WhenGetGenID = wgBeforePost
+    Active = True
     Transaction = TransactionDB
     Database = DB
     AutoCommit = True
@@ -1949,6 +1973,7 @@ object DataModule: TDataModule
     AutoUpdateOptions.KeyFields = 'T_ID'
     AutoUpdateOptions.GeneratorName = 'GEN_TEMPLATES_ID'
     AutoUpdateOptions.WhenGetGenID = wgBeforePost
+    Active = True
     Transaction = TransactionDB
     Database = DB
     AutoCommit = True
@@ -2039,6 +2064,7 @@ object DataModule: TDataModule
     AutoUpdateOptions.KeyFields = 'DOG_ID'
     AutoUpdateOptions.GeneratorName = 'NEW_DOGOVOR'
     AutoUpdateOptions.WhenGetGenID = wgBeforePost
+    Active = True
     Transaction = TransactionDB
     Database = DB
     AutoCommit = True
@@ -2176,6 +2202,7 @@ object DataModule: TDataModule
     AutoUpdateOptions.KeyFields = 'SVS_ID'
     AutoUpdateOptions.GeneratorName = 'NEW_SERV_S'
     AutoUpdateOptions.WhenGetGenID = wgBeforePost
+    Active = True
     AfterInsert = ds_SERVAfterInsert
     Transaction = TransactionDB
     Database = DB
@@ -2318,6 +2345,7 @@ object DataModule: TDataModule
     AutoUpdateOptions.KeyFields = 'DOG_ID'
     AutoUpdateOptions.GeneratorName = 'NEW_DOGOVOR'
     AutoUpdateOptions.WhenGetGenID = wgBeforePost
+    Active = True
     Transaction = TransactionDB
     Database = DB
     AutoCommit = True
@@ -2418,6 +2446,7 @@ object DataModule: TDataModule
     AutoUpdateOptions.KeyFields = 'SUP_ID'
     AutoUpdateOptions.GeneratorName = 'NEW_SUPPLIER'
     AutoUpdateOptions.WhenGetGenID = wgBeforePost
+    Active = True
     Transaction = TransactionDB
     Database = DB
     AutoCommit = True
@@ -2482,8 +2511,10 @@ object DataModule: TDataModule
       'order by SVS_NAME ')
     AutoUpdateOptions.KeyFields = 'SVS_ID'
     AutoUpdateOptions.GeneratorName = 'NEW_SERV_S'
+    Active = True
     Transaction = TransactionDB
     Database = DB
+    AutoCommit = True
     DataSource = Source_SUP_First
     Left = 64
     Top = 480
@@ -2553,6 +2584,7 @@ object DataModule: TDataModule
       'select *'
       'from mon$attachments'
       'order by MON$REMOTE_ADDRESS')
+    Active = True
     Transaction = TransactionDB
     Database = DB
     AutoCommit = True
@@ -2647,6 +2679,7 @@ object DataModule: TDataModule
     AutoUpdateOptions.KeyFields = 'REQ_ID'
     AutoUpdateOptions.GeneratorName = 'NEW_T_REQUEST'
     AutoUpdateOptions.WhenGetGenID = wgBeforePost
+    Active = True
     Transaction = TransactionDB
     Database = DB
     AutoCommit = True
@@ -2673,7 +2706,7 @@ object DataModule: TDataModule
     end
     object ds_RequestREQ_N_ZAKAZ: TFIBStringField
       FieldName = 'REQ_N_ZAKAZ'
-      Size = 64
+      Size = 250
       EmptyStrToNull = True
     end
     object ds_RequestREQ_DATE: TFIBDateTimeField
@@ -2768,6 +2801,7 @@ object DataModule: TDataModule
     AutoUpdateOptions.KeyFields = 'SVR_ID'
     AutoUpdateOptions.GeneratorName = 'NEW_T_SERV_R'
     AutoUpdateOptions.WhenGetGenID = wgBeforePost
+    Active = True
     Transaction = TransactionDB
     Database = DB
     AutoCommit = True
@@ -2912,8 +2946,10 @@ object DataModule: TDataModule
       '    T_SERV_R'
       'where SVR_REQID=:REQ_ID'
       'order by SVR_ID  ')
+    Active = True
     Transaction = TransactionDB
     Database = DB
+    AutoCommit = True
     DataSource = Source_Request
     Left = 152
     Top = 472
@@ -3005,6 +3041,7 @@ object DataModule: TDataModule
       'FROM'
       '    T_STATUS_PRODUCTION ')
     AutoUpdateOptions.WhenGetGenID = wgBeforePost
+    Active = True
     Transaction = TransactionDB
     Database = DB
     AutoCommit = True
@@ -3032,7 +3069,8 @@ object DataModule: TDataModule
       '    TSP_TPID = :TSP_TPID,'
       '    TSP_NAME = :TSP_NAME,'
       '    TSP_COUNT = :TSP_COUNT,'
-      '    TSP_UNITM = :TSP_UNITM'
+      '    TSP_UNITM = :TSP_UNITM,'
+      '    TSP_PERSENT_WASTE = :TSP_PERSENT_WASTE'
       'WHERE'
       '    TSP_ID = :OLD_TSP_ID'
       '    ')
@@ -3049,7 +3087,8 @@ object DataModule: TDataModule
       '    TSP_TPID,'
       '    TSP_NAME,'
       '    TSP_COUNT,'
-      '    TSP_UNITM'
+      '    TSP_UNITM,'
+      '    TSP_PERSENT_WASTE'
       ')'
       'VALUES('
       '    :TSP_ID,'
@@ -3057,7 +3096,8 @@ object DataModule: TDataModule
       '    :TSP_TPID,'
       '    :TSP_NAME,'
       '    :TSP_COUNT,'
-      '    :TSP_UNITM'
+      '    :TSP_UNITM,'
+      '    :TSP_PERSENT_WASTE'
       ')')
     RefreshSQL.Strings = (
       'SELECT'
@@ -3066,12 +3106,13 @@ object DataModule: TDataModule
       '    TSP_TPID,'
       '    TSP_NAME,'
       '    TSP_COUNT,'
-      '    TSP_UNITM'
+      '    TSP_UNITM,'
+      '    TSP_PERSENT_WASTE'
       'FROM'
-      '    T_SPECIFICATION_PRODUCTION '
-      ''
-      ' WHERE '
-      '        T_SPECIFICATION_PRODUCTION.TSP_ID = :OLD_TSP_ID'
+      '    T_SPECIFICATION_PRODUCTION'
+      'where(  TSP_TPID=:perem'
+      '     ) and (     T_SPECIFICATION_PRODUCTION.TSP_ID = :OLD_TSP_ID'
+      '     )'
       '    ')
     SelectSQL.Strings = (
       'SELECT'
@@ -3080,14 +3121,16 @@ object DataModule: TDataModule
       '    TSP_TPID,'
       '    TSP_NAME,'
       '    TSP_COUNT,'
-      '    TSP_UNITM'
+      '    TSP_UNITM,'
+      '    TSP_PERSENT_WASTE'
       'FROM'
       '    T_SPECIFICATION_PRODUCTION'
       'where TSP_TPID=:perem'
-      'order by TSP_NAME  ')
+      'order by TSP_ID  ')
     AutoUpdateOptions.KeyFields = 'TSP_ID'
     AutoUpdateOptions.GeneratorName = 'NEW_T_SPECIFICATION_PRODUCTION'
     AutoUpdateOptions.WhenGetGenID = wgBeforePost
+    Active = True
     Transaction = TransactionDB
     Database = DB
     AutoCommit = True
@@ -3102,7 +3145,7 @@ object DataModule: TDataModule
     object ds_Specification_ProductionTSP_TPID: TFIBIntegerField
       FieldName = 'TSP_TPID'
     end
-    object ds_Specification_ProductionTSP_NAME: TFIBStringField
+    object Название: TFIBStringField
       FieldName = 'TSP_NAME'
       Size = 100
       EmptyStrToNull = True
@@ -3117,6 +3160,12 @@ object DataModule: TDataModule
       FieldName = 'TSP_UNITM'
       Size = 15
       EmptyStrToNull = True
+    end
+    object ds_Specification_ProductionTSP_PERSENT_WASTE: TFIBBCDField
+      FieldName = 'TSP_PERSENT_WASTE'
+      DisplayFormat = '#,##0.0000'
+      EditFormat = '0.0000'
+      Size = 4
     end
   end
   object Source_Specification_Prod: TDataSource
@@ -3138,60 +3187,56 @@ object DataModule: TDataModule
   end
   object ds_Spec_Prod_detail: TpFIBDataSet
     UpdateSQL.Strings = (
-      'UPDATE T_SERV_R'
+      'UPDATE T_SPECIFICATION_PRODUCTION'
       'SET '
-      '    SVR_REQID = :SVR_REQID,'
-      '    SVR_TMID = :SVR_TMID,'
-      '    SVR_NAME = :SVR_NAME,'
-      '    SVR_COUNT = :SVR_COUNT,'
-      '    SVR_UNITM = :SVR_UNITM,'
-      '    SVR_GOST = :SVR_GOST,'
-      '    SVR_LOGIN = :SVR_LOGIN'
+      '    TSP_TMID = :TSP_TMID,'
+      '    TSP_TPID = :TSP_TPID,'
+      '    TSP_NAME = :TSP_NAME,'
+      '    TSP_COUNT = :TSP_COUNT,'
+      '    TSP_UNITM = :TSP_UNITM,'
+      '    TSP_PERSENT_WASTE = :TSP_PERSENT_WASTE'
       'WHERE'
-      '    SVR_ID = :OLD_SVR_ID'
+      '    TSP_ID = :OLD_TSP_ID'
       '    ')
     DeleteSQL.Strings = (
       'DELETE FROM'
-      '    T_SERV_R'
+      '    T_SPECIFICATION_PRODUCTION'
       'WHERE'
-      '        SVR_ID = :OLD_SVR_ID'
+      '        TSP_ID = :OLD_TSP_ID'
       '    ')
     InsertSQL.Strings = (
-      'INSERT INTO T_SERV_R('
-      '    SVR_ID,'
-      '    SVR_REQID,'
-      '    SVR_TMID,'
-      '    SVR_NAME,'
-      '    SVR_COUNT,'
-      '    SVR_UNITM,'
-      '    SVR_GOST,'
-      '    SVR_LOGIN'
+      'INSERT INTO T_SPECIFICATION_PRODUCTION('
+      '    TSP_ID,'
+      '    TSP_TMID,'
+      '    TSP_TPID,'
+      '    TSP_NAME,'
+      '    TSP_COUNT,'
+      '    TSP_UNITM,'
+      '    TSP_PERSENT_WASTE'
       ')'
       'VALUES('
-      '    :SVR_ID,'
-      '    :SVR_REQID,'
-      '    :SVR_TMID,'
-      '    :SVR_NAME,'
-      '    :SVR_COUNT,'
-      '    :SVR_UNITM,'
-      '    :SVR_GOST,'
-      '    :SVR_LOGIN'
+      '    :TSP_ID,'
+      '    :TSP_TMID,'
+      '    :TSP_TPID,'
+      '    :TSP_NAME,'
+      '    :TSP_COUNT,'
+      '    :TSP_UNITM,'
+      '    :TSP_PERSENT_WASTE'
       ')')
     RefreshSQL.Strings = (
       'SELECT'
-      '    SVR_ID,'
-      '    SVR_REQID,'
-      '    SVR_TMID,'
-      '    SVR_NAME,'
-      '    SVR_COUNT,'
-      '    SVR_UNITM,'
-      '    SVR_GOST,'
-      '    SVR_LOGIN'
+      '    TSP_ID,'
+      '    TSP_TMID,'
+      '    TSP_TPID,'
+      '    TSP_NAME,'
+      '    TSP_COUNT,'
+      '    TSP_UNITM,'
+      '    TSP_PERSENT_WASTE'
       'FROM'
-      '    T_SERV_R '
+      '    T_SPECIFICATION_PRODUCTION '
       ''
       ' WHERE '
-      '        T_SERV_R.SVR_ID = :OLD_SVR_ID'
+      '        T_SPECIFICATION_PRODUCTION.TSP_ID = :OLD_TSP_ID'
       '    ')
     SelectSQL.Strings = (
       'SELECT'
@@ -3200,14 +3245,16 @@ object DataModule: TDataModule
       '    TSP_TPID,'
       '    TSP_NAME,'
       '    TSP_COUNT,'
-      '    TSP_UNITM'
+      '    TSP_UNITM,'
+      '    TSP_PERSENT_WASTE'
       'FROM'
       '    T_SPECIFICATION_PRODUCTION'
       'where TSP_TPID=:TP_ID'
-      'order by TSP_NAME   ')
+      'order by TSP_ID   ')
     Active = True
     Transaction = TransactionDB
     Database = DB
+    AutoCommit = True
     DataSource = Source_Product
     Left = 528
     Top = 480
@@ -3236,10 +3283,110 @@ object DataModule: TDataModule
       Size = 15
       EmptyStrToNull = True
     end
+    object ds_Spec_Prod_detailTSP_PERSENT_WASTE: TFIBBCDField
+      FieldName = 'TSP_PERSENT_WASTE'
+      DisplayFormat = '#,##0.0000'
+      EditFormat = '0.0000'
+      Size = 4
+    end
   end
   object Source_Spec_Prod_Detail: TDataSource
     DataSet = ds_Spec_Prod_detail
     Left = 528
     Top = 528
+  end
+  object DataSetTEST: TpFIBDataSet
+    UpdateSQL.Strings = (
+      'UPDATE T_PRODUCT'
+      'SET '
+      '    TP_PGID = :TP_PGID,'
+      '    TP_NAME = :TP_NAME,'
+      '    TP_VOLUME = :TP_VOLUME,'
+      '    TP_UNITM = :TP_UNITM,'
+      '    TP_GOST = :TP_GOST,'
+      '    TP_WEIGHT = :TP_WEIGHT,'
+      '    TP_PRICE = :TP_PRICE,'
+      '    TP_DATE = :TP_DATE,'
+      '    TP_STATUS = :TP_STATUS,'
+      '    TP_PRIM = :TP_PRIM'
+      'WHERE'
+      '    TP_ID = :OLD_TP_ID'
+      '    ')
+    DeleteSQL.Strings = (
+      'DELETE FROM'
+      '    T_PRODUCT'
+      'WHERE'
+      '        TP_ID = :OLD_TP_ID'
+      '    ')
+    InsertSQL.Strings = (
+      'INSERT INTO T_PRODUCT('
+      '    TP_ID,'
+      '    TP_PGID,'
+      '    TP_NAME,'
+      '    TP_VOLUME,'
+      '    TP_UNITM,'
+      '    TP_GOST,'
+      '    TP_WEIGHT,'
+      '    TP_PRICE,'
+      '    TP_DATE,'
+      '    TP_STATUS,'
+      '    TP_PRIM'
+      ')'
+      'VALUES('
+      '    :TP_ID,'
+      '    :TP_PGID,'
+      '    :TP_NAME,'
+      '    :TP_VOLUME,'
+      '    :TP_UNITM,'
+      '    :TP_GOST,'
+      '    :TP_WEIGHT,'
+      '    :TP_PRICE,'
+      '    :TP_DATE,'
+      '    :TP_STATUS,'
+      '    :TP_PRIM'
+      ')')
+    RefreshSQL.Strings = (
+      'SELECT'
+      '    TP_ID,'
+      '    TP_PGID,'
+      '    TP_NAME,'
+      '    TP_VOLUME,'
+      '    TP_UNITM,'
+      '    TP_GOST,'
+      '    TP_WEIGHT,'
+      '    TP_PRICE,'
+      '    TP_DATE,'
+      '    TP_STATUS,'
+      '    TP_PRIM'
+      'FROM'
+      '    T_PRODUCT '
+      ''
+      ' WHERE '
+      '        T_PRODUCT.TP_ID = :OLD_TP_ID'
+      '    ')
+    SelectSQL.Strings = (
+      'SELECT'
+      '    TP_ID,'
+      '    TP_PGID,'
+      '    PG_NAME,'
+      '    TP_NAME,'
+      '    TP_WEIGHT,'
+      '    TP_UNITM,'
+      '    TP_PRICE,'
+      '    TP_DATE,'
+      '    TP_STATUS,'
+      '    TP_PRIM,'
+      '    TP_VOLUME,'
+      '    TP_GOST'
+      'FROM'
+      '    T_PRODUCT'
+      'left join PRODGROUP on T_PRODUCT.TP_PGID=PRODGROUP.PG_ID'
+      'where TP_ID IN (:peremIdArray)'
+      'order by TP_DATE DESC')
+    Transaction = TransactionDB
+    Database = DB
+    DataSource = Source_T_Users
+    Left = 368
+    Top = 32
   end
 end

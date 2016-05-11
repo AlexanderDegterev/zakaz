@@ -68,9 +68,9 @@ type
       ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
       AShift: TShiftState; var AHandled: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure eFilterChange(Sender: TObject);
     procedure RzBitBtn2Click(Sender: TObject);
     procedure RzBitBtn1Click(Sender: TObject);
+    procedure eFilterChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -82,117 +82,126 @@ var
 
 implementation
 
-uses DataModuleForm, ADD_Form_S, BTS_Office_form;
+uses DataModuleForm, ADD_Form_S, BTS_Office_form, my_Unit;
 
 {$R *.dfm}
 
-procedure TFormEdit_S.cxGrid2DBTableView1CellDblClick(
-  Sender: TcxCustomGridTableView; ACellViewInfo: TcxGridTableDataCellViewInfo;
+procedure TFormEdit_S.cxGrid2DBTableView1CellDblClick
+  (Sender: TcxCustomGridTableView; ACellViewInfo: TcxGridTableDataCellViewInfo;
   AButton: TMouseButton; AShift: TShiftState; var AHandled: Boolean);
 var
-QuantityProd, SV_ID, SV_COUNT, TM_ID :integer;
-TM_NAME, TM_UNITM, TM_GOST :STRING;
+  QuantityProd, SV_ID, SV_COUNT, TM_ID: integer;
+  TM_NAME, TM_UNITM, TM_GOST: STRING;
 begin
-  TM_ID:=DataModule.ds_Metal.FieldByName('TM_ID').AsInteger;
-  TM_NAME:=DataModule.ds_Metal.FieldByName('TM_NAME').AsString;
-  TM_UNITM:=DataModule.ds_Metal.FieldByName('TM_UNITM').AsString;
-  TM_GOST:=DataModule.ds_Metal.FieldByName('TM_GOST').AsString;
-  SV_COUNT:=0;
+  TM_ID := DataModule.ds_Metal.FieldByName('TM_ID').AsInteger;
+  TM_NAME := DataModule.ds_Metal.FieldByName('TM_NAME').AsString;
+  TM_UNITM := DataModule.ds_Metal.FieldByName('TM_UNITM').AsString;
+  TM_GOST := DataModule.ds_Metal.FieldByName('TM_GOST').AsString;
+  SV_COUNT := 0;
   //
   // Переделка через FIBQuery (Кол-во продукции)
-  {DataModule.Query_QuantityMet_S.ParamByName('Perem1').Value:=DataModule.ds_metal.FieldByName('TM_ID').AsInteger;
-  DataModule.Query_QuantityMet_S.ParamByName('Perem2').Value:=DataModule.DS_SUP_First.FieldByName('DOG_ID').AsInteger;
+  { DataModule.Query_QuantityMet_S.ParamByName('Perem1').Value:=DataModule.ds_metal.FieldByName('TM_ID').AsInteger;
+    DataModule.Query_QuantityMet_S.ParamByName('Perem2').Value:=DataModule.DS_SUP_First.FieldByName('DOG_ID').AsInteger;
 
-  // пересмотреть
-  //DataModule.Query_QuantityMet.ParamByName('Perem2').Value:=TRIM(Edit1.Text);
-  //DataModule.Query_QuantityMet.Transaction.StartTransaction;
-  DataModule.Query_QuantityMet_S.ExecQuery;
-  //DataModule.Query_QuantityMet.Transaction.Commit;
+    // пересмотреть
+    //DataModule.Query_QuantityMet.ParamByName('Perem2').Value:=TRIM(Edit1.Text);
+    //DataModule.Query_QuantityMet.Transaction.StartTransaction;
+    DataModule.Query_QuantityMet_S.ExecQuery;
+    //DataModule.Query_QuantityMet.Transaction.Commit;
 
 
-  SV_ID:=DataModule.Query_QuantityMet_S.FieldByName('SVS_ID').AsInteger;
-  SV_COUNT:=DataModule.Query_QuantityMet_S.FieldByName('COUNT').AsInteger;
-  //ShowMessage('Найдено: '+intToStr(SV_COUNT)+'          Нажмите Ок'+intToStr(SVM_ID));
+    SV_ID:=DataModule.Query_QuantityMet_S.FieldByName('SVS_ID').AsInteger;
+    SV_COUNT:=DataModule.Query_QuantityMet_S.FieldByName('COUNT').AsInteger;
+    //ShowMessage('Найдено: '+intToStr(SV_COUNT)+'          Нажмите Ок'+intToStr(SVM_ID));
 
-  // - не переписана
+    // - не переписана
 
-  if SV_COUNT>=1 then
-   begin
+    if SV_COUNT>=1 then
+    begin
 
-     ShowMessage('материал '+TM_NAME+' уже есть в списке!'+'  Нажмите Ок');
-     DataModule.ds_SERV_S.ReopenLocate('SVS_ID');
+    ShowMessage('материал '+TM_NAME+' уже есть в списке!'+'  Нажмите Ок');
+    DataModule.ds_SERV_S.ReopenLocate('SVS_ID');
 
-   end
+    end
 
-  else}
-  Begin             // ПОЕХАЛИ
+    else }
+  Begin // ПОЕХАЛИ
 
-  //ShowMessage('STOP');
-  DataModule.ds_SERV_S.Open;
-  DataModule.ds_SERV_S.Insert;
-  DataModule.ds_SERV_S.FieldByName('SVS_DOGID').AsInteger :=DataModule.DS_SUP_First.FieldByName('DOG_ID').AsInteger;
-  DataModule.ds_SERV_S.FieldByName('SVS_SUPID').AsInteger :=DataModule.ds_SUPPLIER.FieldByName('SUP_ID').AsInteger;
-  DataModule.ds_SERV_S.FieldByName('SVS_TMID').AsInteger :=TM_ID;
-  DataModule.ds_SERV_S.FieldByName('SVS_NAME').AsString :=DataModule.ds_Metal.FieldByName('TM_NAME').AsString;
-  DataModule.ds_SERV_S.FieldByName('SVS_UNITM').AsString :=TM_UNITM;
-  DataModule.ds_SERV_S.Post;
-  DataModule.ds_SERV_S.ParamByName('Perem1').Value:=DataModule.DS_SUP_First.FieldByName('DOG_ID').AsInteger;
-  DataModule.ds_SERV_S.ReopenLocate('SVS_ID');
+    // ShowMessage('STOP');
+    DataModule.ds_SERV_S.Open;
+    DataModule.ds_SERV_S.Insert;
+    DataModule.ds_SERV_S.FieldByName('SVS_DOGID').AsInteger :=
+      DataModule.DS_SUP_First.FieldByName('DOG_ID').AsInteger;
+    DataModule.ds_SERV_S.FieldByName('SVS_SUPID').AsInteger :=
+      DataModule.ds_SUPPLIER.FieldByName('SUP_ID').AsInteger;
+    DataModule.ds_SERV_S.FieldByName('SVS_TMID').AsInteger := TM_ID;
+    DataModule.ds_SERV_S.FieldByName('SVS_NAME').AsString :=
+      DataModule.ds_Metal.FieldByName('TM_NAME').AsString;
+    DataModule.ds_SERV_S.FieldByName('SVS_UNITM').AsString := TM_UNITM;
+    DataModule.ds_SERV_S.Post;
+    DataModule.ds_SERV_S.ParamByName('Perem1').Value :=
+      DataModule.DS_SUP_First.FieldByName('DOG_ID').AsInteger;
+    DataModule.ds_SERV_S.ReopenLocate('SVS_ID');
 
   End;
 end;
 
 procedure TFormEdit_S.eFilterChange(Sender: TObject);
-var
-  filterText:string;
-begin
-   if (Length(Trim(eFilter.Text)) > 0) and (eFilter.Text <> filterText) then
-     begin
-       DataModule.ds_Metal.Filtered := False;
-       DataModule.ds_Metal.FilterOptions :=[foCaseInsensitive];
-       DataModule.ds_Metal.Filter := 'TM_NAME LIKE ' + QuotedStr('%' + Trim(eFilter.Text) + '%');// +
-                           //' OR U_NOMERZAK LIKE ' + QuotedStr('%' + Trim(eFilter.Text) + '%'); //+
-                          // ' OR U_INV LIKE ' + QuotedStr('%' + Trim(eFilter.Text) + '%') ;
-       DataModule.ds_Metal.Filtered := True;
-
-     end;
-
-   if Length(Trim(eFilter.Text)) = 0 then
-      begin
-        eFilter.Clear;
-        DataModule.ds_Metal.Filtered := False;
-        DataModule.ds_SERV_S.ReopenLocate('SVS_NAME');
-      end;
-end;
+Begin
+  eFilterT_Metal(eFilter.Text);
+End;
+// var
+// filterText:string;
+// begin
+// if (Length(Trim(eFilter.Text)) > 0) and (eFilter.Text <> filterText) then
+// begin
+// DataModule.ds_Metal.Filtered := False;
+// DataModule.ds_Metal.FilterOptions :=[foCaseInsensitive];
+// DataModule.ds_Metal.Filter := 'TM_NAME LIKE ' + QuotedStr('%' + Trim(eFilter.Text) + '%');// +
+// DataModule.ds_Metal.Filtered := True;
+//
+// end;
+//
+// if Length(Trim(eFilter.Text)) = 0 then
+// begin
+// eFilter.Clear;
+// DataModule.ds_Metal.Filtered := False;
+// DataModule.ds_SERV_S.ReopenLocate('SVS_NAME');
+// end;
+// end;
 
 procedure TFormEdit_S.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-DataModule.DS_SUP_First.ReopenLocate('DOG_DATE');
-DataModule.ds_Detail.ReopenLocate('SVS_ID');
-DataModule.ds_Metal.Close;
-DataModule.DS_SERV_S.Close;
+  DataModule.DS_SUP_First.ReopenLocate('DOG_DATE');
+  DataModule.ds_Detail.ReopenLocate('SVS_ID');
+  DataModule.ds_Metal.Close;
+  DataModule.ds_SERV_S.Close;
 
 end;
 
 procedure TFormEdit_S.FormShow(Sender: TObject);
 begin
-{if UserRight = 1 then
- Begin
-  DBLookupComboBox1.Enabled := False;
-  DBLookupComboBox4.Enabled := False;
-  Edit2.Enabled :=False;
-  cxButtonEdit4.Enabled :=False;
-  eDateBegin.Enabled :=False;
- End; }
+  { if UserRight = 1 then
+    Begin
+    DBLookupComboBox1.Enabled := False;
+    DBLookupComboBox4.Enabled := False;
+    Edit2.Enabled :=False;
+    cxButtonEdit4.Enabled :=False;
+    eDateBegin.Enabled :=False;
+    End; }
 
   DataModule.DS_SUP_First.Open;
-  //DataModule.ds_First.Edit;
-  Edit2.Text:=DataModule.DS_SUP_First.FieldByName('DOG_NUMBER').AsString; //номер договора
-  eDateBegin.date:=DataModule.DS_SUP_First.FieldByName('DOG_DATE').AsDateTime; //дата
-  Edit10.Text:=DataModule.DS_SUP_First.FieldByName('DOG_PRIM').AsString; //примечание
+  // DataModule.ds_First.Edit;
+  Edit2.Text := DataModule.DS_SUP_First.FieldByName('DOG_NUMBER').AsString;
+  // номер договора
+  eDateBegin.date := DataModule.DS_SUP_First.FieldByName('DOG_DATE').AsDateTime;
+  // дата
+  Edit10.Text := DataModule.DS_SUP_First.FieldByName('DOG_PRIM').AsString;
+  // примечание
 
   DataModule.ds_SERV_S.Close;
-  DataModule.ds_SERV_S.ParamByName('Perem1').Value:=DataModule.DS_SUP_First.FieldByName('DOG_ID').AsInteger;
+  DataModule.ds_SERV_S.ParamByName('Perem1').Value :=
+    DataModule.DS_SUP_First.FieldByName('DOG_ID').AsInteger;
   DataModule.ds_SERV_S.Open;
   DataModule.ds_Metal.Open;
 
@@ -200,23 +209,24 @@ end;
 
 procedure TFormEdit_S.RzBitBtn1Click(Sender: TObject);
 begin
- eFilter.Clear;
- DataModule.ds_Metal.Filtered := False;
+  eFilter.Clear;
+  DataModule.ds_Metal.Filtered := False;
 end;
 
 procedure TFormEdit_S.RzBitBtn2Click(Sender: TObject);
 begin
- DataModule.DS_SERV_S.Delete;
+  DataModule.ds_SERV_S.Delete;
 end;
 
 procedure TFormEdit_S.SaveButtonClick(Sender: TObject);
 begin
-DataModule.DS_SUP_First.Edit;
-DataModule.DS_SUP_First.FieldByName('DOG_NUMBER').AsString := Trim(Edit2.Text);
-DataModule.DS_SUP_First.FieldByName('DOG_DATE').AsDateTime := eDateBegin.Date;
-DataModule.DS_SUP_First.FieldByName('DOG_PRIM').AsString := Trim(Edit10.Text);
-DataModule.DS_SUP_First.Post;
-DataModule.DS_SUP_First.ReopenLocate('DOG_ID');
+  DataModule.DS_SUP_First.Edit;
+  DataModule.DS_SUP_First.FieldByName('DOG_NUMBER').AsString :=
+    Trim(Edit2.Text);
+  DataModule.DS_SUP_First.FieldByName('DOG_DATE').AsDateTime := eDateBegin.date;
+  DataModule.DS_SUP_First.FieldByName('DOG_PRIM').AsString := Trim(Edit10.Text);
+  DataModule.DS_SUP_First.Post;
+  DataModule.DS_SUP_First.ReopenLocate('DOG_ID');
 end;
 
 end.

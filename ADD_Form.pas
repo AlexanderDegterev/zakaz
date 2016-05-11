@@ -15,7 +15,7 @@ type
     SaveButton: TButton;
     CloseButton: TButton;
     DBLookupComboBox1: TDBLookupComboBox;
-    Edit2: TEdit;
+    EditNumberZakaz: TEdit;
     cxButtonEdit4: TcxButtonEdit;
     cxButtonEdit3: TcxButtonEdit;
     Edit1: TEdit;
@@ -87,7 +87,6 @@ type
     procedure RzDelBtnClick(Sender: TObject);
     procedure RzAddBtnClick(Sender: TObject);
 
-
   private
     { Private declarations }
   public
@@ -99,220 +98,250 @@ var
 
 implementation
 
+//function DataComplite: boolean;
+//begin
+//  {функция возвратит true, если заполнены все необходимые данные}
+//  Result:=(Trim(EditNumberZakaz.Text)<>'') //введен номер заказа
+////          (Trim(edFName.Text)<>'') and //введено имя
+////          (Trim(edLName.Text)<>'') and //введено отчество
+////          (StrToDateDef(edBirthday.Text,0)<>0) and //введена дата рождения
+////          (rgEducation.ItemIndex<>-1); //выбрано образование
+//end;
+
+
 uses Object_Form, Izdelie, Material_Form;
 
 {$R *.dfm}
 
+
+
+
 // функция возвращает название файла без расширения
 function ExtractOnlyFileName(const FileName: string): string;
 
- begin
+begin
 
-   result:=StringReplace(ExtractFileName(FileName),ExtractFileExt(FileName),'',[]);
+  result := StringReplace(ExtractFileName(FileName),
+    ExtractFileExt(FileName), '', []);
 
- end;
+end;
 
 procedure TFormAdd.CloseButtonClick(Sender: TObject);
 begin
- DataModule.DS_T_Users.Filtered := False;
- DataModule.DS_T_USERS.ReopenLocate('U_ID');
- modalResult := mrOk;
+  DataModule.DS_T_Users.Filtered := False;
+  DataModule.DS_T_Users.ReopenLocate('U_ID');
+  modalResult := mrOk;
 end;
-
 
 procedure TFormAdd.cxButtonEdit4KeyPress(Sender: TObject; var Key: Char);
 begin
-if key =#13 then
-begin
-  Application.CreateForm(TObj, Obj);
- //Obj.Showmodal;
-  try
-   Obj := TObj.Create(self);
-    if (Obj.showModal = mrOk) then
-     begin
-      FormAdd.cxButtonEdit3.Text := DataModule.ds_Object.FieldByName('OB_ID').AsString;
-      FormAdd.cxButtonEdit4.Text := DataModule.ds_Object.FieldByName('OB_NAME').AsString;
-      //edit1.text := form1.dataset1.....;
-      //...
-     end;
+  if Key = #13 then
+  begin
+    Application.CreateForm(TObj, Obj);
+    // Obj.Showmodal;
+    try
+      Obj := TObj.Create(self);
+      if (Obj.showModal = mrOk) then
+      begin
+        FormAdd.cxButtonEdit3.Text := DataModule.ds_Object.FieldByName
+          ('OB_ID').AsString;
+        FormAdd.cxButtonEdit4.Text := DataModule.ds_Object.FieldByName
+          ('OB_NAME').AsString;
+        // edit1.text := form1.dataset1.....;
+        // ...
+      end;
     finally
-    DataModule.ds_Object.Filtered := False;
-    Obj.free;
-end;
-end;
+      DataModule.ds_Object.Filtered := False;
+      Obj.free;
+    end;
+  end;
 end;
 
 procedure TFormAdd.cxButtonEdit4PropertiesButtonClick(Sender: TObject;
   AButtonIndex: Integer);
 begin
- Application.CreateForm(TObj, Obj);
- //Obj.Showmodal;
+  Application.CreateForm(TObj, Obj);
+  // Obj.Showmodal;
   try
-   Obj := TObj.Create(self);
+    Obj := TObj.Create(self);
     if (Obj.showModal = mrOk) then
-     begin
-      FormAdd.cxButtonEdit3.Text := DataModule.ds_Object.FieldByName('OB_ID').AsString;
-      FormAdd.cxButtonEdit4.Text := DataModule.ds_Object.FieldByName('OB_NAME').AsString;
-      //edit1.text := form1.dataset1.....;
-      //...
-     end;
-    finally
+    begin
+      FormAdd.cxButtonEdit3.Text := DataModule.ds_Object.FieldByName
+        ('OB_ID').AsString;
+      FormAdd.cxButtonEdit4.Text := DataModule.ds_Object.FieldByName
+        ('OB_NAME').AsString;
+      // edit1.text := form1.dataset1.....;
+      // ...
+    end;
+  finally
     DataModule.ds_Object.Filtered := False;
     Obj.free;
-end;
+  end;
 end;
 
 procedure TFormAdd.EbitMatButtonClick(Sender: TObject);
 begin
- Application.CreateForm(TMaterial, Material);
+  Application.CreateForm(TMaterial, Material);
   try
-   Material:=TMaterial.Create(self);
-   if (Material.ShowModal = mrOk) then
+    Material := TMaterial.Create(self);
+    if (Material.showModal = mrOk) then
     begin
-      FormAdd.Edit4.Text:=DataModule.DS_T_Users.FieldByName('U_MET').AsString;
+      FormAdd.Edit4.Text := DataModule.DS_T_Users.FieldByName('U_MET').AsString;
     end;
 
   finally
-  Material.Free;
+    Material.free;
 
   end;
 end;
 
 procedure TFormAdd.EditButtonClick(Sender: TObject);
 begin
- Application.CreateForm(TIzdelieForm, IzdelieForm);
+  Application.CreateForm(TIzdelieForm, IzdelieForm);
   try
-   IzdelieForm:=TIzdelieForm.Create(self);
-   if (IzdelieForm.ShowModal = mrOk) then
+    IzdelieForm := TIzdelieForm.Create(self);
+    if (IzdelieForm.showModal = mrOk) then
     begin
-      FormADD.Edit7.Text:=DataModule.DS_T_Users.FieldByName('U_CERT').AsString;
-      ComboBox1.Text:=DataModule.DS_T_USERS.FieldByName('U_NASED').AsString;
+      FormAdd.Edit7.Text := DataModule.DS_T_Users.FieldByName('U_CERT')
+        .AsString;
+      ComboBox1.Text := DataModule.DS_T_Users.FieldByName('U_NASED').AsString;
     end;
 
   finally
-  IzdelieForm.Free;
+    IzdelieForm.free;
 
   end;
 end;
 
 procedure TFormAdd.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
- DataModule.DS_T_USERS.ReopenLocate('U_ID');
- //DataModule.DS_T_Users.Close;
- //DataModule.DS_T_Users.Open;
+  DataModule.DS_T_Users.ReopenLocate('U_ID');
+  // DataModule.DS_T_Users.Close;
+  // DataModule.DS_T_Users.Open;
 end;
 
 procedure TFormAdd.FormShow(Sender: TObject);
 begin
   DBLookupComboBox2.KeyValue := -1;
-  eDateBegin.Date:=Date;
+  eDateBegin.Date := Date;
   DataModule.DS_T_Users.Insert;
   DataModule.ds_Files.Close;
-  DataModule.ds_Files.ParamByName('Perem').Value:=DataModule.DS_T_USERS.FieldByName('U_ID').AsInteger;
+  DataModule.ds_Files.ParamByName('Perem').Value :=
+    DataModule.DS_T_Users.FieldByName('U_ID').AsInteger;
   DataModule.ds_Files.Open;
 end;
 
 procedure TFormAdd.RzAddBtnClick(Sender: TObject);
 var
   blob: TStream;
-  nameFile,MyDIR:String;
+  nameFile, MyDIR: String;
 begin
-      //получить путь запущенного приложения
-      MyDIR:=ExtractFileDir(Application.ExeName);
-      Label15.Caption:='Путь к файлу: '+MyDIR+'\temp\';
-      //сохранение файла на диск из BLOB поля
-      blob :=DataModule.ds_Files.CreateBlobStream(DataModule.ds_Files.FieldByName('T_BLOB'), bmRead);
-      nameFile :=DataModule.ds_Files.FieldByName('T_NAME').AsString;
+  // получить путь запущенного приложения
+  MyDIR := ExtractFileDir(Application.ExeName);
+  Label15.Caption := 'Путь к файлу: ' + MyDIR + '\temp\';
+  // сохранение файла на диск из BLOB поля
+  blob := DataModule.ds_Files.CreateBlobStream
+    (DataModule.ds_Files.FieldByName('T_BLOB'), bmRead);
+  nameFile := DataModule.ds_Files.FieldByName('T_NAME').AsString;
+  try
+    blob.Seek(0, soFromBeginning);
+    with TFileStream.Create(MyDIR + '\temp\' + nameFile + '.jpg', fmCreate) do
       try
-        blob.Seek(0, soFromBeginning);
-        with TFileStream.Create(MyDIR+'\temp\'+nameFile+'.jpg', fmCreate) do
-          try
-            CopyFrom(blob, blob.Size)
-          finally
-          Free
-        end;
-    finally
-       blob.Free
+        CopyFrom(blob, blob.Size)
+      finally
+        free
+      end;
+  finally
+    blob.free
   end;
-  //открытие сохраненного на диске файла
-  ShellExecute(Self.Handle, 'open', PChar(MyDIR+'\temp\'+nameFile+'.jpg'), nil, nil, SW_SHOWNORMAL);
+  // открытие сохраненного на диске файла
+  ShellExecute(self.Handle, 'open', PChar(MyDIR + '\temp\' + nameFile + '.jpg'),
+    nil, nil, SW_SHOWNORMAL);
 end;
 
 procedure TFormAdd.RzDelBtnClick(Sender: TObject);
 begin
-  if MessageDlg('Вы действительно хотите удалить?',
-            mtConfirmation, [mbYes, mbNo], 0) = mrNo
-            then exit;
-     DataModule.ds_Files.Delete;
+  if MessageDlg('Вы действительно хотите удалить?', mtConfirmation,
+    [mbYes, mbNo], 0) = mrNo then
+    exit;
+  DataModule.ds_Files.Delete;
 end;
 
 procedure TFormAdd.RzLoadBtnClick(Sender: TObject);
 var
-blob: TStream;
-fs : TFileStream;
-link,nameFile : String;
+  blob: TStream;
+  fs: TFileStream;
+  link, nameFile: String;
 begin
-  DataModule.ds_Files.insert;
-  DataModule.ds_Files.FieldByName('T_UID').AsInteger:=DataModule.DS_T_Users.FieldByName('U_ID').AsInteger;
+  DataModule.ds_Files.Insert;
+  DataModule.ds_Files.FieldByName('T_UID').AsInteger :=
+    DataModule.DS_T_Users.FieldByName('U_ID').AsInteger;
   if OpenFRDialog.Execute then
-      begin
-        link:=( OpenFRDialog.FileName );
-        nameFile:=ExtractOnlyFileName(link);
-        Label1.Caption:=nameFile;
+  begin
+    link := (OpenFRDialog.FileName);
+    nameFile := ExtractOnlyFileName(link);
+    Label1.Caption := nameFile;
 
-        // Запись в BLOB-поле
-        blob := DataModule.ds_Files.CreateBlobStream(DataModule.ds_Files.FieldByName('T_BLOB'), bmWrite);
-          try
-            blob.Seek(0, soFromBeginning);
-            fs := TFileStream.Create(link{'c:\your_name.fr3'}, fmOpenRead or
-              fmShareDenyWrite);
-            try
-              DataModule.ds_Files.FieldByName('T_NAME').AsString := nameFile;
-              blob.CopyFrom(fs, fs.Size)
-            finally
-              fs.Free
-            end;
-          finally
-            blob.Free;
-            DataModule.ds_Files.post;
-          end;
-        // Конец записи в BLOB-поле
-      end
-      else
-       Begin
-       DataModule.ds_Files.ReopenLocate('T_ID');
-       ShowMessage('Файл не выбран!');
-       End;
-       end;
-
+    // Запись в BLOB-поле
+    blob := DataModule.ds_Files.CreateBlobStream
+      (DataModule.ds_Files.FieldByName('T_BLOB'), bmWrite);
+    try
+      blob.Seek(0, soFromBeginning);
+      fs := TFileStream.Create(link { 'c:\your_name.fr3' } ,
+        fmOpenRead or fmShareDenyWrite);
+      try
+        DataModule.ds_Files.FieldByName('T_NAME').AsString := nameFile;
+        blob.CopyFrom(fs, fs.Size)
+      finally
+        fs.free
+      end;
+    finally
+      blob.free;
+      DataModule.ds_Files.post;
+    end;
+    // Конец записи в BLOB-поле
+  end
+  else
+  Begin
+    DataModule.ds_Files.ReopenLocate('T_ID');
+    ShowMessage('Файл не выбран!');
+  End;
+end;
 
 procedure TFormAdd.SaveButtonClick(Sender: TObject);
-begin
+label GoToInsertT_Users;
+begin   // ОШИБКА ЛИГИКИ !!!
+  {функция возвратит true, если заполнены все необходимые данные}
+  if (Trim(EditNumberZakaz.Text) = '') then
+    Begin
+      if MessageDlg('Не введен номер заказа!, продолжить?',
+               mtWarning, [mbYes, mbNo], 0) = mrNo then Exit
+      else
+          GoTo GoToInsertT_Users;
+    end;
 
-  //DataModule.DS_T_USERS.Insert;
-  DataModule.DS_T_USERS.FieldByName('U_NOMERZAK').AsString := Trim(Edit2.Text);
-  DataModule.DS_T_USERS.FieldByName('U_OBJECT').AsString :=cxButtonEdit3.Text;
-  DataModule.DS_T_USERS.FieldByName('U_DATEBEG').AsDateTime := eDateBegin.Date;
-  //DataModule.DS_T_USERS.FieldByName('U_DATESTART').AsDateTime := eDateStart.Date;
-  //DataModule.DS_T_USERS.FieldByName('U_DATEEND').AsDateTime := eDateEnd.Date;
-  DataModule.DS_T_USERS.FieldByName('U_DATESTART').AsVariant := cxDateStart.EditValue;
-  DataModule.DS_T_USERS.FieldByName('U_DATEEND').AsVariant := cxDateEnd.EditValue;
-  DataModule.DS_T_USERS.FieldByName('U_NASED').AsString := ComboBox1.Text;
-  //DataModule.DS_T_USERS.FieldByName('U_CERT').AsString := Trim(Edit7.Text);
-  DataModule.DS_T_USERS.FieldByName('U_PRIM').AsString := Trim(Edit10.Text);
-  DataModule.DS_T_USERS.Post;
-  EbitMatButton.Enabled:=true;
-  EditButton.Enabled:=true;
-  GroupBox13.Enabled:=true;
-  //Close;
-  end;
+      GoToInsertT_Users:
+      try
+        // DataModule.DS_T_USERS.Insert;
+        DataModule.DS_T_Users.FieldByName('U_NOMERZAK').AsString := Trim(EditNumberZakaz.Text);
+        DataModule.DS_T_Users.FieldByName('U_OBJECT').AsString := cxButtonEdit3.Text;
+        DataModule.DS_T_Users.FieldByName('U_DATEBEG').AsDateTime := eDateBegin.Date;
+        // DataModule.DS_T_USERS.FieldByName('U_DATESTART').AsDateTime := eDateStart.Date;
+        // DataModule.DS_T_USERS.FieldByName('U_DATEEND').AsDateTime := eDateEnd.Date;
+        DataModule.DS_T_Users.FieldByName('U_DATESTART').AsVariant :=
+          cxDateStart.EditValue;
+        DataModule.DS_T_Users.FieldByName('U_DATEEND').AsVariant :=
+          cxDateEnd.EditValue;
+        DataModule.DS_T_Users.FieldByName('U_NASED').AsString := ComboBox1.Text;
+        // DataModule.DS_T_USERS.FieldByName('U_CERT').AsString := Trim(Edit7.Text);
+        DataModule.DS_T_Users.FieldByName('U_PRIM').AsString := Trim(Edit10.Text);
+        DataModule.DS_T_Users.post;
+        EbitMatButton.Enabled := true;
+        EditButton.Enabled := true;
+        GroupBox13.Enabled := true;
+      except
+        raise Exception.Create('Ошибка вставки данных!');
+    end;
+end;
 
-
-
-end.   // последний end
-
-
-
-
-
-
+end. // последний end

@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, Buttons, Grids, DBGrids, DataBaseConnection,
-  DataModuleForm, BTS_Office_form, {EditForm,} IdHash{, IdHashMessageDigest},IniFiles;
+  DataModuleForm, BTS_Office_form, {EditForm,} IdHash {, IdHashMessageDigest} ,
+  IniFiles;
 
 type
   Tregistration = class(TForm)
@@ -28,42 +29,42 @@ type
     { Private declarations }
   public
     { Public declarations }
-    class function Execute : boolean;
-    function md5(s: string) : string;
+    class function Execute: boolean;
+    function md5(s: string): string;
   end;
 
-
 implementation
+
 uses IdHashMessageDigest;
 {$R *.dfm}
 
-class function TRegistration.Execute : Boolean;
+class function Tregistration.Execute: boolean;
 begin
-  //try DataModule.DB.Connected:=true;
-    with TRegistration.Create(nil) do
-  try
-    //flConnect := True; //напрмер, если уже во время работы с программой просто нужно поменять пользователя, не переподключаясь к базе
-    Result := ShowModal = mrOk;
-  finally
-    Free;
-  end;
-  
+  // try DataModule.DB.Connected:=true;
+  with Tregistration.Create(nil) do
+    try
+      // flConnect := True; //напрмер, если уже во время работы с программой просто нужно поменять пользователя, не переподключаясь к базе
+      Result := ShowModal = mrOk;
+    finally
+      Free;
+    end;
 
-  end;
+end;
 
-//end;
+// end;
 
 // ФУНКЦИЯ MD5HASH
-function  TRegistration.md5(S:string):String;
+function Tregistration.md5(s: string): String;
 begin
-  Result:='';
+  Result := '';
   with TIdHashMessageDigest.Create do
-   try
-     Result:=LowerCase(HashStringAsHex(s));//AnsiLowerCase(AsHex(HashValue(s)));
-   finally
-     Free;
+    try
+      Result := LowerCase(HashStringAsHex(s));
+      // AnsiLowerCase(AsHex(HashValue(s)));
+    finally
+      Free;
 
-   end;
+    end;
 end;
 
 // КОНЕЦ ФУНКЦИИ MD5HASH
@@ -71,113 +72,115 @@ end;
 // ini
 procedure read_ini;
 var
- ini:TIniFile;
- UserId:integer;
- Host,Db:string;
+  ini: TIniFile;
+  UserId: integer;
+  Host, Db: string;
 begin
-  DataModule.DB.Connected := False;
-  ini:=TIniFile.Create(ExtractFileDir(Application.ExeName)+ '\' + 'zakaz.ini' );
-  host:=ini.ReadString('Login', 'Host', '192.168.93.98');
-  Db:=ini.ReadString('Login', 'Database', '0');
-  UserID:=ini.ReadInteger('ConnectDB', 'UserId', 0);
+  DataModule.Db.Connected := False;
+  ini := TIniFile.Create(ExtractFileDir(Application.ExeName) + '\' +
+    'zakaz.ini');
+  Host := ini.ReadString('Login', 'Host', '192.168.93.98');
+  Db := ini.ReadString('Login', 'Database', '0');
+  UserId := ini.ReadInteger('ConnectDB', 'UserId', 0);
   ini.Free;
 
-try
-  DataModule.DB.DBName := host + ':' + Db;
-  DataModule.DB.Connected := True;
+  try
+    DataModule.Db.DBName := Host + ':' + Db;
+    DataModule.Db.Connected := True;
 
   except
-  MessageDlg('Подключение к базе данных отсутствует!', mtInformation, [mbOk], 0);
-  Application.Terminate;
-  Exit;
-end;
+    MessageDlg('Подключение к базе данных отсутствует!', mtInformation,
+      [mbOk], 0);
+    Application.Terminate;
+    Exit;
+  end;
 
-  if DataModule.DB.Connected then
-     Begin
-  DataModule.DS_T_USERS.Active := True;
-  DataModule.ds_Clients.Active := True;
-  DataModule.ds_ProdGroup.Active := True;
-  DataModule.ds_Object.Active := True;
-  DataModule.ds_ObjectName.Active := True;
-  DataModule.ds_product.Active := True;
-  DataModule.ds_SERV.Active := True;
-  DataModule.ds_SERV_M.Active := True;
-  DataModule.ds_Files.Active := True;
-  DataModule.ds_Metal.Active := True;
-  DataModule.DS_Division.Active := True;
-  DataModule.ds_Proffesionals.Active := True;
-  DataModule.DS_USERS.Active := True;
-  DataModule.ds_Template.Active := True;
-  DataModule.ds_QuantityProd.Active := True;
-  DataModule.ds_USER_DEL.Active := True;
-  DataModule.ds_OTD.Active := True;
-//  DataModule.DS_T_USERS.Refresh;
-//  DataModule.DS_T_USERS.ReopenLocate('U_ID');
-  DataModule.DS_USERS.Locate('id', UserId, []);
-     End;
-{except
-  MessageDlg('Подключение к базе данных отсутствует!', mtInformation, [mbOk], 0);
-  //ShowMessage('Подключение к базе данных отсутствует!');
-  Exit;
-end;}
+  if DataModule.Db.Connected then
+  Begin
+    DataModule.DS_T_USERS.Active := True;
+    DataModule.ds_Clients.Active := True;
+    DataModule.ds_ProdGroup.Active := True;
+    DataModule.ds_Object.Active := True;
+    DataModule.ds_ObjectName.Active := True;
+    DataModule.ds_product.Active := True;
+    DataModule.ds_SERV.Active := True;
+    DataModule.ds_SERV_M.Active := True;
+    DataModule.ds_Files.Active := True;
+    DataModule.ds_Metal.Active := True;
+    DataModule.DS_Division.Active := True;
+    DataModule.ds_Proffesionals.Active := True;
+    DataModule.DS_USERS.Active := True;
+    DataModule.ds_Template.Active := True;
+    DataModule.ds_QuantityProd.Active := True;
+    DataModule.ds_USER_DEL.Active := True;
+    DataModule.ds_OTD.Active := True;
+    // DataModule.DS_T_USERS.Refresh;
+    // DataModule.DS_T_USERS.ReopenLocate('U_ID');
+    DataModule.DS_USERS.Locate('id', UserId, []);
+  End;
+  { except
+    MessageDlg('Подключение к базе данных отсутствует!', mtInformation, [mbOk], 0);
+    //ShowMessage('Подключение к базе данных отсутствует!');
+    Exit;
+    end; }
 
 end;
 // конец Ini
 
 procedure Tregistration.FormShow(Sender: TObject);
-//var ind1:integer;
+// var ind1:integer;
 begin
-   DataModule := TDataModule.Create(nil);
-   Read_ini;
-   {if DataModule.DB.Connected then
-     Begin
-     ind1:=4;    // Иванова
-     //DataModule.DS_USERS.Locate('id', UserId, []);
-     //ShowMessage('подключение к БД Оk');
-     End
-   else
-     Begin
-   ShowMessage('Ошибка подключения к БД');
-   DataBase:= TDataBase.Create(nil);
-   DataBase.ShowModal;}
-   //try
+  DataModule := TDataModule.Create(nil);
+  read_ini;
+  { if DataModule.DB.Connected then
+    Begin
+    ind1:=4;    // Иванова
+    //DataModule.DS_USERS.Locate('id', UserId, []);
+    //ShowMessage('подключение к БД Оk');
+    End
+    else
+    Begin
+    ShowMessage('Ошибка подключения к БД');
+    DataBase:= TDataBase.Create(nil);
+    DataBase.ShowModal; }
+  // try
   // DataModule.DB.Connected := true;
-   //except
+  // except
 
-   //end;
+  // end;
 
-   //end;
+  // end;
 
 end;
 
 procedure Tregistration.Cancel_ButtonClick(Sender: TObject);
 begin
- //Close;
- modalResult := mrCancel;
+  // Close;
+  modalResult := mrCancel;
 end;
-
-
 
 procedure Tregistration.Edit1KeyPress(Sender: TObject; var Key: Char);
 begin
-if key = #13 then // если нажата клавиша <Enter>
-  Ok_ButtonClick(Self); //вызываем процедуру Ok_ButtonClick
+  if Key = #13 then // если нажата клавиша <Enter>
+    Ok_ButtonClick(Self); // вызываем процедуру Ok_ButtonClick
 end;
 
 procedure Tregistration.Ok_ButtonClick(Sender: TObject);
 begin
- if(DataModule.DS_USERS.FieldByFieldNo(3).asString = Edit1.Text) then  //FieldByFieldNo(3)FieldByName('PWD')
- begin
-  UserIDGlobal:= DataModule.DS_USERS.FieldByName('ID').asInteger;
-  UserRight := DataModule.DS_USERS.FieldByFieldNo(4).asInteger; // 1 - пользователь; 0 - администратор
-  UserName := DataModule.DS_USERS.FieldByFieldNo(2).asString;
-  modalResult := mrOk;
- end
+  if (DataModule.DS_USERS.FieldByFieldNo(3).asString = Edit1.Text) then
+  // FieldByFieldNo(3)FieldByName('PWD')
+  begin
+    UserIDGlobal := DataModule.DS_USERS.FieldByName('ID').asInteger;
+    UserRight := DataModule.DS_USERS.FieldByFieldNo(4).asInteger;
+    // 1 - пользователь; 0 - администратор
+    UserName := DataModule.DS_USERS.FieldByFieldNo(2).asString;
+    modalResult := mrOk;
+  end
 
- else
- //modalResult := mrCancel;
- //ShowMessage('Ошибка'+#13#10+'          Нажмите Ок')
-  Application.messageBox('неверный пароль', 'Ошибка!', MB_ICONERROR);
+  else
+    // modalResult := mrCancel;
+    // ShowMessage('Ошибка'+#13#10+'          Нажмите Ок')
+    Application.messageBox('неверный пароль', 'Ошибка!', MB_ICONERROR);
   Edit1.Clear;
   Exit;
 end;

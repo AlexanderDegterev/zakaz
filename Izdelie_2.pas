@@ -79,215 +79,231 @@ uses DataModuleForm, BTS_Office_form, Add_Product_Form, ADD_ProdGroup_Form,
 procedure TIzdelie2.BitBtn1Click(Sender: TObject);
 begin
   DataModule.ds_SERV.Edit;
-  DataModule.ds_SERV.FieldByName('SV_READY').AsString:=DataModule.ds_SERV.FieldByName('SV_OLDREADY').AsString;
+  DataModule.ds_SERV.FieldByName('SV_READY').AsString :=
+    DataModule.ds_SERV.FieldByName('SV_OLDREADY').AsString;
   DataModule.ds_SERV.Post;
 end;
 
 procedure TIzdelie2.ButtonDelClick(Sender: TObject);
 begin
- DataModule.ds_SERV.Delete;
- DataModule.ds_SERV.ReopenLocate('SV_UID');
+  DataModule.ds_SERV.Delete;
+  DataModule.ds_SERV.ReopenLocate('SV_UID');
 end;
 
 procedure TIzdelie2.cxGrid2DBTableView1DblClick(Sender: TObject);
 var
-QuantityProd, SV_ID, SV_COUNT, TP_ID, TP_PGID :integer;
-TP_NAME, TP_UNITM, TP_GOST :STRING;
+  QuantityProd, SV_ID, SV_COUNT, TP_ID, TP_PGID: integer;
+  TP_NAME, TP_UNITM, TP_GOST: STRING;
 begin
-  TP_ID:=DataModule.ds_product.FieldByName('TP_ID').AsInteger;
-  TP_UNITM:=DataModule.ds_product.FieldByName('TP_UNITM').AsString;
+  TP_ID := DataModule.ds_product.FieldByName('TP_ID').AsInteger;
+  TP_UNITM := DataModule.ds_product.FieldByName('TP_UNITM').AsString;
 
-  SV_COUNT:=0;
+  SV_COUNT := 0;
   //
   // Переделка через FIBQuery (Кол-во продукции)
-  DataModule.Query_QuantityProd.ParamByName('Perem1').Value:=DataModule.ds_product.FieldByName('TP_ID').AsInteger;
-  DataModule.Query_QuantityProd.ParamByName('Perem2').Value:=TRIM(Edit1.Text);
-  //DataModule.Query_QuantityProd.Transaction.StartTransaction;
+  DataModule.Query_QuantityProd.ParamByName('Perem1').Value :=
+    DataModule.ds_product.FieldByName('TP_ID').AsInteger;
+  DataModule.Query_QuantityProd.ParamByName('Perem2').Value := TRIM(Edit1.Text);
+  // DataModule.Query_QuantityProd.Transaction.StartTransaction;
   DataModule.Query_QuantityProd.ExecQuery;
-  //DataModule.Query_QuantityProd.Transaction.Commit;
+  // DataModule.Query_QuantityProd.Transaction.Commit;
 
-  SV_ID:=DataModule.Query_QuantityProd.FieldByName('SV_ID').AsInteger;
-  SV_COUNT:=DataModule.Query_QuantityProd.FieldByName('SV_COUNT').AsInteger;
-  //ShowMessage('Найдено: '+intToStr(SV_COUNT)+'          Нажмите Ок'+intToStr(SV_ID));
+  SV_ID := DataModule.Query_QuantityProd.FieldByName('SV_ID').AsInteger;
+  SV_COUNT := DataModule.Query_QuantityProd.FieldByName('SV_COUNT').AsInteger;
+  // ShowMessage('Найдено: '+intToStr(SV_COUNT)+'          Нажмите Ок'+intToStr(SV_ID));
 
   //
 
-  if SV_COUNT>=1 then
-   begin
+  if SV_COUNT >= 1 then
+  begin
 
-     // UpDate через Query
-     DataModule.ds_SERV.Open;
-     DataModule.ds_SERV.Edit;
-     DataModule.QueryUpDate.ParamByName('Perem1').Value:=SV_COUNT + 1;
-     DataModule.QueryUpDate.ParamByName('Perem2').Value:=SV_ID;
-     //ShowMessage('Присвоили переменные QueryUpDate '+intToStr(QuantityProd)+'SV_COUNT:'+intToStr(SV_COUNT)+'          Нажмите Ок');
-     DataModule.QueryUpDate.ExecQuery;
+    // UpDate через Query
+    DataModule.ds_SERV.Open;
+    DataModule.ds_SERV.Edit;
+    DataModule.QueryUpDate.ParamByName('Perem1').Value := SV_COUNT + 1;
+    DataModule.QueryUpDate.ParamByName('Perem2').Value := SV_ID;
+    // ShowMessage('Присвоили переменные QueryUpDate '+intToStr(QuantityProd)+'SV_COUNT:'+intToStr(SV_COUNT)+'          Нажмите Ок');
+    DataModule.QueryUpDate.ExecQuery;
 
-     // Отключил для проверки тормозов
-     //eFilter.Clear;                             // на скорость не влияет
+    // Отключил для проверки тормозов
+    // eFilter.Clear;                             // на скорость не влияет
 
-     // Внимательно проверить 16,09,2013
+    // Внимательно проверить 16,09,2013
 
-     //DataModule.ds_ProdGroup.Close;
-     //DataModule.ds_ProdGroup.Open;
-     DataModule.ds_SERV.ReopenLocate('SV_UID'); // на скорость не влияет
-     //DataModule.ds_SERV.Close;
-     //DataModule.ds_SERV.Open;
-     //ShowMessage('Добавили !');
+    // DataModule.ds_ProdGroup.Close;
+    // DataModule.ds_ProdGroup.Open;
+    DataModule.ds_SERV.ReopenLocate('SV_UID'); // на скорость не влияет
+    // DataModule.ds_SERV.Close;
+    // DataModule.ds_SERV.Open;
+    // ShowMessage('Добавили !');
 
-   end
+  end
 
   else
   Begin
 
-  //ShowMessage('STOP');
-  DataModule.ds_SERV.Open;
-  DataModule.ds_SERV.Insert;
-  DataModule.ds_SERV.FieldByName('SV_UID').AsInteger :=strToInt(Trim(Edit1.Text));
-  DataModule.ds_SERV.FieldByName('SV_TPID').AsInteger :=TP_ID;
-  DataModule.ds_SERV.FieldByName('SV_COUNT').AsString :='1';
-  DataModule.ds_SERV.FieldByName('SV_UNITM').AsString :=TP_UNITM;
-  DataModule.ds_SERV.Post;
+    // ShowMessage('STOP');
+    DataModule.ds_SERV.Open;
+    DataModule.ds_SERV.Insert;
+    DataModule.ds_SERV.FieldByName('SV_UID').AsInteger :=
+      strToInt(TRIM(Edit1.Text));
+    DataModule.ds_SERV.FieldByName('SV_TPID').AsInteger := TP_ID;
+    DataModule.ds_SERV.FieldByName('SV_COUNT').AsString := '1';
+    DataModule.ds_SERV.FieldByName('SV_UNITM').AsString := TP_UNITM;
+    DataModule.ds_SERV.Post;
 
-       // Отключил для проверки тормозов
-  //eFilter.Clear;
-  //DataModule.ds_ProdGroup.Close;
-  //DataModule.ds_ProdGroup.Open;
-  DataModule.ds_SERV.ReopenLocate('SV_UID');
+    // Отключил для проверки тормозов
+    // eFilter.Clear;
+    // DataModule.ds_ProdGroup.Close;
+    // DataModule.ds_ProdGroup.Open;
+    DataModule.ds_SERV.ReopenLocate('SV_UID');
   End;
 end;
 
 procedure TIzdelie2.eFilterChange(Sender: TObject);
 var
-  filterText:string;
+  filterText: string;
 begin
-   if (Length(Trim(eFilter.Text)) > 0) and (eFilter.Text <> filterText) then
-     begin
-       DataModule.ds_product.Filtered := False;
-       DataModule.ds_product.FilterOptions :=[foCaseInsensitive];
-       DataModule.ds_product.Filter := 'TP_NAME LIKE ' + QuotedStr('%' + Trim(eFilter.Text) + '%');// +
-                           //' OR U_NOMERZAK LIKE ' + QuotedStr('%' + Trim(eFilter.Text) + '%'); //+
-                          // ' OR U_INV LIKE ' + QuotedStr('%' + Trim(eFilter.Text) + '%') ;
-       DataModule.ds_product.Filtered := True;
+  if (Length(TRIM(eFilter.Text)) > 0) and (eFilter.Text <> filterText) then
+  begin
+    DataModule.ds_product.Filtered := False;
+    DataModule.ds_product.FilterOptions := [foCaseInsensitive];
+    DataModule.ds_product.Filter := 'TP_NAME LIKE ' +
+      QuotedStr('%' + TRIM(eFilter.Text) + '%'); // +
+    // ' OR U_NOMERZAK LIKE ' + QuotedStr('%' + Trim(eFilter.Text) + '%'); //+
+    // ' OR U_INV LIKE ' + QuotedStr('%' + Trim(eFilter.Text) + '%') ;
+    DataModule.ds_product.Filtered := True;
 
-     end;
+  end;
 
-   if Length(Trim(eFilter.Text)) = 0 then
-      begin
-        {DBLookupComboBox1.KeyValue := -1;}
-        eFilter.Clear;
-        DataModule.ds_product.Filtered := False;
-        DataModule.ds_SERV.ReopenLocate('SV_UID');
-      end;
+  if Length(TRIM(eFilter.Text)) = 0 then
+  begin
+    { DBLookupComboBox1.KeyValue := -1; }
+    eFilter.Clear;
+    DataModule.ds_product.Filtered := False;
+    DataModule.ds_SERV.ReopenLocate('SV_UID');
+  end;
 end;
 
 procedure TIzdelie2.FormShow(Sender: TObject);
 begin
   eFilter.Clear;
   DataModule.ds_product.Filtered := False;
-//  DataModule.ds_product.Close;
-//  DataModule.ds_product.SelectSQL.Text:='SELECT TP_ID, TP_PGID, TP_NAME, TP_VOLUME, TP_UNITM, TP_GOST FROM T_PRODUCT order by TP_NAME'; //COLLATE PXW_CYRL';
-//  DataModule.ds_product.Open;
-  DataModule.ds_product.ReopenLocate('TP_ID');   //TP_ID
+  // DataModule.ds_product.Close;
+  // DataModule.ds_product.SelectSQL.Text:='SELECT TP_ID, TP_PGID, TP_NAME, TP_VOLUME, TP_UNITM, TP_GOST FROM T_PRODUCT order by TP_NAME'; //COLLATE PXW_CYRL';
+  // DataModule.ds_product.Open;
+  DataModule.ds_product.ReopenLocate('TP_ID'); // TP_ID
 
   DataModule.ds_SERV.Close;
-  DataModule.ds_SERV.ParamByName('Perem').Value:=DataModule.DS_T_USERS.FieldByName('U_ID').AsInteger;
+  DataModule.ds_SERV.ParamByName('Perem').Value :=
+    DataModule.DS_T_USERS.FieldByName('U_ID').AsInteger;
   DataModule.ds_SERV.Open;
-  //DataModule.ds_SERV.Edit;
+  // DataModule.ds_SERV.Edit;
 
-  //Label4.Caption :=IntToStr(UserRight);
+  // Label4.Caption :=IntToStr(UserRight);
   if UserRight = 1 then
-   Begin
-    ButtonDel.Visible:=false;
-    BitBtn1.Visible:=false;
-    cxGrid1DBTableView1SV_COUNT.Options.Editing :=False;
-    cxGrid1DBTableView1SV_ZAGOTOVKI.Options.Editing :=False;
-    cxGrid1DBTableView1SV_DATEOTGRUZ.Options.Editing :=False;
-   End;
-   edit1.Text:=DataModule.DS_T_Users.FieldByName('U_ID').AsString; // Не удалять используется !
+  Begin
+    ButtonDel.Visible := False;
+    BitBtn1.Visible := False;
+    cxGrid1DBTableView1SV_COUNT.Options.Editing := False;
+    cxGrid1DBTableView1SV_ZAGOTOVKI.Options.Editing := False;
+    cxGrid1DBTableView1SV_DATEOTGRUZ.Options.Editing := False;
+  End;
+  Edit1.Text := DataModule.DS_T_USERS.FieldByName('U_ID').AsString;
+  // Не удалять используется !
 end;
 
 procedure TIzdelie2.RzBitBtn2Click(Sender: TObject);
 begin
-Application.CreateForm(TAdd_product, Add_product);
- try
-  Add_product:=TAdd_product.create(self);
-  Add_product.ShowModal;
- finally
- Add_product.free;
-end;
+  Application.CreateForm(TAdd_product, Add_product);
+  try
+    Add_product := TAdd_product.create(self);
+    Add_product.ShowModal;
+  finally
+    Add_product.free;
+  end;
 end;
 
 procedure TIzdelie2.RzBitBtn3Click(Sender: TObject);
 var
-  Count : integer;
+  Count: integer;
 begin
   // Переделка через FIBQuery (Кол-во TP_ID)
-  DataModule.QueryTP_ID.ParamByName('Perem').Value:=DataModule.ds_product.FieldByName('TP_ID').AsInteger;
+  DataModule.QueryTP_ID.ParamByName('Perem').Value :=
+    DataModule.ds_product.FieldByName('TP_ID').AsInteger;
   DataModule.QueryTP_ID.ExecQuery;
-  COUNT:=DataModule.QueryTP_ID.FieldByName('TPID').AsInteger;
-  if COUNT=0 then
-     DataModule.ds_product.Delete
-     else
-     ShowMessage('кол-во используемых : '+IntToStr(COUNT)+' Удаление невозможно !');
+  Count := DataModule.QueryTP_ID.FieldByName('TPID').AsInteger;
+  if Count = 0 then
+    DataModule.ds_product.Delete
+  else
+    ShowMessage('кол-во используемых : ' + IntToStr(Count) +
+      ' Удаление невозможно !');
 end;
-
 
 procedure TIzdelie2.RzBitBtn4Click(Sender: TObject);
 begin
-Application.CreateForm(TProdGroup, ProdGroup);
+  Application.CreateForm(TProdGroup, ProdGroup);
   try
-   ProdGroup:=TProdGroup.Create(self);
-   if (ProdGroup.ShowModal = mrOk) then
+    ProdGroup := TProdGroup.create(self);
+    if (ProdGroup.ShowModal = mrOk) then
     begin
       DataModule.ds_product.Filtered := False;
       DataModule.ds_product.Close;
-      DataModule.ds_product.SelectSQL.Text:='SELECT TP_ID, TP_PGID, TP_NAME, TP_VOLUME, TP_UNITM, TP_GOST FROM T_PRODUCT order by TP_NAME';
+      DataModule.ds_product.SelectSQL.Text :=
+        'SELECT TP_ID, TP_PGID, TP_NAME, TP_VOLUME, TP_UNITM, TP_GOST FROM T_PRODUCT order by TP_NAME';
       DataModule.ds_product.Open;
       DataModule.ds_SERV.ReopenLocate('SV_UID');
     end;
 
   finally
-  ProdGroup.Free;
+    ProdGroup.free;
 
   end;
 end;
 
 procedure TIzdelie2.SaveButtonClick(Sender: TObject);
 var
-SUM,SV_COUNT:Real;  // был тип Integer; (убрал так как не поддерживается числа после запятой)
+  SUM, SV_COUNT: Real;
+  // был тип Integer; (убрал так как не поддерживается числа после запятой)
 begin
-  DataModule.Query_QuantityReady.ParamByName('Perem').Value:=DataModule.DS_T_USERS.FieldByName('U_ID').AsInteger;
+  DataModule.Query_QuantityReady.ParamByName('Perem').Value :=
+    DataModule.DS_T_USERS.FieldByName('U_ID').AsInteger;
   DataModule.Query_QuantityReady.ExecQuery;
-  SUM:=DataModule.Query_QuantityReady.FieldByName('SUMMA').AsFloat;
-  //ShowMessage('кол-во используемых : '+IntToStr(SUM)+' Удаление невозможно !');
-  DataModule.Query_QuantityCount.ParamByName('Perem').Value:=DataModule.DS_T_USERS.FieldByName('U_ID').AsInteger;
+  SUM := DataModule.Query_QuantityReady.FieldByName('SUMMA').AsFloat;
+  // ShowMessage('кол-во используемых : '+IntToStr(SUM)+' Удаление невозможно !');
+  DataModule.Query_QuantityCount.ParamByName('Perem').Value :=
+    DataModule.DS_T_USERS.FieldByName('U_ID').AsInteger;
   DataModule.Query_QuantityCount.ExecQuery;
-  SV_COUNT:=DataModule.Query_QuantityCount.FieldByName('SV_COUNT').AsInteger;
+  SV_COUNT := DataModule.Query_QuantityCount.FieldByName('SV_COUNT').AsInteger;
 
+  if ((SUM = SV_COUNT) and (SUM <> 0) and
+    (DataModule.DS_T_USERS.FieldByName('U_NASED').AsString <> 'Снят') and
+    (DataModule.DS_T_USERS.FieldByName('U_NASED').AsString <> 'Отгружено')) then
+  Begin
+    DataModule.DS_T_USERS.Open;
+    DataModule.DS_T_USERS.Edit;
+    DataModule.DS_T_USERS.FieldByName('U_NASED').AsString := 'Готово';
+    DataModule.DS_T_USERS.Post;
+    DataModule.DS_T_USERS.ReopenLocate('U_ID');
+  End;
 
-  if ((SUM = SV_COUNT) and (SUM <> 0) and (DataModule.DS_T_Users.FieldByName('U_NASED').AsString <> 'Снят') and (DataModule.DS_T_Users.FieldByName('U_NASED').AsString <> 'Отгружено')) then
-    Begin
-      DataModule.DS_T_Users.Open;
-      DataModule.DS_T_Users.Edit;
-      DataModule.DS_T_Users.FieldByName('U_NASED').AsString:='Готово';
-      DataModule.DS_T_Users.Post;
-      DataModule.DS_T_Users.ReopenLocate('U_ID');
-    End;
-
-  if ((SUM > 0) and (DataModule.DS_T_Users.FieldByName('U_NASED').AsString <> 'Снят') and (SUM < SV_COUNT)) then
+  if ((SUM > 0) and (DataModule.DS_T_USERS.FieldByName('U_NASED').AsString <>
+    'Снят') and (SUM < SV_COUNT)) then
   begin
-    if ((SUM > 0) and (DataModule.DS_T_Users.FieldByName('U_NASED').AsString <> 'Готово') and (SUM < SV_COUNT)) then
+    if ((SUM > 0) and (DataModule.DS_T_USERS.FieldByName('U_NASED').AsString <>
+      'Готово') and (SUM < SV_COUNT)) then
+    begin
+      if ((SUM > 0) and (DataModule.DS_T_USERS.FieldByName('U_NASED').AsString
+        <> 'Отгружено') and (SUM < SV_COUNT)) then
       begin
-         if ((SUM > 0) and (DataModule.DS_T_Users.FieldByName('U_NASED').AsString <> 'Отгружено') and (SUM < SV_COUNT)) then
-          begin
-          DataModule.DS_T_Users.Open;
-          DataModule.DS_T_Users.Edit;
-          DataModule.DS_T_Users.FieldByName('U_NASED').AsString:='Выполнен частично';
-          DataModule.DS_T_Users.Post;
-          DataModule.DS_T_Users.ReopenLocate('U_ID');
-          end;
+        DataModule.DS_T_USERS.Open;
+        DataModule.DS_T_USERS.Edit;
+        DataModule.DS_T_USERS.FieldByName('U_NASED').AsString :=
+          'Выполнен частично';
+        DataModule.DS_T_USERS.Post;
+        DataModule.DS_T_USERS.ReopenLocate('U_ID');
       end;
+    end;
   end;
   ModalResult := mrOk;
 end;

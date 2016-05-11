@@ -9,7 +9,8 @@ uses
   cxDataStorage, cxEdit, DB, cxDBData, frxClass, frxDBSet, frxFIBComponents,
   DBCtrls, StdCtrls, Buttons, cxGridLevel, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxClasses, cxGridCustomView, cxGrid,
-  RzButton, RzPanel, ExtCtrls, ComCtrls;
+  RzButton, RzPanel, ExtCtrls, ComCtrls, frxExportPDF, frxExportXLS,
+  dxSkinscxPCPainter;
 
 type
   TFormEditPrice = class(TForm)
@@ -70,6 +71,8 @@ type
     cxGrid1DBTableView1TSP_NAME: TcxGridDBColumn;
     cxGrid1DBTableView1TSP_COUNT: TcxGridDBColumn;
     cxGrid1DBTableView1TSP_UNITM: TcxGridDBColumn;
+    cxGrid1DBTableView1TSP_PERSENT_WASTE: TcxGridDBColumn;
+    LabelForPrice: TLabel;
     procedure FormShow(Sender: TObject);
     procedure BtnDelSpecProdClick(Sender: TObject);
     procedure SaveButtonClick(Sender: TObject);
@@ -77,6 +80,8 @@ type
     procedure cxGrid2DBTableView1DblClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BtnClearEFilterClick(Sender: TObject);
+    procedure BtnPrintClick(Sender: TObject);
+    procedure Edit2KeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -88,14 +93,14 @@ var
 
 implementation
 
-uses DataModuleForm;
+uses DataModuleForm, BTS_Office_form, my_Unit;
 
 {$R *.dfm}
 
 procedure TFormEditPrice.BtnClearEFilterClick(Sender: TObject);
 begin
- eFilter.Clear;
- DataModule.ds_Metal.Filtered := False;
+  eFilter.Clear;
+  DataModule.ds_Metal.Filtered := False;
 end;
 
 procedure TFormEditPrice.BtnDelSpecProdClick(Sender: TObject);
@@ -103,112 +108,167 @@ begin
   DataModule.ds_Specification_Production.Delete;
 end;
 
+procedure TFormEditPrice.BtnPrintClick(Sender: TObject);
+var
+  Stream: TMemoryStream;
+  User: string;
+  TempPer: integer;
+begin
+  TempPer := 47; // Спецификация изделия
+  DataModule.ds_TemplatePrint.ParamByName('X').AsInteger := TempPer;
+  DataModule.ds_TemplatePrint.Open;
+  Stream := TMemoryStream.Create;
+  try
+    (DataModule.ds_TemplatePrint.FieldByName('T_BLOB') as TBLOBField).SaveToStream(Stream);
+    if Stream.Size <> 0 then
+    Begin
+      Stream.Position := 0;
+      frxReport1.Clear;
+      frxReport1.LoadFromStream(Stream);
+    End;
+    // передача переменных в FastReport .
+    frxReport1.Variables['UserRight'] := QuotedStr(UserName);
+    frxReport1.Variables['Perem'] := DataModule.ds_product.FieldByName('TP_ID').AsInteger;
+    frxReport1.Variables['ProductGroup'] := QuotedStr(DBLookupComboBox2.Text);
+    frxReport1.Variables['ProductName'] := QuotedStr(DataModule.ds_product.FieldByName('TP_NAME').AsString);
+    frxReport1.Variables['Weight'] := QuotedStr(DataModule.ds_product.FieldByName('TP_WEIGHT').AsString);
+    frxReport1.Variables['UnitM'] := QuotedStr(DataModule.ds_product.FieldByName('TP_UNITM').AsString);
+    frxReport1.Variables['Price'] := QuotedStr(DataModule.ds_product.FieldByName('TP_PRICE').AsString);
+    frxReport1.Variables['DataPostup'] := QuotedStr(DataModule.ds_product.FieldByName('TP_DATE').AsString);
+    frxReport1.Variables['Prim'] := QuotedStr(DataModule.ds_product.FieldByName('TP_PRIM').AsString);
+    // frxReport1.PrepareReport(true);
+    frxReport1.ShowReport;
+  finally
+    Stream.Free;
+
+  end;
+end;
+
 procedure TFormEditPrice.cxGrid2DBTableView1DblClick(Sender: TObject);
 var
-QuantityProd, SVM_ID, TSP_COUNT, TM_ID :integer;
-TM_NAME, TM_UNITM, TM_GOST :STRING;
+  QuantityProd, SVM_ID, TSP_COUNT, TM_ID: integer;
+  TM_NAME, TM_UNITM, TM_GOST: STRING;
 begin
-// Кол-во материалов)
-  DataModule.QuantityMetInProduction.ParamByName('Perem1').Value:=DataModule.ds_metal.FieldByName('TM_NAME').AsString;
-  DataModule.QuantityMetInProduction.ParamByName('Perem2').Value:=label1.Caption;
+  // Кол-во материалов)
+  DataModule.QuantityMetInProduction.ParamByName('Perem1').Value :=
+    DataModule.ds_Metal.FieldByName('TM_NAME').AsString;
+  DataModule.QuantityMetInProduction.ParamByName('Perem2').Value :=
+    Label1.Caption;
   DataModule.QuantityMetInProduction.ExecQuery;
 
-  //SVM_ID:=DataModule.Query_QuantityMet.FieldByName('SVM_ID').AsInteger;
-  TSP_COUNT:=DataModule.QuantityMetInProduction.FieldByName('COUNT').AsInteger;
-  //ShowMessage('Найдено: '+intToStr(SVM_COUNT)+'          Нажмите Ок'+intToStr(SVM_ID));
+  // SVM_ID:=DataModule.Query_QuantityMet.FieldByName('SVM_ID').AsInteger;
+  TSP_COUNT := DataModule.QuantityMetInProduction.FieldByName('COUNT')
+    .AsInteger;
+  // ShowMessage('Найдено: '+intToStr(SVM_COUNT)+'          Нажмите Ок'+intToStr(SVM_ID));
 
   // - не переписана
 
-  if TSP_COUNT>=1 then
-   begin
-     ShowMessage('материал '+DataModule.ds_metal.FieldByName('TM_NAME').AsString +' уже есть в списке!'+'  Нажмите Ок');
-     DataModule.ds_Specification_Production.ReopenLocate('TSP_NAME');
-   end
+  if TSP_COUNT >= 1 then
+  begin
+    ShowMessage('материал ' + DataModule.ds_Metal.FieldByName('TM_NAME')
+      .AsString + ' уже есть в списке!' + '  Нажмите Ок');
+    DataModule.ds_Specification_Production.ReopenLocate('TSP_NAME');
+  end
 
   else
   Begin
-  DataModule.ds_Specification_Production.Open;
-  DataModule.ds_Specification_Production.Insert;
-  DataModule.ds_Specification_Production.FieldByName('TSP_TMID').AsInteger :=DataModule.ds_metal.FieldByName('TM_ID').AsInteger;
-  DataModule.ds_Specification_Production.FieldByName('TSP_TPID').AsInteger :=StrToInt(Label1.Caption);
-  DataModule.ds_Specification_Production.FieldByName('TSP_NAME').AsString :=DataModule.ds_metal.FieldByName('TM_NAME').AsString;
-//DataModule.ds_Specification_Production.FieldByName('TSP_COUNT').AsString :=COUNT;
-  DataModule.ds_Specification_Production.FieldByName('TSP_UNITM').AsString :=DataModule.ds_metal.FieldByName('TM_UNITM').AsString;;
-  DataModule.ds_Specification_Production.Post;
+    DataModule.ds_Specification_Production.Open;
+    DataModule.ds_Specification_Production.Insert;
+    DataModule.ds_Specification_Production.FieldByName('TSP_TMID').AsInteger :=
+      DataModule.ds_Metal.FieldByName('TM_ID').AsInteger;
+    DataModule.ds_Specification_Production.FieldByName('TSP_TPID').AsInteger :=
+      StrToInt(Label1.Caption);
+    DataModule.ds_Specification_Production.FieldByName('TSP_NAME').AsString :=
+      DataModule.ds_Metal.FieldByName('TM_NAME').AsString;
+    // DataModule.ds_Specification_Production.FieldByName('TSP_COUNT').AsString :=COUNT;
+    DataModule.ds_Specification_Production.FieldByName('TSP_UNITM').AsString :=
+      DataModule.ds_Metal.FieldByName('TM_UNITM').AsString;;
+    DataModule.ds_Specification_Production.Post;
 
-  DataModule.ds_Specification_Production.ReopenLocate('TSP_NAME');
+    DataModule.ds_Specification_Production.ReopenLocate('TSP_NAME');
   end;
 
 end;
 
+procedure TFormEditPrice.Edit2KeyPress(Sender: TObject; var Key: Char);
+begin
+if Key = Char(VK_RETURN)
+       then eDateBegin.SetFocus  // перемешаем курсор в поле даты
+       else if not IsFloat(Key,Edit2.Text) then Key := Chr(0);
+end;
+
 procedure TFormEditPrice.eFilterChange(Sender: TObject);
 var
-  filterText:string;
+  filterText: string;
 begin
-   if (Length(Trim(eFilter.Text)) > 0) and (eFilter.Text <> filterText) then
-     begin
-       DataModule.ds_Metal.Filtered := False;
-       DataModule.ds_Metal.FilterOptions :=[foCaseInsensitive];
-       DataModule.ds_Metal.Filter := 'TM_NAME LIKE ' + QuotedStr('%' + Trim(eFilter.Text) + '%');
-       DataModule.ds_Metal.Filtered := True;
+  if (Length(Trim(eFilter.Text)) > 0) and (eFilter.Text <> filterText) then
+  begin
+    DataModule.ds_Metal.Filtered := False;
+    DataModule.ds_Metal.FilterOptions := [foCaseInsensitive];
+    DataModule.ds_Metal.Filter := 'TM_NAME LIKE ' + QuotedStr('%' + Trim(eFilter.Text) + '%');
+    DataModule.ds_Metal.Filtered := True;
 
-     end;
+  end;
 
-   if Length(Trim(eFilter.Text)) = 0 then
-      begin
-        eFilter.Clear;
-        DataModule.ds_Metal.Filtered := False;
-        DataModule.ds_SERV_R.ReopenLocate('SVR_ID');
-      end;
+  if Length(Trim(eFilter.Text)) = 0 then
+  begin
+    eFilter.Clear;
+    DataModule.ds_Metal.Filtered := False;
+    DataModule.ds_SERV_R.ReopenLocate('SVR_ID');
+  end;
 end;
 
 procedure TFormEditPrice.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-DataModule.ds_Metal.Close;
-//DataModule.ds_product.Close;
-DataModule.DS_Status_Production.Close;
-DataModule.ds_Specification_Production.Close;
-DataModule.ds_product.ReopenLocate('TP_NAME');
+  DataModule.ds_Metal.Close;
+  // DataModule.ds_product.Close;
+  DataModule.DS_Status_Production.Close;
+  DataModule.ds_Specification_Production.Close;
+  DataModule.ds_product.ReopenLocate('TP_NAME');
+  DataModule.ds_Spec_Prod_detail.ReopenLocate('TSP_NAME');
 end;
 
 procedure TFormEditPrice.FormShow(Sender: TObject);
 begin
-  DataModule.ds_product.Open;
+//  DataModule.ds_product.Open;
   DataModule.ds_product.Edit;
   DataModule.ds_Metal.Open;
   DataModule.ds_Metal.Filtered := False;
-//  DataModule.ds_Metal.ReopenLocate('TM_NAME');
+  // DataModule.ds_Metal.ReopenLocate('TM_NAME');
   DataModule.ds_Specification_Production.Close;
-  DataModule.ds_Specification_Production.ParamByName('Perem').Value:=DataModule.ds_product.FieldByName('TP_ID').AsInteger;
+  DataModule.ds_Specification_Production.ParamByName('Perem').Value :=
+    DataModule.ds_product.FieldByName('TP_ID').AsInteger;
   DataModule.ds_Specification_Production.Open;
 
-  Label1.Caption:=DataModule.ds_product.FieldByName('TP_ID').AsString;
-  Edit1.Text:=DataModule.ds_product.FieldByName('TP_NAME').AsString;
-  Edit1.Enabled:=false;
-  Edit6.Text:=DataModule.ds_product.FieldByName('TP_WEIGHT').AsString;
-  Edit4.Text:=DataModule.ds_product.FieldByName('TP_UNITM').AsString;
-  Edit2.Text:=DataModule.ds_product.FieldByName('TP_PRICE').AsString;
-  eDateBegin.DateTime:=DataModule.ds_product.FieldByName('TP_DATE').AsDateTime;
-  Memo1.Text:=DataModule.ds_product.FieldByName('TP_PRIM').AsString;
+  Label1.Caption := DataModule.ds_product.FieldByName('TP_ID').AsString;
+  Edit1.Text := DataModule.ds_product.FieldByName('TP_NAME').AsString;
+//  Edit1.Enabled := False;
+  Edit6.Text := DataModule.ds_product.FieldByName('TP_WEIGHT').AsString;
+  Edit4.Text := DataModule.ds_product.FieldByName('TP_UNITM').AsString;
+  Edit2.Text := DataModule.ds_product.FieldByName('TP_PRICE').AsString;
+  eDateBegin.DateTime := DataModule.ds_product.FieldByName('TP_DATE')
+    .AsDateTime;
+  Memo1.Text := DataModule.ds_product.FieldByName('TP_PRIM').AsString;
 
 end;
 
 procedure TFormEditPrice.SaveButtonClick(Sender: TObject);
-   Begin
-    DataModule.ds_product.FieldByName('TP_NAME').AsString :=Trim(Edit1.Text);
-    DataModule.ds_product.FieldByName('TP_WEIGHT').AsString :=Trim(Edit6.Text);
-    DataModule.ds_product.FieldByName('TP_UNITM').AsString :=Trim(Edit4.Text);
-    DataModule.ds_product.FieldByName('TP_PRICE').AsString :=Trim(Edit2.Text);
-    DataModule.ds_product.FieldByName('TP_DATE').AsDateTime := eDateBegin.Date;
-    DataModule.ds_product.FieldByName('TP_PRIM').AsString :=Trim(Memo1.Text);
-    DataModule.ds_product.Post;
-    Label1.Caption:=DataModule.ds_product.FieldByName('TP_ID').AsString;
-    DataModule.ds_Specification_Production.Close;
-    DataModule.ds_Specification_Production.ParamByName('Perem').Value:=DataModule.ds_product.FieldByName('TP_ID').AsInteger;
-    DataModule.ds_Specification_Production.Open;
-    Panel1.visible:=true;
-    Panel3.visible:=true;
-    SaveButton.Enabled:=false;
-   end;
+Begin
+  DataModule.ds_product.FieldByName('TP_NAME').AsString := Trim(Edit1.Text);
+  DataModule.ds_product.FieldByName('TP_WEIGHT').AsString := Trim(Edit6.Text);
+  DataModule.ds_product.FieldByName('TP_UNITM').AsString := Trim(Edit4.Text);
+  DataModule.ds_product.FieldByName('TP_PRICE').AsString := Trim(Edit2.Text);
+  DataModule.ds_product.FieldByName('TP_DATE').AsDateTime := eDateBegin.Date;
+  DataModule.ds_product.FieldByName('TP_PRIM').AsString := Trim(Memo1.Text);
+  DataModule.ds_product.Post;
+  Label1.Caption := DataModule.ds_product.FieldByName('TP_ID').AsString;
+  DataModule.ds_Specification_Production.Close;
+  DataModule.ds_Specification_Production.ParamByName('Perem').Value :=
+    DataModule.ds_product.FieldByName('TP_ID').AsInteger;
+  DataModule.ds_Specification_Production.Open;
+  Panel1.visible := True;
+  Panel3.visible := True;
+  SaveButton.Enabled := False;
+end;
 
 end.

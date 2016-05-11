@@ -34,25 +34,25 @@ uses DataModuleForm, Edit_Clients_Form, ADD_Clients_Form;
 
 procedure TClients.ADDButtonClick(Sender: TObject);
 begin
- Application.CreateForm(TAdd_Clients, Add_Clients);
- Add_Clients.ShowModal;
+  Application.CreateForm(TAdd_Clients, Add_Clients);
+  Add_Clients.ShowModal;
 end;
 
 procedure TClients.CloseButtonClick(Sender: TObject);
 begin
-Close;
+  Close;
 end;
 
 procedure TClients.DelButtonClick(Sender: TObject);
 begin
- ShowMessage('Удаление запрещено ! (временно)');
- //DataModule.DS_Clients.Delete;
+  ShowMessage('Удаление запрещено ! (временно)');
+  // DataModule.DS_Clients.Delete;
 end;
 
 procedure TClients.EditButtonClick(Sender: TObject);
 begin
- Application.CreateForm(TEdit_Clients, Edit_Clients);
- Edit_Clients.ShowModal;
+  Application.CreateForm(TEdit_Clients, Edit_Clients);
+  Edit_Clients.ShowModal;
 end;
 
 end.

@@ -46,47 +46,47 @@ uses DataModuleUnit, BTScertificat_form;
 
 procedure TDataBase.CloseButtonClick(Sender: TObject);
 begin
- Close;
+  Close;
 end;
 
 procedure TDataBase.SaveButtonClick(Sender: TObject);
 begin
-    DataModule.DB.Connected := False;
-    with DataModule.DB.ConnectParams do
+  DataModule.DB.Connected := False;
+  with DataModule.DB.ConnectParams do
   begin
     UserName := Trim(Edit4.Text);
     Password := Trim(Edit5.Text);
   end;
-// Пробуем подключить базу
-DataModule.DB.DBName := (Trim(Edit1.Text) + ':' + Trim(Edit2.Text));
-try
-  DataModule.DB.Connected := True;
-  DataModule.DS_T_USERS.Active := True;
-  DataModule.ds_Clients.Active := True;
-  DataModule.ds_ProdGroup.Active := True;
-  DataModule.ds_Object.Active := True;
-  DataModule.ds_ObjectName.Active := True;
-  DataModule.ds_product.Active := True;
-  DataModule.ds_SERV.Active := True;
-  DataModule.ds_SERV_M.Active := True;
-  DataModule.ds_Files.Active := True;
-  DataModule.ds_Metal.Active := True;
-  DataModule.DS_Division.Active := True;
-  DataModule.ds_Proffesionals.Active := True;
-  DataModule.DS_USERS.Active := True;
-  DataModule.ds_Template.Active := True;
-  DataModule.ds_QuantityProd.Active := True;
-  DataModule.ds_USER_DEL.Active := True;
-  DataModule.ds_OTD.Active := True;
+  // Пробуем подключить базу
+  DataModule.DB.DBName := (Trim(Edit1.Text) + ':' + Trim(Edit2.Text));
+  try
+    DataModule.DB.Connected := True;
+    DataModule.DS_T_USERS.Active := True;
+    DataModule.ds_Clients.Active := True;
+    DataModule.ds_ProdGroup.Active := True;
+    DataModule.ds_Object.Active := True;
+    DataModule.ds_ObjectName.Active := True;
+    DataModule.ds_product.Active := True;
+    DataModule.ds_SERV.Active := True;
+    DataModule.ds_SERV_M.Active := True;
+    DataModule.ds_Files.Active := True;
+    DataModule.ds_Metal.Active := True;
+    DataModule.DS_Division.Active := True;
+    DataModule.ds_Proffesionals.Active := True;
+    DataModule.DS_USERS.Active := True;
+    DataModule.ds_Template.Active := True;
+    DataModule.ds_QuantityProd.Active := True;
+    DataModule.ds_USER_DEL.Active := True;
+    DataModule.ds_OTD.Active := True;
 
-  DataModule.DS_T_USERS.Refresh;
-  DataModule.DS_T_USERS.ReopenLocate('U_ID');
+    DataModule.DS_T_USERS.Refresh;
+    DataModule.DS_T_USERS.ReopenLocate('U_ID');
 
-  ShowMessage('Ok');
-  Close;
-except
-  ShowMessage('Error!');
-end;
+    ShowMessage('Ok');
+    Close;
+  except
+    ShowMessage('Error!');
+  end;
 
 end;
 

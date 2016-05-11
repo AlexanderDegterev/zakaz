@@ -31,15 +31,16 @@ uses DataModuleForm;
 
 procedure TADD_Prof.CancelButtonClick(Sender: TObject);
 begin
- Close;
+  Close;
 end;
 
 procedure TADD_Prof.SaveButtonClick(Sender: TObject);
 begin
- DataModule.ds_Proffesionals.Insert;
- DataModule.ds_Proffesionals.FieldByName('P_PROF').AsString := Trim(Edit1.Text);
- DataModule.ds_Proffesionals.Post;
- Close;
+  DataModule.ds_Proffesionals.Insert;
+  DataModule.ds_Proffesionals.FieldByName('P_PROF').AsString :=
+    Trim(Edit1.Text);
+  DataModule.ds_Proffesionals.Post;
+  Close;
 end;
 
 end.

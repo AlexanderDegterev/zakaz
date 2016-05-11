@@ -40,25 +40,25 @@ uses DataModuleForm;
 
 procedure TEdit_Metal.CancelButtonClick(Sender: TObject);
 begin
- Close;
+  Close;
 end;
 
 procedure TEdit_Metal.FormShow(Sender: TObject);
 begin
   DataModule.ds_Metal.Open;
-  Edit1.Text:=DataModule.ds_Metal.FieldByName('TM_NAME').AsString;
-  Edit3.Text:=DataModule.ds_Metal.FieldByName('TM_UNITM').AsString;
-  Edit4.Text:=DataModule.ds_Metal.FieldByName('TM_GOST').AsString;
+  Edit1.Text := DataModule.ds_Metal.FieldByName('TM_NAME').AsString;
+  Edit3.Text := DataModule.ds_Metal.FieldByName('TM_UNITM').AsString;
+  Edit4.Text := DataModule.ds_Metal.FieldByName('TM_GOST').AsString;
 end;
 
 procedure TEdit_Metal.SaveButtonClick(Sender: TObject);
 begin
- DataModule.ds_Metal.Edit;
- DataModule.ds_Metal.FieldByName('TM_NAME').AsString := Trim(Edit1.Text);
- DataModule.ds_Metal.FieldByName('TM_UNITM').AsString := Trim(Edit3.Text);
- DataModule.ds_Metal.FieldByName('TM_GOST').AsString := Trim(Edit4.Text);
- DataModule.ds_Metal.Post;
- Close;
+  DataModule.ds_Metal.Edit;
+  DataModule.ds_Metal.FieldByName('TM_NAME').AsString := Trim(Edit1.Text);
+  DataModule.ds_Metal.FieldByName('TM_UNITM').AsString := Trim(Edit3.Text);
+  DataModule.ds_Metal.FieldByName('TM_GOST').AsString := Trim(Edit4.Text);
+  DataModule.ds_Metal.Post;
+  Close;
 end;
 
 end.

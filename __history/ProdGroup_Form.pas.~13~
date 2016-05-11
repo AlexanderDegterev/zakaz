@@ -1,0 +1,69 @@
+unit ProdGroup_Form;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons, Grids, DBGrids, RzButton;
+
+type
+  TProdGroup = class(TForm)
+    DBGrid1: TDBGrid;
+    EditButton: TBitBtn;
+    ADDButton: TBitBtn;
+    DelButton: TBitBtn;
+    CloseButton: TBitBtn;
+    EditIzdButton: TRzBitBtn;
+    procedure ADDButtonClick(Sender: TObject);
+    procedure DelButtonClick(Sender: TObject);
+    procedure EditButtonClick(Sender: TObject);
+    procedure CloseButtonClick(Sender: TObject);
+    procedure EditIzdButtonClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ProdGroup: TProdGroup;
+
+implementation
+
+uses DataModuleForm, ADD_ProdGroup_Form, EDIT_ProdGroup_Form, Product_Form;
+
+{$R *.dfm}
+
+procedure TProdGroup.ADDButtonClick(Sender: TObject);
+begin
+ Application.CreateForm(TADD_ProdGroup, ADD_ProdGroup);
+ ADD_ProdGroup.ShowModal;
+end;
+
+procedure TProdGroup.CloseButtonClick(Sender: TObject);
+begin
+ DataModule.ds_product.Close;
+ DataModule.ds_product.SelectSQL.Text:='SELECT TP_ID, TP_PGID, TP_NAME, TP_VOLUME, TP_UNITM, TP_GOST FROM T_PRODUCT order by TP_ID DESC';
+ DataModule.ds_product.Open;
+ ModalResult:= mrOk;
+end;
+
+procedure TProdGroup.DelButtonClick(Sender: TObject);
+begin
+ShowMessage('Удаление запрещено ! (временно)');
+//DataModule.ds_ProdGroup.Delete;
+end;
+
+procedure TProdGroup.EditButtonClick(Sender: TObject);
+begin
+ Application.CreateForm(TEdit_ProdGroup, Edit_ProdGroup);
+ Edit_ProdGroup.ShowModal;
+end;
+
+procedure TProdGroup.EditIzdButtonClick(Sender: TObject);
+begin
+ Application.CreateForm(TPRODUCT, PRODUCT);
+ PRODUCT.ShowModal;
+end;
+
+end.

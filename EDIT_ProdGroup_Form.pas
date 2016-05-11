@@ -32,22 +32,23 @@ uses DataModuleForm;
 
 procedure TEdit_ProdGroup.CancelButtonClick(Sender: TObject);
 begin
- Close;
+  Close;
 end;
 
 procedure TEdit_ProdGroup.FormShow(Sender: TObject);
 begin
- DataModule.ds_ProdGroup.ParamByName('X').AsInteger:=DataModule.ds_ProdGroup.FieldByName('PG_ID').AsInteger;
- DataModule.ds_ProdGroup.Open;
- Edit1.Text:=DataModule.ds_ProdGroup.FieldByName('PG_NAME').AsString;
+  DataModule.ds_ProdGroup.ParamByName('X').AsInteger :=
+    DataModule.ds_ProdGroup.FieldByName('PG_ID').AsInteger;
+  DataModule.ds_ProdGroup.Open;
+  Edit1.Text := DataModule.ds_ProdGroup.FieldByName('PG_NAME').AsString;
 end;
 
 procedure TEdit_ProdGroup.SaveButtonClick(Sender: TObject);
 begin
- DataModule.ds_ProdGroup.Edit;
- DataModule.ds_ProdGroup.FieldByName('PG_NAME').AsString := Trim(Edit1.Text);
- DataModule.ds_ProdGroup.Post;
- Close;
+  DataModule.ds_ProdGroup.Edit;
+  DataModule.ds_ProdGroup.FieldByName('PG_NAME').AsString := Trim(Edit1.Text);
+  DataModule.ds_ProdGroup.Post;
+  Close;
 end;
 
 end.

@@ -1,0 +1,32 @@
+unit my_Unit;
+
+interface
+
+procedure eFilterT_Metal(text: String);
+
+implementation
+
+uses DataModuleForm, DB, DBGrids, SysUtils;
+
+procedure eFilterT_Metal(text: String);
+var
+  filterText: string;
+begin
+  if (Length(Trim(text)) > 0) and (text <> filterText) then
+  begin
+    DataModule.ds_Metal.Filtered := False;
+    DataModule.ds_Metal.FilterOptions := [foCaseInsensitive];
+    DataModule.ds_Metal.Filter := 'TM_NAME LIKE ' + QuotedStr('%' + Trim(text) + '%');
+    DataModule.ds_Metal.Filtered := True;
+
+  end;
+
+  if Length(Trim(text)) = 0 then
+  begin
+    // eFilter.Clear;
+    DataModule.ds_Metal.Filtered := False;
+    DataModule.ds_SERV_S.ReopenLocate('SVS_NAME');
+  end;
+end;
+
+end.

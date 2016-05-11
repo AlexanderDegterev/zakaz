@@ -39,7 +39,7 @@ uses DataModuleForm;
 
 procedure TADD_Metal.CancelButtonClick(Sender: TObject);
 begin
- Close;
+  Close;
 end;
 
 procedure TADD_Metal.SaveButtonClick(Sender: TObject);
@@ -47,27 +47,29 @@ var
   MetName: string;
   MetQuantity: integer;
 begin
-  MetName:=Trim(Edit1.Text); //наименование
+  MetName := Trim(Edit1.Text); // наименование
   //
   // ѕеределка через FIBQuery ( ол-во наименовани€)
-  DataModule.Query_QuantityTMetal.ParamByName('Perem1').Value:=TRIM(Edit1.Text);
+  DataModule.Query_QuantityTMetal.ParamByName('Perem1').Value :=
+    Trim(Edit1.Text);
   DataModule.Query_QuantityTMetal.ExecQuery;
 
-  MetQuantity:=DataModule.Query_QuantityTMetal.FieldByName('COUNT').AsInteger;
+  MetQuantity := DataModule.Query_QuantityTMetal.FieldByName('COUNT').AsInteger;
 
-  if MetQuantity>=1 then
-    begin
-     ShowMessage('ћатериал: '+MetName+' уже есть с справочнике');
-    end
-   else
-   Begin
+  if MetQuantity >= 1 then
+  begin
+    ShowMessage('ћатериал: ' + MetName + ' уже есть с справочнике');
+  end
+  else
+  Begin
     DataModule.ds_Metal.Insert;
-    DataModule.ds_Metal.FieldByName('TM_NAME').AsString := Trim(Edit1.Text); //наименование
+    DataModule.ds_Metal.FieldByName('TM_NAME').AsString := Trim(Edit1.Text);
+    // наименование
     DataModule.ds_Metal.FieldByName('TM_UNITM').AsString := Trim(Edit3.Text);
     DataModule.ds_Metal.FieldByName('TM_GOST').AsString := Trim(Edit4.Text);
     DataModule.ds_Metal.Post;
     Close;
-   End;
+  End;
 end;
 
 end.

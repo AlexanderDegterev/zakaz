@@ -34,23 +34,23 @@ uses ADD_Prof_Form;
 
 procedure TProfessionals.ADDButtonClick(Sender: TObject);
 begin
- Application.CreateForm(TADD_Prof, ADD_Prof);
- ADD_Prof.ShowModal;
+  Application.CreateForm(TADD_Prof, ADD_Prof);
+  ADD_Prof.ShowModal;
 end;
 
 procedure TProfessionals.CloseButtonClick(Sender: TObject);
 begin
- Close;
+  Close;
 end;
 
 procedure TProfessionals.DelButtonClick(Sender: TObject);
 begin
- DataModule.ds_Proffesionals.Delete;
+  DataModule.ds_Proffesionals.Delete;
 end;
 
 procedure TProfessionals.FormShow(Sender: TObject);
 begin
- DataModule.ds_Proffesionals.FieldByName('p_id').Visible:=False;
+  DataModule.ds_Proffesionals.FieldByName('p_id').Visible := False;
 end;
 
 end.

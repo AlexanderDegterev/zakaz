@@ -46,17 +46,17 @@ uses DataModuleForm;
 
 procedure TConnectDB.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-DataModule.ds_connectDB.Close;
+  DataModule.ds_connectDB.Close;
 end;
 
 procedure TConnectDB.FormShow(Sender: TObject);
 begin
-DataModule.ds_connectDB.Open;
+  DataModule.ds_connectDB.Open;
 end;
 
 procedure TConnectDB.RzRefrashClick(Sender: TObject);
 begin
-DataModule.ds_connectDB.ReopenLocate('MON$ATTACHMENT_ID');
+  DataModule.ds_connectDB.ReopenLocate('MON$ATTACHMENT_ID');
 end;
 
 end.

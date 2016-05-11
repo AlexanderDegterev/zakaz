@@ -55,13 +55,13 @@ uses DataModuleForm, Supplier_Add_Form, Supplier_Edit_Form;
 
 procedure TSupplier.ADDButtonClick(Sender: TObject);
 begin
-Application.CreateForm(TSupplier_Add, Supplier_Add);
+  Application.CreateForm(TSupplier_Add, Supplier_Add);
   try
-  Supplier_Add:=TSupplier_Add.create(self);
-  Supplier_Add.ShowModal;
- finally
- Supplier_Add.free;
-end;
+    Supplier_Add := TSupplier_Add.create(self);
+    Supplier_Add.ShowModal;
+  finally
+    Supplier_Add.free;
+  end;
 end;
 
 procedure TSupplier.cxGrid1DBTableView1CellClick(Sender: TcxCustomGridTableView;
@@ -71,34 +71,34 @@ begin
   ModalResult := mrOk;
 end;
 
-procedure TSupplier.cxGrid1DBTableView1CellDblClick(
-  Sender: TcxCustomGridTableView; ACellViewInfo: TcxGridTableDataCellViewInfo;
+procedure TSupplier.cxGrid1DBTableView1CellDblClick
+  (Sender: TcxCustomGridTableView; ACellViewInfo: TcxGridTableDataCellViewInfo;
   AButton: TMouseButton; AShift: TShiftState; var AHandled: Boolean);
 begin
-ModalResult := mrOk;
+  ModalResult := mrOk;
 end;
 
 procedure TSupplier.cxGrid1DBTableView1KeyPress(Sender: TObject; var Key: Char);
 begin
-  if key = #13 then // если нажата клавиша <Enter>
-  ModalResult := mrOk;
+  if Key = #13 then // если нажата клавиша <Enter>
+    ModalResult := mrOk;
 end;
 
 procedure TSupplier.DelButtonClick(Sender: TObject);
 begin
-ShowMessage('”даление запрещено ! (временно)');
-  //DataModule.ds_Supplier.Delete;
+  ShowMessage('”даление запрещено ! (временно)');
+  // DataModule.ds_Supplier.Delete;
 end;
 
 procedure TSupplier.EditButtonClick(Sender: TObject);
 begin
- Application.CreateForm(TSupplier_Edit, Supplier_Edit);
+  Application.CreateForm(TSupplier_Edit, Supplier_Edit);
   try
-  Supplier_Edit:=TSupplier_Edit.create(self);
-  Supplier_Edit.ShowModal;
- finally
- Supplier_Edit.free;
-end;
+    Supplier_Edit := TSupplier_Edit.create(self);
+    Supplier_Edit.ShowModal;
+  finally
+    Supplier_Edit.free;
+  end;
 end;
 
 end.

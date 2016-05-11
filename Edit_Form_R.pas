@@ -95,32 +95,40 @@ procedure TFormEdit_R.BtnPrintClick(Sender: TObject);
 var
   Stream: TMemoryStream;
   User: string;
-  TempPer: integer;
+  TempPer: Integer;
 begin
- TempPer:=46; // Заявка
- DataModule.ds_TemplatePrint.ParamByName('X').AsInteger:=TempPer;
- DataModule.ds_TemplatePrint.Open;
- Stream:=TMemoryStream.Create;
+  TempPer := 46; // Заявка
+  DataModule.ds_TemplatePrint.ParamByName('X').AsInteger := TempPer;
+  DataModule.ds_TemplatePrint.Open;
+  Stream := TMemoryStream.Create;
   try
-    (DataModule.ds_TemplatePrint.FieldByName('T_BLOB') as TBLOBField).SaveToStream(Stream);
+    (DataModule.ds_TemplatePrint.FieldByName('T_BLOB') as TBLOBField)
+      .SaveToStream(Stream);
     if Stream.Size <> 0 then
-     Begin
-       Stream.Position := 0;
-       frxReport1.Clear;
-       frxReport1.LoadFromStream(Stream);
-     End;
-          // передача переменных в FastReport .
-     frxReport1.Variables['UserRight']:=QuotedStr(UserName);
-     frxReport1.Variables['Perem']:=DataModule.ds_Request.FieldByName('REQ_ID').AsInteger;;
-     frxReport1.Variables['NomerRequest']:=DataModule.ds_Request.FieldByName('REQ_ID').AsString;
-     frxReport1.Variables['Zakazchik']:=QuotedStr(DataModule.ds_Request.FieldByName('CL_NAME').AsString);
-     frxReport1.Variables['Object']:=QuotedStr(DataModule.ds_Request.FieldByName('OB_NAME').AsString);
-     frxReport1.Variables['NomerZakaza']:=QuotedStr(DataModule.ds_Request.FieldByName('REQ_N_ZAKAZ').AsString);
-     frxReport1.Variables['Prim']:=QuotedStr(DataModule.ds_Request.FieldByName('REQ_PRIM').AsString);
-     frxReport1.Variables['DataPostup']:=QuotedStr(DataModule.ds_Request.FieldByName('REQ_DATE').AsString);
-     frxReport1.ShowReport;
+    Begin
+      Stream.Position := 0;
+      frxReport1.Clear;
+      frxReport1.LoadFromStream(Stream);
+    End;
+    // передача переменных в FastReport .
+    frxReport1.Variables['UserRight'] := QuotedStr(UserName);
+    frxReport1.Variables['Perem'] := DataModule.ds_Request.FieldByName('REQ_ID')
+      .AsInteger;
+    frxReport1.Variables['NomerRequest'] := DataModule.ds_Request.FieldByName
+      ('REQ_ID').AsString;
+    frxReport1.Variables['Zakazchik'] :=
+      QuotedStr(DataModule.ds_Request.FieldByName('CL_NAME').AsString);
+    frxReport1.Variables['Object'] :=
+      QuotedStr(DataModule.ds_Request.FieldByName('OB_NAME').AsString);
+    frxReport1.Variables['NomerZakaza'] :=
+      QuotedStr(DataModule.ds_Request.FieldByName('REQ_N_ZAKAZ').AsString);
+    frxReport1.Variables['Prim'] :=
+      QuotedStr(DataModule.ds_Request.FieldByName('REQ_PRIM').AsString);
+    frxReport1.Variables['DataPostup'] :=
+      QuotedStr(DataModule.ds_Request.FieldByName('REQ_DATE').AsString);
+    frxReport1.ShowReport;
   finally
-  Stream.Free;
+    Stream.Free;
 
   end;
 end;
@@ -130,135 +138,157 @@ procedure TFormEdit_R.cxButtonEdit4PropertiesButtonClick(Sender: TObject;
 begin
   Application.CreateForm(TObj, Obj);
   try
-   Obj := TObj.Create(self);
+    Obj := TObj.Create(self);
     if (Obj.showModal = mrOk) then
-     begin
-      FormEdit_R.cxButtonEdit3.Text := DataModule.ds_Object.FieldByName('OB_ID').AsString;
-      FormEdit_R.cxButtonEdit4.Text := DataModule.ds_Object.FieldByName('OB_NAME').AsString;
-     end;
-    finally
+    begin
+      FormEdit_R.cxButtonEdit3.Text := DataModule.ds_Object.FieldByName
+        ('OB_ID').AsString;
+      FormEdit_R.cxButtonEdit4.Text := DataModule.ds_Object.FieldByName
+        ('OB_NAME').AsString;
+    end;
+  finally
     DataModule.ds_Object.Filtered := False;
-    Obj.free;
-end;
+    Obj.Free;
+  end;
 end;
 
-procedure TFormEdit_R.cxGrid2DBTableView1CellDblClick(
-  Sender: TcxCustomGridTableView; ACellViewInfo: TcxGridTableDataCellViewInfo;
+procedure TFormEdit_R.cxGrid2DBTableView1CellDblClick
+  (Sender: TcxCustomGridTableView; ACellViewInfo: TcxGridTableDataCellViewInfo;
   AButton: TMouseButton; AShift: TShiftState; var AHandled: Boolean);
 var
- SVR_COUNT:integer;
+  SVR_COUNT: Integer;
 begin
-  SVR_COUNT:=0;
+  SVR_COUNT := 0;
   //
   // Переделка через FIBQuery (Кол-во продукции)
-  DataModule.Query_QuantityMetR.ParamByName('Perem1').Value:=DataModule.ds_metal.FieldByName('TM_ID').AsInteger;
+  DataModule.Query_QuantityMetR.ParamByName('Perem1').Value :=
+    DataModule.ds_metal.FieldByName('TM_ID').AsInteger;
 
   // пересмотреть
-  DataModule.Query_QuantityMetR.ParamByName('Perem2').Value:=Label1.Caption;//DataModule.ds_Request.FieldByName('REQ_ID').AsInteger;
+  DataModule.Query_QuantityMetR.ParamByName('Perem2').Value := Label1.Caption;
+  // DataModule.ds_Request.FieldByName('REQ_ID').AsInteger;
   DataModule.Query_QuantityMetR.ExecQuery;
 
-  SVR_COUNT:=DataModule.Query_QuantityMetR.FieldByName('COUNT').AsInteger;
+  SVR_COUNT := DataModule.Query_QuantityMetR.FieldByName('COUNT').AsInteger;
 
-  if SVR_COUNT>=1 then
-   begin
+  if SVR_COUNT >= 1 then
+  begin
 
-     ShowMessage('материал '+DataModule.ds_metal.FieldByName('TM_NAME').AsString+' уже есть в списке!'+'  Нажмите Ок');
-     DataModule.ds_SERV_R.ReopenLocate('SVR_ID');
+    ShowMessage('материал ' + DataModule.ds_metal.FieldByName('TM_NAME')
+      .AsString + ' уже есть в списке!' + '  Нажмите Ок');
+    DataModule.ds_SERV_R.ReopenLocate('SVR_ID');
 
-   end
+  end
 
   else
   Begin
 
-  //ShowMessage('STOP');
-  DataModule.ds_SERV_R.Open;
-  DataModule.ds_SERV_R.Insert;
-  DataModule.ds_SERV_R.FieldByName('SVR_REQID').AsInteger :=StrToInt(Label1.Caption);//DataModule.ds_Request.FieldByName('REQ_ID').AsInteger;
-  DataModule.ds_SERV_R.FieldByName('SVR_TMID').AsInteger :=DataModule.ds_Metal.FieldByName('TM_ID').AsInteger;
-  DataModule.ds_SERV_R.FieldByName('SVR_NAME').AsString :=DataModule.ds_Metal.FieldByName('TM_NAME').AsString;
-  DataModule.ds_SERV_R.FieldByName('SVR_UNITM').AsString :=DataModule.ds_Metal.FieldByName('TM_UNITM').AsString;
-  //DataModule.ds_SERV_R.FieldByName('SVR_GOST').AsString :=DataModule.ds_Metal.FieldByName('TM_GOST').AsString; // Убрал - ставят вручную
-  DataModule.ds_SERV_R.Post;
+    // ShowMessage('STOP');
+    DataModule.ds_SERV_R.Open;
+    DataModule.ds_SERV_R.Insert;
+    DataModule.ds_SERV_R.FieldByName('SVR_REQID').AsInteger :=
+      StrToInt(Label1.Caption);
+    // DataModule.ds_Request.FieldByName('REQ_ID').AsInteger;
+    DataModule.ds_SERV_R.FieldByName('SVR_TMID').AsInteger :=
+      DataModule.ds_metal.FieldByName('TM_ID').AsInteger;
+    DataModule.ds_SERV_R.FieldByName('SVR_NAME').AsString :=
+      DataModule.ds_metal.FieldByName('TM_NAME').AsString;
+    DataModule.ds_SERV_R.FieldByName('SVR_UNITM').AsString :=
+      DataModule.ds_metal.FieldByName('TM_UNITM').AsString;
+    // DataModule.ds_SERV_R.FieldByName('SVR_GOST').AsString :=DataModule.ds_Metal.FieldByName('TM_GOST').AsString; // Убрал - ставят вручную
+    DataModule.ds_SERV_R.Post;
 
-  DataModule.ds_SERV_R.ReopenLocate('SVR_ID');
+    DataModule.ds_SERV_R.ReopenLocate('SVR_ID');
 
   End;
 end;
 
 procedure TFormEdit_R.eFilterChange(Sender: TObject);
 var
-  filterText:string;
+  filterText: string;
 begin
-   if (Length(Trim(eFilter.Text)) > 0) and (eFilter.Text <> filterText) then
-     begin
-       DataModule.ds_Metal.Filtered := False;
-       DataModule.ds_Metal.FilterOptions :=[foCaseInsensitive];
-       DataModule.ds_Metal.Filter := 'TM_NAME LIKE ' + QuotedStr('%' + Trim(eFilter.Text) + '%');
-       DataModule.ds_Metal.Filtered := True;
+  if (Length(Trim(eFilter.Text)) > 0) and (eFilter.Text <> filterText) then
+  begin
+    DataModule.ds_metal.Filtered := False;
+    DataModule.ds_metal.FilterOptions := [foCaseInsensitive];
+    DataModule.ds_metal.Filter := 'TM_NAME LIKE ' +
+      QuotedStr('%' + Trim(eFilter.Text) + '%');
+    DataModule.ds_metal.Filtered := True;
 
-     end;
+  end;
 
-   if Length(Trim(eFilter.Text)) = 0 then
-      begin
-        eFilter.Clear;
-        DataModule.ds_Metal.Filtered := False;
-        DataModule.ds_SERV_R.ReopenLocate('SVR_ID');
-      end;
+  if Length(Trim(eFilter.Text)) = 0 then
+  begin
+    eFilter.Clear;
+    DataModule.ds_metal.Filtered := False;
+    DataModule.ds_SERV_R.ReopenLocate('SVR_ID');
+  end;
 end;
 
 procedure TFormEdit_R.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   DataModule.ds_Detail_R.ReopenLocate('SVR_ID');
-  DataModule.ds_Metal.Close;
+  DataModule.ds_metal.Close;
   DataModule.ds_SERV_R.Close;
 end;
 
 procedure TFormEdit_R.FormShow(Sender: TObject);
 begin
   DataModule.ds_Request.Open;
-  //DataModule.ds_Request.Edit;
-  Label1.Caption:=DataModule.ds_Request.FieldByName('REQ_ID').AsString; //Примечание
-  cxButtonEdit3.Text:=DataModule.ds_Request.FieldByName('REQ_OBNAME').AsString;
-  cxButtonEdit4.Text:=DataModule.ds_Request.FieldByName('OB_NAME').AsString;
-  Edit1.Text:=DataModule.ds_Request.FieldByName('REQ_N_ZAKAZ').AsString; //номер заявки
-  eDateBegin.datetime:=DataModule.ds_Request.FieldByName('REQ_DATE').AsDateTime; // Дата
-  //Edit4.Text:=DataModule.ds_Request.FieldByName('REQ_PRIM').AsString; //Примечание
-  Memo1.Text:=DataModule.ds_Request.FieldByName('REQ_PRIM').AsString; //Примечание
+  // DataModule.ds_Request.Edit;
+  Label1.Caption := DataModule.ds_Request.FieldByName('REQ_ID').AsString;
+  // Примечание
+  cxButtonEdit3.Text := DataModule.ds_Request.FieldByName('REQ_OBNAME')
+    .AsString;
+  cxButtonEdit4.Text := DataModule.ds_Request.FieldByName('OB_NAME').AsString;
+  Edit1.Text := DataModule.ds_Request.FieldByName('REQ_N_ZAKAZ').AsString;
+  // номер заявки
+  eDateBegin.datetime := DataModule.ds_Request.FieldByName('REQ_DATE')
+    .AsDateTime; // Дата
+  // Edit4.Text:=DataModule.ds_Request.FieldByName('REQ_PRIM').AsString; //Примечание
+  Memo1.Text := DataModule.ds_Request.FieldByName('REQ_PRIM').AsString;
+  // Примечание
 
   DataModule.ds_SERV_R.Close;
-  DataModule.ds_SERV_R.ParamByName('Perem').Value:=DataModule.ds_Request.FieldByName('REQ_ID').AsInteger;
+  DataModule.ds_SERV_R.ParamByName('Perem').Value :=
+    DataModule.ds_Request.FieldByName('REQ_ID').AsInteger;
   DataModule.ds_SERV_R.Open;
-  DataModule.ds_Metal.Open;
-  DataModule.ds_Metal.Filtered := False;
+  DataModule.ds_metal.Open;
+  DataModule.ds_metal.Filtered := False;
 
 end;
 
 procedure TFormEdit_R.RzBitBtn1Click(Sender: TObject);
 begin
- eFilter.Clear;
- DataModule.ds_Metal.ReopenLocate('TM_ID');
+  eFilter.Clear;
+  DataModule.ds_metal.ReopenLocate('TM_ID');
 end;
 
 procedure TFormEdit_R.RzBitBtn2Click(Sender: TObject);
 begin
-DataModule.DS_SERV_R.Delete;
+  DataModule.ds_SERV_R.Delete;
 end;
 
 procedure TFormEdit_R.SaveButtonClick(Sender: TObject);
 begin
   DataModule.ds_Request.Edit;
-//DataModule.ds_Request.FieldByName('REQ_CLNAME').AsString := Trim(Edit2.Text); //заказчик
-  DataModule.ds_Request.FieldByName('REQ_OBNAME').AsInteger :=StrToInt(cxButtonEdit3.Text);  //Объект
-  DataModule.ds_Request.FieldByName('REQ_N_ZAKAZ').AsString := Trim(Edit1.Text);  //Номер заказа
-  DataModule.ds_Request.FieldByName('REQ_DATE').AsDateTime := eDateBegin.DateTime;  //Дата
-  DataModule.ds_Request.FieldByName('REQ_LOGIN').AsInteger := UserIDGlobal;  //Кто внес данные
-  DataModule.ds_Request.FieldByName('REQ_PRIM').AsString := Trim(Memo1.Text);  //Примечание
+  // DataModule.ds_Request.FieldByName('REQ_CLNAME').AsString := Trim(Edit2.Text); //заказчик
+  DataModule.ds_Request.FieldByName('REQ_OBNAME').AsInteger :=
+    StrToInt(cxButtonEdit3.Text); // Объект
+  DataModule.ds_Request.FieldByName('REQ_N_ZAKAZ').AsString := Trim(Edit1.Text);
+  // Номер заказа
+  DataModule.ds_Request.FieldByName('REQ_DATE').AsDateTime :=
+    eDateBegin.datetime; // Дата
+  DataModule.ds_Request.FieldByName('REQ_LOGIN').AsInteger := UserIDGlobal;
+  // Кто внес данные
+  DataModule.ds_Request.FieldByName('REQ_PRIM').AsString := Trim(Memo1.Text);
+  // Примечание
 
   DataModule.ds_Request.Post;
   DataModule.ds_Request.ReopenLocate('REQ_DATE');
   DataModule.ds_SERV_R.Close;
-  DataModule.ds_SERV_R.ParamByName('Perem').Value:=Label1.Caption;
-  //DataModule.ds_Request.FieldByName('REQ_ID').AsInteger;
+  DataModule.ds_SERV_R.ParamByName('Perem').Value := Label1.Caption;
+  // DataModule.ds_Request.FieldByName('REQ_ID').AsInteger;
   DataModule.ds_SERV_R.Open;
 end;
 

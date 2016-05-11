@@ -4,13 +4,14 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ExtCtrls, Buttons, Grids, DBGrids, ComCtrls, DataModuleForm,
+  Dialogs, StdCtrls, ExtCtrls, Buttons, Grids, DBGrids, ComCtrls,
+  DataModuleForm,
   frxClass, DB, frxRich, frxDCtrl, frxFIBComponents, frxDBSet, BTS_Office_form,
   cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore,
   dxSkinsDefaultPainters, cxStyles, cxCustomData, cxFilter, cxData,
   cxDataStorage, cxEdit, cxDBData, cxGridLevel, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxClasses, cxGridCustomView, cxGrid,
-  frxExportBIFF, frxExportPDF, frxExportMail, frxExportXLS;
+  frxExportBIFF, frxExportPDF, frxExportMail, frxExportXLS, dxSkinscxPCPainter;
 
 type
   TGenerateReport = class(TForm)
@@ -62,87 +63,92 @@ var
   Stream: TMemoryStream;
   User: string;
 begin
- DataModule.ds_Template.ParamByName('X').AsInteger:=DataModule.ds_Template.FieldByName('T_ID').AsInteger;
- DataModule.ds_Template.Open;
- Stream:=TMemoryStream.Create;
+  DataModule.ds_Template.ParamByName('X').AsInteger :=
+    DataModule.ds_Template.FieldByName('T_ID').AsInteger;
+  DataModule.ds_Template.Open;
+  Stream := TMemoryStream.Create;
   try
-    (DataModule.ds_Template.FieldByName('T_BLOB') as TBLOBField).SaveToStream(Stream);
-    //Stream.Seek(0, soFromBeginning);
+    (DataModule.ds_Template.FieldByName('T_BLOB') as TBLOBField)
+      .SaveToStream(Stream);
+    // Stream.Seek(0, soFromBeginning);
     if Stream.Size <> 0 then
-     Begin
-       Stream.Position := 0;
-       frxReport1.Clear;
-       frxReport1.LoadFromStream(Stream);
-       //ShowMessage('Stream.Size <> 0'+#13#10+'          Нажмите Ок');
-     End;
-          // передача переменных в FastReport .
-     frxReport1.Variables['DateBeg']:=Format('''%s''',[DateToStr(eDateBegin.Date)]);
-     frxReport1.Variables['DateEnd']:=Format('''%s''',[DateToStr(eDateEnd.Date)]);
-     frxReport1.Variables['UserRight']:=QuotedStr(UserName);
-     frxReport1.Variables['MetalName']:='''' + DataModule.ds_Metal.FieldByName('TM_NAME').AsString + '''';
-     frxReport1.Variables['MetalID']:=DataModule.ds_Metal.FieldByName('TM_ID').AsInteger;
-     frxReport1.ShowReport;
+    Begin
+      Stream.Position := 0;
+      frxReport1.Clear;
+      frxReport1.LoadFromStream(Stream);
+      // ShowMessage('Stream.Size <> 0'+#13#10+'          Нажмите Ок');
+    End;
+    // передача переменных в FastReport .
+    frxReport1.Variables['DateBeg'] := Format('''%s''', [DateToStr(eDateBegin.Date)]);
+    frxReport1.Variables['DateEnd'] := Format('''%s''', [DateToStr(eDateEnd.Date)]);
+    frxReport1.Variables['UserRight'] := QuotedStr(UserName);
+    frxReport1.Variables['MetalName'] := '''' + DataModule.ds_Metal.FieldByName('TM_NAME').AsString + '''';
+    frxReport1.Variables['MetalID'] := DataModule.ds_Metal.FieldByName('TM_ID').AsInteger;
+    frxReport1.ShowReport;
   finally
-  Stream.Free;
+    Stream.Free;
 
   end;
 end;
 
 procedure TGenerateReport.DBGrid1CellClick(Column: TColumn);
 begin
- Label1.Caption:=DataModule.ds_Template.FieldByName('T_NAME').AsString;//'ТЕСТ';
- if (DataModule.ds_Template.FieldByName('T_ID').AsInteger = 3) or
+  Label1.Caption := DataModule.ds_Template.FieldByName('T_NAME').AsString;
+  // 'ТЕСТ';
+  if (DataModule.ds_Template.FieldByName('T_ID').AsInteger = 3) or
     (DataModule.ds_Template.FieldByName('T_ID').AsInteger = 2) then
   begin
-    eFilter.Visible:=True;
-    cxGrid2.Visible:=True;
+    eFilter.Visible := True;
+    cxGrid2.Visible := True;
   end
   else
   Begin
-    eFilter.Visible:=False;
-    cxGrid2.Visible:=False;
+    eFilter.Visible := False;
+    cxGrid2.Visible := False;
   End;
 
 end;
 
 procedure TGenerateReport.eFilterChange(Sender: TObject);
 var
-  filterText:string;
+  filterText: string;
 begin
-   if (Length(Trim(eFilter.Text)) > 0) and (eFilter.Text <> filterText) then
-     begin
-       DataModule.ds_Metal.Filtered := False;
-       DataModule.ds_Metal.FilterOptions :=[foCaseInsensitive];
-       DataModule.ds_Metal.Filter := 'TM_NAME LIKE ' + QuotedStr('%' + Trim(eFilter.Text) + '%');// +
-                           //' OR U_NOMERZAK LIKE ' + QuotedStr('%' + Trim(eFilter.Text) + '%'); //+
-                          // ' OR U_INV LIKE ' + QuotedStr('%' + Trim(eFilter.Text) + '%') ;
-       DataModule.ds_Metal.Filtered := True;
-     end;
-   if Length(Trim(eFilter.Text)) = 0 then
-      begin
-        eFilter.Clear;
-        DataModule.ds_Metal.Filtered := False;
-        DataModule.ds_Metal.ReopenLocate('TM_ID');
-      end;
+  if (Length(Trim(eFilter.Text)) > 0) and (eFilter.Text <> filterText) then
+  begin
+    DataModule.ds_Metal.Filtered := False;
+    DataModule.ds_Metal.FilterOptions := [foCaseInsensitive];
+    DataModule.ds_Metal.Filter := 'TM_NAME LIKE ' +
+      QuotedStr('%' + Trim(eFilter.Text) + '%'); // +
+    // ' OR U_NOMERZAK LIKE ' + QuotedStr('%' + Trim(eFilter.Text) + '%'); //+
+    // ' OR U_INV LIKE ' + QuotedStr('%' + Trim(eFilter.Text) + '%') ;
+    DataModule.ds_Metal.Filtered := True;
+  end;
+  if Length(Trim(eFilter.Text)) = 0 then
+  begin
+    eFilter.Clear;
+    DataModule.ds_Metal.Filtered := False;
+    DataModule.ds_Metal.ReopenLocate('TM_ID');
+  end;
 
 end;
 
 procedure TGenerateReport.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
- DataModule.ds_Template.Close;
- DataModule.ds_Metal.Close;
- Action := caFree;
+  DataModule.ds_Template.Close;
+  DataModule.ds_Metal.Close;
+  Action := caFree;
 end;
 
 procedure TGenerateReport.FormShow(Sender: TObject);
 begin
- DataModule.ds_Template.Open;
-// DataModule.ds_Metal.Open;
- DataModule.ds_Metal.ReopenLocate('TM_NAME');
- DataModule.ds_TemplateT_ID.Visible:=False;
- Label1.Caption:= DataModule.ds_Template.FieldByName('T_NAME').AsString;
- eDateBegin.Date:=Date;
- eDateEnd.Date:=Date;
+  DataModule.ds_Template.Close;
+  DataModule.ds_Template.Open;
+  // DataModule.ds_Metal.Open;
+  DataModule.ds_Metal.ReopenLocate('TM_NAME');
+  DataModule.ds_TemplateT_ID.Visible := False;
+  Label1.Caption := DataModule.ds_Template.FieldByName('T_NAME').AsString;
+//  eDateBegin.Date := Date;
+  eDateEnd.Date := Date;
 end;
 
 end.

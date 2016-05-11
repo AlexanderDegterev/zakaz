@@ -33,6 +33,14 @@ object FormEditPrice: TFormEditPrice
     Width = 256
     Height = 13
     Caption = #1055#1088#1086#1074#1077#1088#1082#1072' '#1085#1072' '#1087#1091#1089#1090#1099#1077' '#1087#1086#1083#1103', '#1087#1077#1088#1077#1076' '#1089#1086#1093#1088#1072#1085#1077#1085#1080#1077#1084' !!!!'
+    Visible = False
+  end
+  object LabelForPrice: TLabel
+    Left = 230
+    Top = 245
+    Width = 137
+    Height = 13
+    Caption = '*'#1090#1086#1083#1100#1082#1086' '#1094#1080#1092#1088#1099' '#1080' '#1089#1080#1084#1074#1086#1083' '#39','#39
   end
   object StaticText4: TStaticText
     Left = 25
@@ -143,7 +151,6 @@ object FormEditPrice: TFormEditPrice
     Format = 'dd.MM.yyyy'
     Time = 42409.000000000000000000
     DateFormat = dfLong
-    Enabled = False
     TabOrder = 5
   end
   object Panel3: TPanel
@@ -364,6 +371,7 @@ object FormEditPrice: TFormEditPrice
         OptionsView.Indicator = True
         object cxGrid2DBTableView1TM_ID: TcxGridDBColumn
           DataBinding.FieldName = 'TM_ID'
+          Visible = False
           Width = 42
         end
         object cxGrid2DBTableView1TM_NAME: TcxGridDBColumn
@@ -420,37 +428,49 @@ object FormEditPrice: TFormEditPrice
           end
           item
             Kind = skSum
+          end
+          item
+            Kind = skSum
             Column = cxGrid1DBTableView1TSP_COUNT
           end>
         DataController.Summary.SummaryGroups = <>
         OptionsView.Footer = True
         OptionsView.GroupByBox = False
         OptionsView.Indicator = True
-        object cxGrid1DBTableView1TSP_ID: TcxGridDBColumn
-          DataBinding.FieldName = 'TSP_ID'
-          Options.Editing = False
-          Width = 43
-        end
-        object cxGrid1DBTableView1TSP_TMID: TcxGridDBColumn
-          DataBinding.FieldName = 'TSP_TMID'
-          Options.Editing = False
-          Width = 56
-        end
-        object cxGrid1DBTableView1TSP_TPID: TcxGridDBColumn
-          DataBinding.FieldName = 'TSP_TPID'
-          Options.Editing = False
-          Width = 53
-        end
         object cxGrid1DBTableView1TSP_NAME: TcxGridDBColumn
+          Caption = #1052#1072#1090#1077#1088#1080#1072#1083
           DataBinding.FieldName = 'TSP_NAME'
           Options.Editing = False
-          Width = 360
+          Width = 320
         end
         object cxGrid1DBTableView1TSP_COUNT: TcxGridDBColumn
+          Caption = #1050#1086#1083'-'#1074#1086
           DataBinding.FieldName = 'TSP_COUNT'
         end
         object cxGrid1DBTableView1TSP_UNITM: TcxGridDBColumn
+          Caption = #1045#1076'.'#1080#1079#1084'.'
           DataBinding.FieldName = 'TSP_UNITM'
+          Options.Editing = False
+          Width = 44
+        end
+        object cxGrid1DBTableView1TSP_PERSENT_WASTE: TcxGridDBColumn
+          Caption = #1055#1088#1086#1094#1077#1085#1090' '#1086#1090#1093#1086#1076#1086#1074
+          DataBinding.FieldName = 'TSP_PERSENT_WASTE'
+          Width = 96
+        end
+        object cxGrid1DBTableView1TSP_ID: TcxGridDBColumn
+          DataBinding.FieldName = 'TSP_ID'
+          Visible = False
+          Options.Editing = False
+        end
+        object cxGrid1DBTableView1TSP_TMID: TcxGridDBColumn
+          DataBinding.FieldName = 'TSP_TMID'
+          Visible = False
+          Options.Editing = False
+        end
+        object cxGrid1DBTableView1TSP_TPID: TcxGridDBColumn
+          DataBinding.FieldName = 'TSP_TPID'
+          Visible = False
           Options.Editing = False
         end
       end
@@ -502,7 +522,6 @@ object FormEditPrice: TFormEditPrice
       Width = 192
       Height = 25
       Caption = #1055#1077#1095#1072#1090#1100' '#1089#1087#1077#1094#1080#1092#1080#1082#1072#1094#1080#1080' '#1080#1079#1076#1077#1083#1080#1103
-      DoubleBuffered = True
       Glyph.Data = {
         36030000424D3603000000000000360000002800000010000000100000000100
         18000000000000030000120B0000120B00000000000000000000FF00FFFF00FF
@@ -530,8 +549,8 @@ object FormEditPrice: TFormEditPrice
         F263B0EF8DA7EEC396F2CEA9E99B89FD0AF5FF00FFFF00FFFF00FFFF00FFFF00
         FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
         00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
-      ParentDoubleBuffered = False
       TabOrder = 2
+      OnClick = BtnPrintClick
     end
   end
   object StaticText6: TStaticText
@@ -559,8 +578,6 @@ object FormEditPrice: TFormEditPrice
     Top = 104
     Width = 201
     Height = 21
-    Enabled = False
-    ReadOnly = True
     TabOrder = 10
   end
   object Memo1: TMemo
@@ -576,6 +593,7 @@ object FormEditPrice: TFormEditPrice
     Width = 201
     Height = 21
     TabOrder = 12
+    OnKeyPress = Edit2KeyPress
   end
   object StaticText7: TStaticText
     Left = 25
@@ -741,7 +759,6 @@ object FormEditPrice: TFormEditPrice
     Width = 117
     Height = 25
     Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
-    DoubleBuffered = True
     Glyph.Data = {
       36030000424D3603000000000000360000002800000010000000100000000100
       18000000000000030000120B0000120B00000000000000000000FB00FFFB00FF
@@ -769,7 +786,6 @@ object FormEditPrice: TFormEditPrice
       FB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00
       FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB
       00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FFFB00FF}
-    ParentDoubleBuffered = False
     TabOrder = 24
     OnClick = SaveButtonClick
   end
@@ -794,7 +810,7 @@ object FormEditPrice: TFormEditPrice
       ''
       'end.')
     Left = 176
-    Top = 552
+    Top = 520
     Datasets = <>
     Variables = <>
     Style = <>
@@ -805,6 +821,6 @@ object FormEditPrice: TFormEditPrice
     DataSet = DataModule.ds_product
     BCDToCurrency = False
     Left = 112
-    Top = 528
+    Top = 520
   end
 end

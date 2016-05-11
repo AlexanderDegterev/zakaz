@@ -40,12 +40,12 @@ uses DataModuleForm;
 
 procedure TEdit_Templates.SaveButtonClick(Sender: TObject);
 begin
- DataModule.ds_Template.Edit;
- if RzComboBox1.ItemIndex  = 0 then //Договора
- DataModule.ds_Template.FieldByName('T_TYPE').AsInteger:=1
- else
- DataModule.ds_Template.FieldByName('T_TYPE').AsInteger:=0;
- DataModule.ds_Template.Post;
+  DataModule.ds_Template.Edit;
+  if RzComboBox1.ItemIndex = 0 then // Договора
+    DataModule.ds_Template.FieldByName('T_TYPE').AsInteger := 1
+  else
+    DataModule.ds_Template.FieldByName('T_TYPE').AsInteger := 0;
+  DataModule.ds_Template.Post;
 
 end;
 

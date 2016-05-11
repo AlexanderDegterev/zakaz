@@ -84,39 +84,46 @@ var
   User: string;
   TempPer: integer;
 begin
- TempPer:=44; // Отчет для материалов
- DataModule.ds_TemplatePrint.ParamByName('X').AsInteger:=TempPer;
- DataModule.ds_TemplatePrint.Open;
- Stream:=TMemoryStream.Create;
+  TempPer := 44; // Отчет для материалов
+  DataModule.ds_TemplatePrint.ParamByName('X').AsInteger := TempPer;
+  DataModule.ds_TemplatePrint.Open;
+  Stream := TMemoryStream.Create;
   try
-    (DataModule.ds_TemplatePrint.FieldByName('T_BLOB') as TBLOBField).SaveToStream(Stream);
-    //Stream.Seek(0, soFromBeginning);
+    (DataModule.ds_TemplatePrint.FieldByName('T_BLOB') as TBLOBField)
+      .SaveToStream(Stream);
+    // Stream.Seek(0, soFromBeginning);
     if Stream.Size <> 0 then
-     Begin
-       Stream.Position := 0;
-       frxReport1.Clear;
-       frxReport1.LoadFromStream(Stream);
-       //ShowMessage('Stream.Size <> 0'+#13#10+'          Нажмите Ок');
-     End;
-          // передача переменных в FastReport .
-     //frxReport1.Variables['DateBeg']:=Format('''%s''',[DateToStr(eDateBegin.Date)]);
-     //frxReport1.Variables['DateEnd']:=Format('''%s''',[DateToStr(eDateEnd.Date)]);
-     frxReport1.Variables['UserRight']:=QuotedStr(UserName);
-     frxReport1.Variables['MetalName']:='''' + DataModule.ds_Metal.FieldByName('TM_NAME').AsString + '''';
-     frxReport1.Variables['MetalID']:=DataModule.ds_Metal.FieldByName('TM_ID').AsInteger;
-     frxReport1.Variables['Perem']:=DataModule.DS_T_Users.FieldByName('U_ID').AsInteger;;
-     frxReport1.Variables['NomerZak']:=DataModule.DS_T_Users.FieldByName('U_NOMERZAK').AsString;
-     frxReport1.Variables['Zakazchik']:=QuotedStr(DataModule.DS_T_Users.FieldByName('CL_NAME').AsString);
-     frxReport1.Variables['DataPostup']:=QuotedStr(DataModule.DS_T_Users.FieldByName('U_DATEBEG').AsString);
-     //frxReport1.ShowReport;
-     //frxReport2.PrintOptions.Printer := 'TSC TTP-247';
-     frxReport1.PrintOptions.clear;
-     frxReport1.SelectPrinter;
-     frxReport1.PrintOptions.ShowDialog := false;
-     frxReport1.PrintOptions.PrintOnSheet := 1;
-     frxReport1.Print;
+    Begin
+      Stream.Position := 0;
+      frxReport1.Clear;
+      frxReport1.LoadFromStream(Stream);
+      // ShowMessage('Stream.Size <> 0'+#13#10+'          Нажмите Ок');
+    End;
+    // передача переменных в FastReport .
+    // frxReport1.Variables['DateBeg']:=Format('''%s''',[DateToStr(eDateBegin.Date)]);
+    // frxReport1.Variables['DateEnd']:=Format('''%s''',[DateToStr(eDateEnd.Date)]);
+    frxReport1.Variables['UserRight'] := QuotedStr(UserName);
+    frxReport1.Variables['MetalName'] := '''' + DataModule.ds_Metal.FieldByName
+      ('TM_NAME').AsString + '''';
+    frxReport1.Variables['MetalID'] := DataModule.ds_Metal.FieldByName('TM_ID')
+      .AsInteger;
+    frxReport1.Variables['Perem'] := DataModule.DS_T_Users.FieldByName('U_ID')
+      .AsInteger;;
+    frxReport1.Variables['NomerZak'] := DataModule.DS_T_Users.FieldByName
+      ('U_NOMERZAK').AsString;
+    frxReport1.Variables['Zakazchik'] :=
+      QuotedStr(DataModule.DS_T_Users.FieldByName('CL_NAME').AsString);
+    frxReport1.Variables['DataPostup'] :=
+      QuotedStr(DataModule.DS_T_Users.FieldByName('U_DATEBEG').AsString);
+    // frxReport1.ShowReport;
+    // frxReport2.PrintOptions.Printer := 'TSC TTP-247';
+    frxReport1.PrintOptions.Clear;
+    frxReport1.SelectPrinter;
+    frxReport1.PrintOptions.ShowDialog := false;
+    frxReport1.PrintOptions.PrintOnSheet := 1;
+    frxReport1.Print;
   finally
-  Stream.Free;
+    Stream.Free;
 
   end;
 end;
@@ -127,173 +134,179 @@ var
   User: string;
   TempPer: integer;
 begin
- TempPer:=44; // Отчет для материалов
- DataModule.ds_TemplatePrint.ParamByName('X').AsInteger:=TempPer;
- DataModule.ds_TemplatePrint.Open;
- Stream:=TMemoryStream.Create;
+  TempPer := 44; // Отчет для материалов
+  DataModule.ds_TemplatePrint.ParamByName('X').AsInteger := TempPer;
+  DataModule.ds_TemplatePrint.Open;
+  Stream := TMemoryStream.Create;
   try
-    (DataModule.ds_TemplatePrint.FieldByName('T_BLOB') as TBLOBField).SaveToStream(Stream);
-    //Stream.Seek(0, soFromBeginning);
+    (DataModule.ds_TemplatePrint.FieldByName('T_BLOB') as TBLOBField)
+      .SaveToStream(Stream);
+    // Stream.Seek(0, soFromBeginning);
     if Stream.Size <> 0 then
-     Begin
-       Stream.Position := 0;
-       frxReport1.Clear;
-       frxReport1.LoadFromStream(Stream);
-       //ShowMessage('Stream.Size <> 0'+#13#10+'          Нажмите Ок');
-     End;
-          // передача переменных в FastReport .
-     //frxReport1.Variables['DateBeg']:=Format('''%s''',[DateToStr(eDateBegin.Date)]);
-     //frxReport1.Variables['DateEnd']:=Format('''%s''',[DateToStr(eDateEnd.Date)]);
-     frxReport1.Variables['UserRight']:=QuotedStr(UserName);
-     frxReport1.Variables['MetalName']:='''' + DataModule.ds_Metal.FieldByName('TM_NAME').AsString + '''';
-     frxReport1.Variables['MetalID']:=DataModule.ds_Metal.FieldByName('TM_ID').AsInteger;
-     frxReport1.Variables['Perem']:=DataModule.DS_T_Users.FieldByName('U_ID').AsInteger;;
-     frxReport1.Variables['NomerZak']:=DataModule.DS_T_Users.FieldByName('U_NOMERZAK').AsString;
-     frxReport1.Variables['Zakazchik']:=QuotedStr(DataModule.DS_T_Users.FieldByName('CL_NAME').AsString);
-     frxReport1.Variables['DataPostup']:=QuotedStr(DataModule.DS_T_Users.FieldByName('U_DATEBEG').AsString);
-     frxReport1.ShowReport;
+    Begin
+      Stream.Position := 0;
+      frxReport1.Clear;
+      frxReport1.LoadFromStream(Stream);
+      // ShowMessage('Stream.Size <> 0'+#13#10+'          Нажмите Ок');
+    End;
+    // передача переменных в FastReport .
+    // frxReport1.Variables['DateBeg']:=Format('''%s''',[DateToStr(eDateBegin.Date)]);
+    // frxReport1.Variables['DateEnd']:=Format('''%s''',[DateToStr(eDateEnd.Date)]);
+    frxReport1.Variables['UserRight'] := QuotedStr(UserName);
+    frxReport1.Variables['MetalName'] := '''' + DataModule.ds_Metal.FieldByName('TM_NAME').AsString + '''';
+    frxReport1.Variables['MetalID'] := DataModule.ds_Metal.FieldByName('TM_ID').AsInteger;
+    frxReport1.Variables['Perem'] := DataModule.DS_T_Users.FieldByName('U_ID').AsInteger;;
+    frxReport1.Variables['NomerZak'] := DataModule.DS_T_Users.FieldByName('U_NOMERZAK').AsString;
+    frxReport1.Variables['Zakazchik'] := QuotedStr(DataModule.DS_T_Users.FieldByName('CL_NAME').AsString);
+    frxReport1.Variables['DataPostup'] := QuotedStr(DataModule.DS_T_Users.FieldByName('U_DATEBEG').AsString);
+    frxReport1.ShowReport;
   finally
-  Stream.Free;
+    Stream.Free;
 
   end;
 end;
 
 procedure TMaterial.ButtonCloseClick(Sender: TObject);
 begin
- DataModule.DS_T_Users.ReopenLocate('U_ID');
- Close;
+  DataModule.DS_T_Users.ReopenLocate('U_ID');
+  Close;
 end;
 
 procedure TMaterial.ButtonDelClick(Sender: TObject);
 begin
- DataModule.ds_SERV_M.Delete;
+  DataModule.ds_SERV_M.Delete;
 end;
 
 procedure TMaterial.DBGrid1DblClick(Sender: TObject);
 var
-QuantityProd, SVM_ID, SVM_COUNT, TM_ID :integer;
-TM_NAME, TM_UNITM, TM_GOST :STRING;
+  QuantityProd, SVM_ID, SVM_COUNT, TM_ID: integer;
+  TM_NAME, TM_UNITM, TM_GOST: STRING;
 begin
-  edit2.Text:=DataModule.ds_Metal.FieldByName('TM_ID').AsString;
-  TM_ID:=DataModule.ds_Metal.FieldByName('TM_ID').AsInteger;
-  TM_NAME:=DataModule.ds_Metal.FieldByName('TM_NAME').AsString;
-  TM_UNITM:=DataModule.ds_Metal.FieldByName('TM_UNITM').AsString;
-  TM_GOST:=DataModule.ds_Metal.FieldByName('TM_GOST').AsString;
-  SVM_COUNT:=0;
+  Edit2.Text := DataModule.ds_Metal.FieldByName('TM_ID').AsString;
+  TM_ID := DataModule.ds_Metal.FieldByName('TM_ID').AsInteger;
+  TM_NAME := DataModule.ds_Metal.FieldByName('TM_NAME').AsString;
+  TM_UNITM := DataModule.ds_Metal.FieldByName('TM_UNITM').AsString;
+  TM_GOST := DataModule.ds_Metal.FieldByName('TM_GOST').AsString;
+  SVM_COUNT := 0;
   //
   // Переделка через FIBQuery (Кол-во продукции)
-  DataModule.Query_QuantityMet.ParamByName('Perem1').Value:=DataModule.ds_metal.FieldByName('TM_ID').AsInteger;
+  DataModule.Query_QuantityMet.ParamByName('Perem1').Value :=
+    DataModule.ds_Metal.FieldByName('TM_ID').AsInteger;
 
   // пересмотреть
-  DataModule.Query_QuantityMet.ParamByName('Perem2').Value:=TRIM(Edit1.Text);
-  //DataModule.Query_QuantityMet.Transaction.StartTransaction;
+  DataModule.Query_QuantityMet.ParamByName('Perem2').Value := TRIM(Edit1.Text);
+  // DataModule.Query_QuantityMet.Transaction.StartTransaction;
   DataModule.Query_QuantityMet.ExecQuery;
-  //DataModule.Query_QuantityMet.Transaction.Commit;
+  // DataModule.Query_QuantityMet.Transaction.Commit;
 
-
-  SVM_ID:=DataModule.Query_QuantityMet.FieldByName('SVM_ID').AsInteger;
-  SVM_COUNT:=DataModule.Query_QuantityMet.FieldByName('COUNT').AsInteger;
-  //ShowMessage('Найдено: '+intToStr(SVM_COUNT)+'          Нажмите Ок'+intToStr(SVM_ID));
+  SVM_ID := DataModule.Query_QuantityMet.FieldByName('SVM_ID').AsInteger;
+  SVM_COUNT := DataModule.Query_QuantityMet.FieldByName('COUNT').AsInteger;
+  // ShowMessage('Найдено: '+intToStr(SVM_COUNT)+'          Нажмите Ок'+intToStr(SVM_ID));
 
   // - не переписана
 
-  if SVM_COUNT>=1 then
-   begin
+  if SVM_COUNT >= 1 then
+  begin
 
-     ShowMessage('материал '+TM_NAME+' уже есть в списке!'+'  Нажмите Ок');
-     DataModule.ds_SERV_M.ReopenLocate('SVM_ID');
+    ShowMessage('материал ' + TM_NAME + ' уже есть в списке!' + '  Нажмите Ок');
+    DataModule.ds_SERV_M.ReopenLocate('SVM_ID');
 
-   end
+  end
 
   else
   Begin
 
-  //ShowMessage('STOP');
-  DataModule.ds_SERV_M.Open;
-  DataModule.ds_SERV_M.Insert;
-  DataModule.ds_SERV_M.FieldByName('SVM_UID').AsInteger :=strToInt(Trim(Edit1.Text));
-  DataModule.ds_SERV_M.FieldByName('SVM_TMID').AsInteger :=TM_ID;
-  DataModule.ds_SERV_M.FieldByName('SVM_COUNT').AsString :='';
-  DataModule.ds_SERV_M.FieldByName('SVM_UNITM').AsString :=TM_UNITM;
-  DataModule.ds_SERV_M.Post;
+    // ShowMessage('STOP');
+    DataModule.ds_SERV_M.Open;
+    DataModule.ds_SERV_M.Insert;
+    DataModule.ds_SERV_M.FieldByName('SVM_UID').AsInteger :=
+      strToInt(TRIM(Edit1.Text));
+    DataModule.ds_SERV_M.FieldByName('SVM_TMID').AsInteger := TM_ID;
+    DataModule.ds_SERV_M.FieldByName('SVM_COUNT').AsString := '';
+    DataModule.ds_SERV_M.FieldByName('SVM_UNITM').AsString := TM_UNITM;
+    DataModule.ds_SERV_M.Post;
 
-  DataModule.ds_SERV_M.ReopenLocate('SVM_ID');
+    DataModule.ds_SERV_M.ReopenLocate('SVM_ID');
 
   End;
 end;
 
 procedure TMaterial.eFilterChange(Sender: TObject);
 var
-  filterText:string;
+  filterText: string;
 begin
-   if (Length(Trim(eFilter.Text)) > 0) and (eFilter.Text <> filterText) then
-     begin
-       DataModule.ds_Metal.Filtered := False;
-       DataModule.ds_Metal.FilterOptions :=[foCaseInsensitive];
-       DataModule.ds_Metal.Filter := 'TM_NAME LIKE ' + QuotedStr('%' + Trim(eFilter.Text) + '%');// +
-                           //' OR U_NOMERZAK LIKE ' + QuotedStr('%' + Trim(eFilter.Text) + '%'); //+
-                          // ' OR U_INV LIKE ' + QuotedStr('%' + Trim(eFilter.Text) + '%') ;
-       DataModule.ds_Metal.Filtered := True;
+  if (Length(TRIM(eFilter.Text)) > 0) and (eFilter.Text <> filterText) then
+  begin
+    DataModule.ds_Metal.Filtered := false;
+    DataModule.ds_Metal.FilterOptions := [foCaseInsensitive];
+    DataModule.ds_Metal.Filter := 'TM_NAME LIKE ' +
+      QuotedStr('%' + TRIM(eFilter.Text) + '%'); // +
+    // ' OR U_NOMERZAK LIKE ' + QuotedStr('%' + Trim(eFilter.Text) + '%'); //+
+    // ' OR U_INV LIKE ' + QuotedStr('%' + Trim(eFilter.Text) + '%') ;
+    DataModule.ds_Metal.Filtered := True;
 
-     end;
+  end;
 
-   if Length(Trim(eFilter.Text)) = 0 then
-      begin
-        {DBLookupComboBox1.KeyValue := -1;}
-        eFilter.Clear;
-        DataModule.ds_Metal.Filtered := False;
-        DataModule.ds_SERV_M.ReopenLocate('SVM_UID');
-      end;
+  if Length(TRIM(eFilter.Text)) = 0 then
+  begin
+    { DBLookupComboBox1.KeyValue := -1; }
+    eFilter.Clear;
+    DataModule.ds_Metal.Filtered := false;
+    DataModule.ds_SERV_M.ReopenLocate('SVM_UID');
+  end;
 end;
 
 procedure TMaterial.FormClose(Sender: TObject; var Action: TCloseAction);
- begin
+begin
   DataModule.DS_T_Users.ReopenLocate('U_ID');
   DataModule.ds_SERV_M.Close;
   DataModule.ds_Metal.Close;
   Action := caFree;
- end;
+end;
 
 procedure TMaterial.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
- SaveButtonClick(self);
+  SaveButtonClick(self);
 end;
 
 procedure TMaterial.FormShow(Sender: TObject);
 begin
- DataModule.ds_SERV_M.Close;
- DataModule.ds_SERV_M.ParamByName('Perem').Value:=DataModule.DS_T_USERS.FieldByName('U_ID').AsInteger;
- DataModule.ds_SERV_M.Open;
- DataModule.ds_Metal.Open;
- DataModule.ds_Metal.Filtered := False;
- edit1.Text:=DataModule.DS_T_Users.FieldByName('U_ID').AsString;
- Label3.Caption:='Номер заказа: '+DataModule.DS_T_Users.FieldByName('U_NOMERZAK').AsString;
- if UserRight = 1 then
-   Begin
-    ButtonDel.Visible:=false;
-    cxGrid1DBTableView1.OptionsData.Editing :=False;
-   End;
+  DataModule.ds_SERV_M.Close;
+  DataModule.ds_SERV_M.ParamByName('Perem').Value :=
+    DataModule.DS_T_Users.FieldByName('U_ID').AsInteger;
+  DataModule.ds_SERV_M.Open;
+  DataModule.ds_Metal.Open;
+  DataModule.ds_Metal.Filtered := false;
+  Edit1.Text := DataModule.DS_T_Users.FieldByName('U_ID').AsString;
+  Label3.Caption := 'Номер заказа: ' + DataModule.DS_T_Users.FieldByName
+    ('U_NOMERZAK').AsString;
+  if UserRight = 1 then
+  Begin
+    ButtonDel.Visible := false;
+    cxGrid1DBTableView1.OptionsData.Editing := false;
+  End;
 end;
-
 
 procedure TMaterial.RzBitBtn1Click(Sender: TObject);
 begin
   eFilter.Clear;
- DataModule.ds_Metal.Filtered := False;
+  DataModule.ds_Metal.Filtered := false;
 end;
 
 procedure TMaterial.SaveButtonClick(Sender: TObject);
 begin
-// тут можно перенести логику в БД (использовать триггер T_SERV_M_BU0)
-DataModule.QuerySummMet.ParamByName('Perem').Value:=DataModule.DS_T_Users.FieldByName('U_ID').AsInteger;
-DataModule.QuerySummMet.ExecQuery;
-DataModule.DS_T_Users.Open;
-DataModule.DS_T_Users.Edit;
-DataModule.DS_T_Users.FieldByName('U_MET').AsString:=DataModule.QuerySummMet.FieldByName('SUM').AsString;
-DataModule.DS_T_Users.Post;
-DataModule.DS_T_Users.ReopenLocate('U_ID');
-ModalResult := mrOk;
- //Close;
+  // тут можно перенести логику в БД (использовать триггер T_SERV_M_BU0)
+  DataModule.QuerySummMet.ParamByName('Perem').Value :=
+    DataModule.DS_T_Users.FieldByName('U_ID').AsInteger;
+  DataModule.QuerySummMet.ExecQuery;
+  DataModule.DS_T_Users.Open;
+  DataModule.DS_T_Users.Edit;
+  DataModule.DS_T_Users.FieldByName('U_MET').AsString :=
+    DataModule.QuerySummMet.FieldByName('SUM').AsString;
+  DataModule.DS_T_Users.Post;
+  DataModule.DS_T_Users.ReopenLocate('U_ID');
+  ModalResult := mrOk;
+  // Close;
 end;
 
 end.

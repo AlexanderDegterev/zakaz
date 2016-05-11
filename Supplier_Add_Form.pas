@@ -37,18 +37,19 @@ uses DataModuleForm;
 
 procedure TSupplier_Add.CancelButtonClick(Sender: TObject);
 begin
-modalResult := mrCancel;
+  modalResult := mrCancel;
 end;
 
 procedure TSupplier_Add.SaveButtonClick(Sender: TObject);
 begin
- DataModule.ds_Supplier.Insert;
- DataModule.ds_Supplier.FieldByName('SUP_NAME').AsString := Trim(Edit1.Text);
- DataModule.ds_Supplier.FieldByName('SUP_ADRES').AsString := Trim(Edit2.Text);
- DataModule.ds_Supplier.FieldByName('SUP_UNN').AsString := Trim(Edit3.Text);
- DataModule.ds_Supplier.FieldByName('SUP_TELEPHONE').AsString := Trim(Edit4.Text);
- DataModule.ds_Supplier.Post;
- modalResult :=mrOk;
+  DataModule.ds_Supplier.Insert;
+  DataModule.ds_Supplier.FieldByName('SUP_NAME').AsString := Trim(Edit1.Text);
+  DataModule.ds_Supplier.FieldByName('SUP_ADRES').AsString := Trim(Edit2.Text);
+  DataModule.ds_Supplier.FieldByName('SUP_UNN').AsString := Trim(Edit3.Text);
+  DataModule.ds_Supplier.FieldByName('SUP_TELEPHONE').AsString :=
+    Trim(Edit4.Text);
+  DataModule.ds_Supplier.Post;
+  modalResult := mrOk;
 end;
 
 end.

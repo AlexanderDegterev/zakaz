@@ -47,19 +47,20 @@ uses DataModuleForm;
 
 procedure TEdit_Product.CancelButtonClick(Sender: TObject);
 begin
- Close;
+  Close;
 end;
 
 procedure TEdit_Product.FormShow(Sender: TObject);
-var Vrem:Integer;
+var
+  Vrem: Integer;
 begin
- DataModule.ds_product.Open;
- vrem:=DataModule.ds_product.FieldByName('TP_PGID').AsInteger;
- Edit1.Text:=DataModule.ds_product.FieldByName('TP_Name').AsString;
- Edit2.Text:=DataModule.ds_product.FieldByName('TP_VOLUME').AsString;
- Edit3.Text:=DataModule.ds_product.FieldByName('TP_UNITM').AsString;
- Edit4.Text:=DataModule.ds_product.FieldByName('TP_GOST').AsString;
- Edit5.Text:=IntToStr(vrem);
+  DataModule.ds_product.Open;
+  Vrem := DataModule.ds_product.FieldByName('TP_PGID').AsInteger;
+  Edit1.Text := DataModule.ds_product.FieldByName('TP_Name').AsString;
+  Edit2.Text := DataModule.ds_product.FieldByName('TP_VOLUME').AsString;
+  Edit3.Text := DataModule.ds_product.FieldByName('TP_UNITM').AsString;
+  Edit4.Text := DataModule.ds_product.FieldByName('TP_GOST').AsString;
+  Edit5.Text := IntToStr(Vrem);
 
 end;
 

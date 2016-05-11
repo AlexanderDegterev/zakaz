@@ -30,14 +30,15 @@ implementation
 
 procedure TEdit_Clients.CancelButtonClick(Sender: TObject);
 begin
- Close;
+  Close;
 end;
 
 procedure TEdit_Clients.FormShow(Sender: TObject);
 begin
- DataModule.DS_CLIENTS.ParamByName('X').AsInteger:=DataModule.DS_CLIENTS.FieldByName('CL_ID').AsInteger;
- DataModule.DS_CLIENTS.Open;
- Edit1.Text:=DataModule.DS_CLIENTS.FieldByName('CL_NAME').AsString;
+  DataModule.DS_CLIENTS.ParamByName('X').AsInteger :=
+    DataModule.DS_CLIENTS.FieldByName('CL_ID').AsInteger;
+  DataModule.DS_CLIENTS.Open;
+  Edit1.Text := DataModule.DS_CLIENTS.FieldByName('CL_NAME').AsString;
 end;
 
 procedure TEdit_Clients.SaveButtonClick(Sender: TObject);
