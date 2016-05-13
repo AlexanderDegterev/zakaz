@@ -219,7 +219,6 @@ type
     cxGridDBTableView4TSP_COUNT: TcxGridDBColumn;
     cxGridDBTableView4TSP_UNITM: TcxGridDBColumn;
     cxGridDBTableView4TSP_PERSENT_WASTE: TcxGridDBColumn;
-    BtnPrint: TBitBtn;
     BitExportExcel: TBitBtn;
     PrintSpecProduction: TAction;
     Action2: TAction;
@@ -288,7 +287,6 @@ type
     procedure cxGridDBTableView3TP_PRICECustomDrawCell
       (Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
       AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
-    procedure PrintSpecProductionExecute(Sender: TObject);
     procedure BitExportExcelClick(Sender: TObject);
     procedure Get_SelectionClick(Sender: TObject);
     procedure Check(AGridView: TcxGridDBTableView);
@@ -519,13 +517,24 @@ end;
 procedure TMain.BitExportExcelClick(Sender: TObject);
 var
   Stream: TMemoryStream;
-  User, MyDIR, dir: string;
-  TempPer: integer;
+  User,S, MyDIR,dir: string;
+  TempPer, i: integer;
 begin
-  TempPer := 47; // Спецификация изделия
+  S:='';
+  TempPer := 49; // Спецификация изделия(selected)
+  with cxGridDBTableView3.Controller do
+  Begin
+    S:= 'IN (' +VarToStr(cxGridDBTableView3.Controller.SelectedRecords[0].Values[0]);
+       for i := 1 to SelectedRecordCount - 1 do
+         S:= S+ ','+VarToStr(cxGridDBTableView3.Controller.SelectedRecords[i].Values[0]);
+    S:=S + ')';
+  End;
+//  Showmessage(S);
+  DataModule.ds_TemplatePrint.Close;
   DataModule.ds_TemplatePrint.ParamByName('X').AsInteger := TempPer;
   DataModule.ds_TemplatePrint.Open;
   Stream := TMemoryStream.Create;
+
   try
     (DataModule.ds_TemplatePrint.FieldByName('T_BLOB') as TBLOBField).SaveToStream(Stream);
     if Stream.Size <> 0 then
@@ -534,16 +543,10 @@ begin
       frxReport1.Clear;
       frxReport1.LoadFromStream(Stream);
     End;
-    // передача переменных в FastReport .
+    //передача переменных в FastReport .
+    frxReport1.Variables['peremIdArray'] := QuotedStr(S);
     frxReport1.Variables['UserRight'] := QuotedStr(UserName);
-    frxReport1.Variables['Perem'] := DataModule.ds_product.FieldByName('TP_ID').AsInteger;
-    frxReport1.Variables['ProductGroup'] := QuotedStr(DataModule.ds_product.FieldByName('PG_NAME').AsString);
-    frxReport1.Variables['ProductName'] := QuotedStr(DataModule.ds_product.FieldByName('TP_NAME').AsString);
-    frxReport1.Variables['Weight'] := QuotedStr(DataModule.ds_product.FieldByName('TP_WEIGHT').AsString);
-    frxReport1.Variables['UnitM'] := QuotedStr(DataModule.ds_product.FieldByName('TP_UNITM').AsString);
-    frxReport1.Variables['Price'] := QuotedStr(DataModule.ds_product.FieldByName('TP_PRICE').AsString);
-    frxReport1.Variables['DataPostup'] := QuotedStr(DataModule.ds_product.FieldByName('TP_DATE').AsString);
-    frxReport1.Variables['Prim'] := QuotedStr(DataModule.ds_product.FieldByName('TP_PRIM').AsString);
+//     frxReport1.PrepareReport(true);
 
   // Создание каталога temp и файлов
   MyDIR := ExtractFileDir(Application.ExeName);
@@ -1082,6 +1085,7 @@ begin
     S:=S + ')';
   End;
 //  Showmessage(S);
+  DataModule.ds_TemplatePrint.Close;
   DataModule.ds_TemplatePrint.ParamByName('X').AsInteger := TempPer;
   DataModule.ds_TemplatePrint.Open;
   Stream := TMemoryStream.Create;
@@ -1166,42 +1170,6 @@ begin
     frxReport1.ShowReport;
   finally
     Stream.Free;
-  end;
-end;
-
-procedure TMain.PrintSpecProductionExecute(Sender: TObject);
-var
-  Stream: TMemoryStream;
-  User: string;
-  TempPer: integer;
-begin
-  TempPer := 47; // Спецификация изделия
-  DataModule.ds_TemplatePrint.ParamByName('X').AsInteger := TempPer;
-  DataModule.ds_TemplatePrint.Open;
-  Stream := TMemoryStream.Create;
-  try
-    (DataModule.ds_TemplatePrint.FieldByName('T_BLOB') as TBLOBField).SaveToStream(Stream);
-    if Stream.Size <> 0 then
-    Begin
-      Stream.Position := 0;
-      frxReport1.Clear;
-      frxReport1.LoadFromStream(Stream);
-    End;
-    // передача переменных в FastReport .
-    frxReport1.Variables['UserRight'] := QuotedStr(UserName);
-    frxReport1.Variables['Perem'] := DataModule.ds_product.FieldByName('TP_ID').AsInteger;
-    frxReport1.Variables['ProductGroup'] := QuotedStr(DataModule.ds_product.FieldByName('PG_NAME').AsString);
-    frxReport1.Variables['ProductName'] := QuotedStr(DataModule.ds_product.FieldByName('TP_NAME').AsString);
-    frxReport1.Variables['Weight'] := QuotedStr(DataModule.ds_product.FieldByName('TP_WEIGHT').AsString);
-    frxReport1.Variables['UnitM'] := QuotedStr(DataModule.ds_product.FieldByName('TP_UNITM').AsString);
-    frxReport1.Variables['Price'] := QuotedStr(DataModule.ds_product.FieldByName('TP_PRICE').AsString);
-    frxReport1.Variables['DataPostup'] := QuotedStr(DataModule.ds_product.FieldByName('TP_DATE').AsString);
-    frxReport1.Variables['Prim'] := QuotedStr(DataModule.ds_product.FieldByName('TP_PRIM').AsString);
-    // frxReport1.PrepareReport(true);
-    frxReport1.ShowReport;
-  finally
-    Stream.Free;
-
   end;
 end;
 

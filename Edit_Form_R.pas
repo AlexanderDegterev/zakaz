@@ -10,7 +10,7 @@ uses
   ComCtrls, RzPanel, Buttons, RzButton, cxGridLevel, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxClasses, cxGridCustomView, cxGrid,
   ExtCtrls, DBCtrls, cxTextEdit, cxMaskEdit, cxButtonEdit, frxClass,
-  frxFIBComponents, frxDBSet;
+  frxFIBComponents, frxDBSet, dxSkinscxPCPainter;
 
 type
   TFormEdit_R = class(TForm)
@@ -98,6 +98,7 @@ var
   TempPer: Integer;
 begin
   TempPer := 46; // Заявка
+  DataModule.ds_TemplatePrint.Close;
   DataModule.ds_TemplatePrint.ParamByName('X').AsInteger := TempPer;
   DataModule.ds_TemplatePrint.Open;
   Stream := TMemoryStream.Create;

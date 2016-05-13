@@ -115,6 +115,7 @@ var
   TempPer: integer;
 begin
   TempPer := 47; // Спецификация изделия
+  DataModule.ds_TemplatePrint.Close;
   DataModule.ds_TemplatePrint.ParamByName('X').AsInteger := TempPer;
   DataModule.ds_TemplatePrint.Open;
   Stream := TMemoryStream.Create;
@@ -128,7 +129,8 @@ begin
     End;
     // передача переменных в FastReport .
     frxReport1.Variables['UserRight'] := QuotedStr(UserName);
-    frxReport1.Variables['Perem'] := DataModule.ds_product.FieldByName('TP_ID').AsInteger;
+//    frxReport1.Variables['Perem'] := DataModule.ds_product.FieldByName('TP_ID').AsInteger;
+    frxReport1.Variables['Perem'] := StrToInt(Label1.Caption);
     frxReport1.Variables['ProductGroup'] := QuotedStr(DBLookupComboBox2.Text);
     frxReport1.Variables['ProductName'] := QuotedStr(DataModule.ds_product.FieldByName('TP_NAME').AsString);
     frxReport1.Variables['Weight'] := QuotedStr(DataModule.ds_product.FieldByName('TP_WEIGHT').AsString);

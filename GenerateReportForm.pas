@@ -63,8 +63,8 @@ var
   Stream: TMemoryStream;
   User: string;
 begin
-  DataModule.ds_Template.ParamByName('X').AsInteger :=
-    DataModule.ds_Template.FieldByName('T_ID').AsInteger;
+  DataModule.ds_Template.Close;
+  DataModule.ds_Template.ParamByName('X').AsInteger := DataModule.ds_Template.FieldByName('T_ID').AsInteger;
   DataModule.ds_Template.Open;
   Stream := TMemoryStream.Create;
   try

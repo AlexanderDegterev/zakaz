@@ -8,7 +8,8 @@ uses
   dxSkinsCore, dxSkinsDefaultPainters, cxStyles, cxCustomData, cxFilter, cxData,
   cxDataStorage, cxEdit, DB, cxDBData, StdCtrls, Buttons, cxGridLevel,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxClasses,
-  cxGridCustomView, cxGrid, RzButton, RzPanel, ExtCtrls, ImgList;
+  cxGridCustomView, cxGrid, RzButton, RzPanel, ExtCtrls, ImgList,
+  dxSkinscxPCPainter;
 
 type
   TIzdelie2 = class(TForm)
