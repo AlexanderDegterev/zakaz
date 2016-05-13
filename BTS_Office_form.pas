@@ -230,6 +230,7 @@ type
     GroupPrintSpecProd: TAction;
     colCheckPrice: TcxGridDBColumn;
     frxDBDatasetSelect: TfrxDBDataset;
+    PrintSelectZakaz: TBitBtn;
     procedure eFilterChange(Sender: TObject);
     procedure ButtonCloseClick(Sender: TObject);
     procedure N6Click(Sender: TObject);
@@ -312,6 +313,7 @@ type
     procedure GroupPrintSpecProdExecute(Sender: TObject);
     procedure colCheckPricePropertiesEditValueChanged(Sender: TObject);
     procedure eFilterPriceClick(Sender: TObject);
+    procedure PrintSelectZakazClick(Sender: TObject);
 
 
   private
@@ -422,6 +424,7 @@ begin
     [mbYes, mbNo], 0) = mrNo then
     exit;
   DataModule.ds_product.Delete;
+  DataModule.ds_product.FullRefresh;
 end;
 
 procedure TMain.ActionAddFormPriceExecute(Sender: TObject);
@@ -499,6 +502,7 @@ begin
     exit;
 
   DataModule.DS_SUP_First.Delete;
+  DataModule.DS_SUP_First.FullRefresh;
 end;
 
 procedure TMain.BitEdit_SClick(Sender: TObject);
@@ -600,8 +604,8 @@ begin
   if MessageDlg('Вы действительно хотите удалить?', mtConfirmation,
     [mbYes, mbNo], 0) = mrNo then
     exit;
-
   DataModule.ds_Request.Delete;
+  DataModule.ds_Request.FullRefresh;
 end;
 
 procedure TMain.BtnPriceDeleteClick(Sender: TObject);
@@ -611,6 +615,7 @@ begin
     exit;
 
   DataModule.ds_product.Delete;
+  DataModule.ds_product.FullRefresh;
 end;
 
 procedure TMain.Get_SelectionClick(Sender: TObject);
@@ -671,8 +676,9 @@ begin
   if MessageDlg('Вы действительно хотите удалить?', mtConfirmation,
     [mbYes, mbNo], 0) = mrNo then
     exit;
-
   DataModule.DS_T_Users.Delete;
+  DataModule.DS_T_Users.FullRefresh;
+
 end;
 
 procedure TMain.ButtonEditClick(Sender: TObject);
@@ -1122,6 +1128,44 @@ begin
     Remot_orders.ShowModal;
   finally
     Remot_orders.free;
+  end;
+end;
+
+procedure TMain.PrintSelectZakazClick(Sender: TObject);
+var
+  Stream: TMemoryStream;
+  User,S: string;
+  TempPer, i: integer;
+begin
+  S:='';
+  TempPer := 30; // Отчет заказ+изделия (select)
+  with cxGrid1DBTableView1.Controller do
+  Begin
+    S:= 'IN (' +VarToStr(cxGrid1DBTableView1.Controller.SelectedRecords[0].Values[0]);
+       for i := 1 to SelectedRecordCount - 1 do
+         S:= S+ ','+VarToStr(cxGrid1DBTableView1.Controller.SelectedRecords[i].Values[0]);
+    S:=S + ')';
+  End;
+  //Showmessage(S);
+  DataModule.ds_TemplatePrint.ParamByName('X').AsInteger := TempPer;
+  DataModule.ds_TemplatePrint.Open;
+  Stream := TMemoryStream.Create;
+
+  try
+    (DataModule.ds_TemplatePrint.FieldByName('T_BLOB') as TBLOBField).SaveToStream(Stream);
+    if Stream.Size <> 0 then
+    Begin
+      Stream.Position := 0;
+      frxReport1.Clear;
+      frxReport1.LoadFromStream(Stream);
+    End;
+    //передача переменных в FastReport .
+    frxReport1.Variables['peremIdArray'] := QuotedStr(S);
+    frxReport1.Variables['UserRight'] := QuotedStr(UserName);
+     frxReport1.PrepareReport(true);
+    frxReport1.ShowReport;
+  finally
+    Stream.Free;
   end;
 end;
 

@@ -54,13 +54,6 @@ implementation
 uses DataModuleForm, Edit_Template_Form;
 
 {$R *.dfm}
-{ function GetID(genname: string; increment: Integer = 1):integer;
-  begin
-  DataModule.qGen.Active:=false;
-  DataModule.qGen.SelectSQL:=Format('select gen_id(%s,%d)from rdb$database',[genname,increment]);
-  DataModule.qGen.Open;
-  Result:=DataModule.qGen.Fields[0].AsInteger;
-  end; }
 
 // функция возвращает название файла без расширения
 function ExtractOnlyFileName(const FileName: string): string;
@@ -89,6 +82,7 @@ end;
 procedure TControlOfTemplates.FormShow(Sender: TObject);
 begin
   DataModule.ds_Template.Open;
+  DataModule.ds_Template.FullRefresh;
   DataModule.ds_Template.FieldByName('T_ID').Visible := False;
   // DataModule.ds_Template.FieldByName('T_TYPE').Visible:=False;
   DataModule.ds_TemplateT_TYPE.Visible := False;

@@ -285,32 +285,8 @@ object ControlOfTemplates: TControlOfTemplates
     Left = 460
     Top = 44
   end
-  object frxDesigner: TfrxDesigner
-    DefaultScriptLanguage = 'PascalScript'
-    DefaultFont.Charset = DEFAULT_CHARSET
-    DefaultFont.Color = clWindowText
-    DefaultFont.Height = -13
-    DefaultFont.Name = 'Arial'
-    DefaultFont.Style = []
-    DefaultLeftMargin = 10.000000000000000000
-    DefaultRightMargin = 10.000000000000000000
-    DefaultTopMargin = 10.000000000000000000
-    DefaultBottomMargin = 10.000000000000000000
-    DefaultPaperSize = 9
-    DefaultOrientation = poPortrait
-    GradientEnd = 11982554
-    GradientStart = clWindow
-    TemplatesExt = 'fr3'
-    Restrictions = []
-    RTLLanguage = False
-    MemoParentFont = False
-    OnSaveReport = frxDesignerSaveReport
-    OnShow = frxDesignerShow
-    Left = 464
-    Top = 160
-  end
   object frxReport: TfrxReport
-    Version = '4.13.3'
+    Version = '4.13.1'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
@@ -335,7 +311,7 @@ object ControlOfTemplates: TControlOfTemplates
     Left = 464
     Top = 224
     Bitmap = {
-      494C01013A004800300010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01013A0048003C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000040000000F0000000010020000000000000F0
       00000000000000000000000000000000000000000000CCCCCC00C0C0C000E5E5
       E500000000000000000000000000000000000000000000000000000000000000
